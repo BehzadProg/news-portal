@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>Admin Forgot Password</title>
     <link rel="stylesheet" href="{{asset('backend/admin-login-page-asset/style.css')}}">
 </head>
 <body>
@@ -41,29 +41,21 @@
         <img src="{{asset('backend/admin-login-page-asset/img/girl.png')}}" class="girl">
         <img src="{{asset('backend/admin-login-page-asset/img/trees.png')}}" class="trees">
         <div class="login">
-            <h2>Sign In</h2>
-            <form action="{{route('admin.handle.login')}}" method="post">
+            <h2>Forgot Password</h2>
+            <form action="{{route('admin.password.email')}}" method="post">
                 @csrf
                 <div class="inputBox">
+                    <p>Forgot your password? No problem. we will email you a password reset link that will allow you to choose a new one.</p>
                     @if (session()->has('success'))
                     <i><b style="color: #8f2c24">{{session()->get('success')}}</b></i>
                     @endif
+                    <input type="email" name="email" value="{{old('email')}}" placeholder="Email">
                     @error('email')
                     <code style="color: red">{{$message}}</code>
                    @enderror
-                    <input type="email" name="email" placeholder="Email">
                 </div>
                 <div class="inputBox">
-                    @error('password')
-                    <code style="color: red">{{$message}}</code>
-                   @enderror
-                    <input type="password" name="password" placeholder="Password">
-                </div>
-                <div class="inputBox">
-                    <input type="submit" value="Login" id="btn">
-                </div>
-                <div class="group">
-                    <a href="{{route('admin.password.request')}}">Forget Password</a>
+                    <input type="submit" value="Send Reset Link" id="btn">
                 </div>
             </form>
         </div>
