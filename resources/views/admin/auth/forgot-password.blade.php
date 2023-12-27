@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Forgot Password</title>
+    <title>{{__('Admin Forgot Password')}}</title>
     <link rel="stylesheet" href="{{asset('backend/admin-login-page-asset/style.css')}}">
 </head>
 <body>
@@ -45,17 +45,17 @@
             <form action="{{route('admin.password.email')}}" method="post">
                 @csrf
                 <div class="inputBox">
-                    <p>Forgot your password? No problem. we will email you a password reset link that will allow you to choose a new one.</p>
+                    <p>{{__('Forgot your password? No problem. we will email you a password reset link that will allow you to choose a new one')}}.</p>
                     @if (session()->has('success'))
                     <i><b style="color: #8f2c24">{{session()->get('success')}}</b></i>
                     @endif
-                    <input type="email" name="email" value="{{old('email')}}" placeholder="Email">
+                    <input type="email" name="email" value="{{old('email')}}" placeholder="{{__('Email')}}">
                     @error('email')
                     <code style="color: red">{{$message}}</code>
                    @enderror
                 </div>
                 <div class="inputBox">
-                    <input type="submit" value="Send Reset Link" id="btn">
+                    <input type="submit" value="{{__('Send Reset Link')}}" id="btn">
                 </div>
             </form>
         </div>

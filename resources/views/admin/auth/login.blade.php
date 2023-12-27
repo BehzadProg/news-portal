@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>{{__('Admin Login')}}</title>
     <link rel="stylesheet" href="{{asset('backend/admin-login-page-asset/style.css')}}">
 </head>
 <body>
@@ -41,7 +41,7 @@
         <img src="{{asset('backend/admin-login-page-asset/img/girl.png')}}" class="girl">
         <img src="{{asset('backend/admin-login-page-asset/img/trees.png')}}" class="trees">
         <div class="login">
-            <h2>Sign In</h2>
+            <h2>{{__('Sign In')}}</h2>
             <form action="{{route('admin.handle.login')}}" method="post">
                 @csrf
                 <div class="inputBox">
@@ -51,19 +51,19 @@
                     @error('email')
                     <code style="color: red">{{$message}}</code>
                    @enderror
-                    <input type="email" name="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="{{__('Email')}}">
                 </div>
                 <div class="inputBox">
                     @error('password')
                     <code style="color: red">{{$message}}</code>
                    @enderror
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="{{__('Password')}}">
                 </div>
                 <div class="inputBox">
                     <input type="submit" value="Login" id="btn">
                 </div>
                 <div class="group">
-                    <a href="{{route('admin.password.request')}}">Forget Password</a>
+                    <a href="{{route('admin.password.request')}}">{{__('Forget Password')}}</a>
                 </div>
             </form>
         </div>

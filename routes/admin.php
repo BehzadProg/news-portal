@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login' , [AdminAuthenticationController::class , 'login'])->name('login');
@@ -19,4 +20,8 @@ Route::post('reset-password', [AdminAuthenticationController::class, 'store'])->
 Route::group(['middleware' => ['admin']],function () {
 
     Route::get('dashboard' , [DashboardController::class , 'index'])->name('dashboard');
+
+    /** admin profile routes */
+    Route::put('profile-password-update/{id}' , [ProfileController::class , 'updatePassword'])->name('profile-update-password');
+    Route::resource('profile' , ProfileController::class);
 });
