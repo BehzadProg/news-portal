@@ -9,6 +9,7 @@ use App\Http\Requests\AdminUpdatePasswordRequest;
 use App\Models\Admin;
 use App\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\Auth;
+Use Alert;
 
 class ProfileController extends Controller
 {
@@ -20,38 +21,6 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('admin')->user();
         return view('admin.profile.index' , compact('user'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -67,7 +36,7 @@ class ProfileController extends Controller
         $profile->email = $request->email;
         $profile->save();
 
-
+        toast(__('Profile Updated Successfully!'),'success')->width('400');
         return redirect()->back();
     }
 
@@ -78,14 +47,7 @@ class ProfileController extends Controller
         $admin->password = bcrypt($request->password);
         $admin->save();
 
+        toast(__('Password Updated Successfully!'),'success')->width('400');
         return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

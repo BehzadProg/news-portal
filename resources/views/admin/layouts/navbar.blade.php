@@ -15,17 +15,14 @@
                     <img alt="image" src="{{ asset('backend/assets/img/avatar/avatar-1.png') }}"
                         class="rounded-circle mr-1">
                 @endif
-                <div class="d-sm-none d-lg-inline-block">Hi, {{Auth::guard('admin')->user()->name}}</div>
+                <div class="d-sm-none d-lg-inline-block">{{__('Hi')}}, {{Auth::guard('admin')->user()->name}}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a href="{{ route('admin.profile.index') }}" class="dropdown-item has-icon">
-                    <i class="far fa-user"></i> Profile
-                </a>
-                <a href="features-activities.html" class="dropdown-item has-icon">
-                    <i class="fas fa-bolt"></i> Activities
+                    <i class="far fa-user"></i> {{__('Profile')}}
                 </a>
                 <a href="features-settings.html" class="dropdown-item has-icon">
-                    <i class="fas fa-cog"></i> Settings
+                    <i class="fas fa-cog"></i> {{__('Settings')}}
                 </a>
                 <div class="dropdown-divider"></div>
                 <form method="POST" action="{{ route('admin.logout') }}">
@@ -33,7 +30,7 @@
                     <a href="#" class="dropdown-item has-icon text-danger"
                         onclick="event.preventDefault();
             this.closest('form').submit();">
-                        <i class="fas fa-sign-out-alt"></i> Logout
+                        <i class="fas fa-sign-out-alt"></i> {{__('Logout')}}
                     </a>
                 </form>
             </div>
