@@ -37,11 +37,11 @@
                                         @foreach ($languages as $lang)
 
                                         <tr>
-                                            <td>{{$lang->id}}</td>
+                                            <td>{{$loop->index + 1}}</td>
                                             <td>{{$lang->name}}</td>
                                             <td>{{$lang->lang}}</td>
                                             <td>
-                                                @if ($lang->default == 1)
+                                                @if ($lang->default === 1)
                                                 <span class="badge badge-primary">{{__('Yes')}}</span>
                                                 @else
                                                 <span class="badge badge-warning">{{__('No')}}</span>
@@ -49,7 +49,7 @@
                                             </td>
 
                                             <td>
-                                                @if ($lang->status == 1)
+                                                @if ($lang->status === 1)
                                                 <span class="badge badge-success">{{__('Active')}}</span>
                                                 @else
                                                 <span class="badge badge-danger">{{__('InActive')}}</span>
