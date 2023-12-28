@@ -85,7 +85,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->language = $request->language;
         $category->name = $request->name;
-        $category->slug = \Str::slug($request->name);
         $category->show_at_nav = $request->show_at_nav;
         $category->status = $request->status;
         $category->save();
