@@ -1,12 +1,12 @@
 @extends('admin.layouts.master')
-@section('title', '- Edit Category')
+@section('title', __('- Edit Category'))
 @section('content')
     <section class="section">
         <div class="section-header">
             <div class="section-header-back">
                 <a href="{{route('admin.category.index')}}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>{{__('Edit Category')}}</h1>
+            <h1>{{__('Category')}}</h1>
         </div>
 
         <div class="section-body">
@@ -14,7 +14,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>{{__('Update Category')}}</h4>
+                            <h4>{{__('Edit Category')}}</h4>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('admin.category.update' , $category->id) }}" method="post">

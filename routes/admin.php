@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,7 @@ Route::group(['middleware' => ['admin']],function () {
 
     /** category routes */
     Route::resource('category' , CategoryController::class);
+
+    /** News routes */
+    Route::resource('news' , NewsController::class);
 });

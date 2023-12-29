@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('- Category'))
+@section('title', __('- News'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{__('Category')}}</h1>
+            <h1>{{__('News')}}</h1>
         </div>
 
         <div class="section-body">
@@ -11,9 +11,9 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{__('All Categories')}}</h4>
+                            <h4>{{__('All News')}}</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('admin.category.create') }}" class="btn btn-primary">{{__('Create New')}} <i
+                                <a href="{{ route('admin.news.create') }}" class="btn btn-primary">{{__('Create New')}} <i
                                         class="fas fa-plus"></i></a>
                             </div>
                         </div>
