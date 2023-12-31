@@ -67,7 +67,7 @@
                                                                     src="{{ asset(env('NEWS_IMAGE_UPLOAD_PATH') . $item->image) }}"
                                                                     alt="">
                                                             </td>
-                                                            <td>{{ $item->title }}</td>
+                                                            <td>{{  limitText($item->title) }}</td>
                                                             <td>{{ $item->category->name }}</td>
                                                             <td>
                                                                 <label class="custom-switch mt-2">

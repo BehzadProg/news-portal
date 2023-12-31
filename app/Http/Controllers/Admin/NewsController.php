@@ -157,6 +157,11 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $news = News::findOrFail($id);
+        $this->deleteFileIfExist(env('NEWS_IMAGE_UPLOAD_PATH') . $news->image);
+        $news->tags()->delete();
+        $news->delete();
+
+        return response(['status' => 'success' , 'message' => __('News Deleted Successfully')]);
     }
 }
