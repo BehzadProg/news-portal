@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Create News'))
+@section('title', __('- Edit News'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -14,12 +14,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>{{__('Create News')}}</h4>
+                            <h4>{{__('Edit News')}}</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.news.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('admin.news.update' , $news->id) }}" method="post" enctype="multipart/form-data">
                                 @csrf
-
+                                @method('PUT')
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Language')}}</label>
                                     <div class="col-sm-12 col-md-7">
@@ -27,7 +27,7 @@
                                             <option value="">--{{__('Select')}}--</option>
                                             @foreach ($languages as $language)
 
-                                            <option value="{{$language->lang}}">{{$language->name}}</option>
+                                            <option {{$news->language === $language->lang ? 'selected' : ''}} value="{{$language->lang}}">{{$language->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('language')
@@ -41,6 +41,9 @@
                                     <div class="col-sm-12 col-md-7">
                                       <select name="category" id="category" class="form-control select2">
                                         <option value="">--{{__('Select')}}--</option>
+                                        @foreach ($categories as $category)
+                                        <option {{$category->id === $news->category_id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
                                       </select>
                                       @error('category')
                                         <p class="text-danger">{{$message}}</p>
@@ -64,7 +67,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Title')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input name="title" type="text" value="{{old('title')}}" class="form-control">
+                                        <input name="title" type="text" value="{{$news->title}}" class="form-control">
                                         @error('title')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -74,7 +77,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Content')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <textarea name="content" class="summernote-simple" cols="30" rows="10">{{old('content')}}</textarea>
+                                        <textarea name="content" class="summernote-simple" cols="30" rows="10">{{$news->content}}</textarea>
                                         @error('content')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -84,7 +87,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Tags')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                      <input type="text" name="tags" class="form-control inputtags">
+                                      <input type="text" name="tags" value="{{formatTags($news->tags()->pluck('name')->toArray())}}" class="form-control inputtags">
                                       @error('tags')
                                       <p class="text-danger" style="margin-bottom: 0">{{$message}}</p>
                                       @enderror
@@ -95,7 +98,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Meta Title')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input name="meta_title" value="{{old('meta_title')}}" type="text" class="form-control">
+                                        <input name="meta_title" value="{{$news->meta_title}}" type="text" class="form-control">
                                         @error('meta_title')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -104,7 +107,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Meta Description')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <textarea name="meta_description" class="form-control" cols="30" rows="10">{{old('meta_description')}}</textarea>
+                                        <textarea name="meta_description" class="form-control" cols="30" rows="10">{{$news->meta_description}}</textarea>
                                         @error('meta_description')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -116,7 +119,7 @@
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Status')}}</div>
                                             <label class="custom-switch mt-2">
-                                              <input value="1" type="checkbox" name="status" class="custom-switch-input">
+                                              <input {{$news->status === 1 ? 'checked' : ''}} value="1" type="checkbox" name="status" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
                                             </label>
                                           </div>
@@ -125,7 +128,7 @@
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Is Breaking News')}}</div>
                                             <label class="custom-switch mt-2">
-                                              <input value="1" type="checkbox" name="is_breaking_news" class="custom-switch-input">
+                                              <input {{$news->is_breaking_news === 1 ? 'checked' : ''}} value="1" type="checkbox" name="is_breaking_news" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
                                             </label>
                                           </div>
@@ -134,7 +137,7 @@
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Show At Slider')}}</div>
                                             <label class="custom-switch mt-2">
-                                              <input value="1" type="checkbox" name="show_at_slider" class="custom-switch-input">
+                                              <input {{$news->show_at_slider === 1 ? 'checked' : ''}} value="1" type="checkbox" name="show_at_slider" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
                                             </label>
                                           </div>
@@ -143,7 +146,7 @@
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Show At Popular')}}</div>
                                             <label class="custom-switch mt-2">
-                                              <input value="1" type="checkbox" name="show_at_popular" class="custom-switch-input">
+                                              <input {{$news->show_at_popular === 1 ? 'checked' : ''}} value="1" type="checkbox" name="show_at_popular" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
                                             </label>
                                           </div>
@@ -153,7 +156,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                     <div class="col-sm-12 col-md-7">
-                                        <button class="btn btn-primary">{{__('Create')}}</button>
+                                        <button class="btn btn-primary">{{__('Update')}}</button>
                                     </div>
                                 </div>
                             </form>
@@ -167,6 +170,13 @@
 @push('scripts')
     <script>
         $(document).ready(function(){
+            $('.image-preview').css({
+                "background-image": "url({{asset(env('NEWS_IMAGE_UPLOAD_PATH').$news->image)}})",
+                "background-size": "cover",
+                "background-position": "center center"
+            })
+
+
             $('#select-language').on('change' , function(){
                 let lang = $(this).val()
 

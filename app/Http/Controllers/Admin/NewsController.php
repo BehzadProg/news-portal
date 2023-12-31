@@ -9,6 +9,8 @@ use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminStoreNewsRequest;
+use App\Http\Requests\AdminUpdateNewsRequest;
 use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
@@ -43,22 +45,8 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdminStoreNewsRequest $request)
     {
-        $request->validate([
-            'language' => 'required',
-            'category' => 'required',
-            'image' => 'required|max:3000|image',
-            'title' => 'required|max:255|unique:news,title',
-            'content' => 'required',
-            'tags' => 'required',
-            'meta_title' => 'max:255',
-            'meta_description' => 'max:255',
-            'is_breaking_news' => 'boolean',
-            'show_at_slider' => 'boolean',
-            'show_at_popular' => 'boolean',
-            'status' => 'boolean',
-        ]);
 
         $imagePath = $this->handleUpload('image' , null , env('NEWS_IMAGE_UPLOAD_PATH') , 'news_image');
         $news = new News();
@@ -98,11 +86,15 @@ class NewsController extends Controller
      */
     public function toggleNewsStatus(Request $request)
     {
+       try {
         $news = News::findOrFail($request->id);
         $news->{$request->name} = $request->status;
         $news->save();
 
         return response(['status' => 'success' , 'message' => __('Updated Successfully')]);
+       } catch (\Throwable $th) {
+         throw $th;
+       }
     }
 
     /**
@@ -110,15 +102,54 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $languages = Language::where('status' , 1)->get();
+        $news = News::findOrFail($id);
+        $categories = Category::where('language' , $news->language)->get();
+        return view('admin.news.edit' , compact('news' , 'languages' , 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminUpdateNewsRequest $request, string $id)
     {
-        //
+
+        $news = News::findOrFail($id);
+        $imagePath = $this->handleUpload('image' , $news , env('NEWS_IMAGE_UPLOAD_PATH') , 'news_image');
+        $news->language = $request->language;
+        $news->category_id = $request->category;
+        $news->image = (!empty($imagePath) ? $imagePath : $news->image);
+        $news->title = $request->title;
+        $news->content = $request->content;
+        $news->meta_title = $request->meta_title;
+        $news->meta_description = $request->meta_description;
+        $news->is_breaking_news = $request->is_breaking_news == 1 ? 1 : 0;
+        $news->show_at_slider = $request->show_at_slider == 1 ? 1 : 0;
+        $news->show_at_popular = $request->show_at_popular == 1 ? 1 : 0;
+        $news->status = $request->status == 1 ? 1 : 0;
+        $news->save();
+
+        // Delete Previous Tags
+        $news->tags()->delete();
+        // Detach Tags from Pivot Table
+        $news->tags()->detach($news->tags);
+
+        // Attach Tags again in pivot & tags table
+        $tags = explode(',' , $request->tags);
+        $tagIds = [];
+        foreach($tags as $tag){
+            $item = new Tag();
+            $item->name = $tag;
+            $item->save();
+
+            $tagIds[] = $item->id;
+
+        }
+
+        $news->tags()->attach($tagIds);
+
+        toast(__('Updated Successfully') , 'success')->width('400');
+        return redirect()->route('admin.news.index');
     }
 
     /**
