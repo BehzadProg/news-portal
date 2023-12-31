@@ -17,14 +17,14 @@
                             <h4>{{__('Create News')}}</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.news.store') }}" method="post">
+                            <form action="{{ route('admin.news.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Language')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <select name="language"  class="form-control select2">
-                                            <option value="">--Select--</option>
+                                        <select name="language" id="select-language" class="form-control select2">
+                                            <option value="">--{{__('Select')}}--</option>
                                             @foreach ($languages as $language)
 
                                             <option value="{{$language->lang}}">{{$language->name}}</option>
@@ -39,8 +39,8 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Category')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                      <select name="category" class="form-control selectric">
-                                        <option value="">{{__('Select')}}</option>
+                                      <select name="category" id="category" class="form-control select2">
+                                        <option value="">--{{__('Select')}}--</option>
                                       </select>
                                       @error('category')
                                         <p class="text-danger">{{$message}}</p>
@@ -49,10 +49,10 @@
                                   </div>
 
                                   <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Image')}}</label>
                                     <div class="col-sm-12 col-md-7">
                                       <div id="image-preview" class="image-preview">
-                                        <label for="image-upload" id="image-label">Choose File</label>
+                                        <label for="image-upload" id="image-label">{{__('Choose File')}}</label>
                                         <input type="file" name="image" id="image-upload" />
                                       </div>
                                       @error('image')
@@ -64,7 +64,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Title')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input name="title" type="text" class="form-control">
+                                        <input name="title" type="text" value="{{old('title')}}" class="form-control">
                                         @error('title')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -74,7 +74,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Content')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <textarea name="content" class="summernote-simple" cols="30" rows="10"></textarea>
+                                        <textarea name="content" class="summernote-simple" cols="30" rows="10">{{old('content')}}</textarea>
                                         @error('content')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -82,9 +82,20 @@
                                 </div>
 
                                 <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Tags')}}</label>
+                                    <div class="col-sm-12 col-md-7">
+                                      <input type="text" name="tags" class="form-control inputtags">
+                                      @error('tags')
+                                      <p class="text-danger" style="margin-bottom: 0">{{$message}}</p>
+                                      @enderror
+                                      <code>{{__('Use comma , to create tag not enter key')}}</code>
+                                    </div>
+                                  </div>
+
+                                <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Meta Title')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input name="meta_title" type="text" class="form-control">
+                                        <input name="meta_title" value="{{old('meta_title')}}" type="text" class="form-control">
                                         @error('meta_title')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -93,7 +104,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Meta Description')}}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <textarea name="meta_description" class="form-control" cols="30" rows="10"></textarea>
+                                        <textarea name="meta_description" class="form-control" cols="30" rows="10">{{old('meta_description')}}</textarea>
                                         @error('meta_description')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -105,11 +116,8 @@
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Status')}}</div>
                                             <label class="custom-switch mt-2">
-                                              <input type="checkbox" name="status" class="custom-switch-input">
+                                              <input value="1" type="checkbox" name="status" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
-                                              @error('status')
-                                              <span class="custom-switch-description text-danger">{{$message}}</span>
-                                              @enderror
                                             </label>
                                           </div>
                                     </div>
@@ -117,11 +125,8 @@
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Is Breaking News')}}</div>
                                             <label class="custom-switch mt-2">
-                                              <input type="checkbox" name="is_breaking_news" class="custom-switch-input">
+                                              <input value="1" type="checkbox" name="is_breaking_news" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
-                                              @error('is_breaking_news')
-                                              <span class="custom-switch-description text-danger">{{$message}}</span>
-                                              @enderror
                                             </label>
                                           </div>
                                     </div>
@@ -129,11 +134,8 @@
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Show At Slider')}}</div>
                                             <label class="custom-switch mt-2">
-                                              <input type="checkbox" name="show_at_slider" class="custom-switch-input">
+                                              <input value="1" type="checkbox" name="show_at_slider" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
-                                              @error('show_at_slider')
-                                              <span class="custom-switch-description text-danger">{{$message}}</span>
-                                              @enderror
                                             </label>
                                           </div>
                                     </div>
@@ -141,11 +143,8 @@
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Show At Popular')}}</div>
                                             <label class="custom-switch mt-2">
-                                              <input type="checkbox" name="show_at_popular" class="custom-switch-input">
+                                              <input value="1" type="checkbox" name="show_at_popular" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
-                                              @error('show_at_popular')
-                                              <span class="custom-switch-description text-danger">{{$message}}</span>
-                                              @enderror
                                             </label>
                                           </div>
                                     </div>
@@ -165,3 +164,28 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#select-language').on('change' , function(){
+                let lang = $(this).val()
+
+                $.ajax({
+                    method:'GET',
+                    url: "{{route('admin.fetch-category')}}",
+                    data:{lang:lang},
+                    success:function(data){
+                        $('#category').html("")
+                        $('#category').html(`<option value="">--{{__('Select')}}--</option>`)
+                        $.each(data , function(index,data){
+                            $('#category').append(`<option value="${data.id}">${data.name}</option>`)
+                        })
+                    },
+                    error:function(data){
+                        console.log(data);
+                    }
+                })
+            })
+        })
+    </script>
+@endpush

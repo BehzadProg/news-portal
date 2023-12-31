@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-8 col-12">
                                         <div id="image-preview" class="image-preview">
-                                            <label for="image-upload" id="image-label">Choose File</label>
+                                            <label for="image-upload" id="image-label">{{__('Choose File')}}</label>
                                             <input type="file" name="image" id="image-upload">
                                         </div>
                                         @if ($errors->has('image'))
