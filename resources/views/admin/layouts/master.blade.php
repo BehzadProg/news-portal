@@ -15,8 +15,10 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/summernote/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/datatables/datatables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet"
+        href="{{ asset('backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('backend/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 
 
     <!-- Template CSS -->
@@ -67,7 +69,7 @@
     <script src="{{ asset('backend/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
     </script>
     <script src="{{ asset('backend/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
-    <script src="{{asset('backend/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+    <script src="{{ asset('backend/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <!-- Sweet Alert PHP Version -->
     @include('sweetalert::alert')
     <!-- Sweet Alert Js Version -->
@@ -88,61 +90,74 @@
         });
         $(".inputtags").tagsinput('items');
 
-        $(document).ready(function(){
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
 
+        $(document).ready(function() {
 
-$('body').on('click', '.delete-item', function(event){
-    event.preventDefault();
-
-    let deleteUrl = $(this).attr('href');
-
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-        if (result.isConfirmed) {
-
-            $.ajax({
-                type: 'DELETE',
-                url: deleteUrl,
-
-                success: function(data){
-
-                    if(data.status == 'success'){
-                        Swal.fire(
-                            'Deleted!',
-                            data.message,
-                            'success'
-                        )
-                        window.location.reload();
-                    }else if (data.status == 'error'){
-                        Swal.fire(
-                            'Cant Delete',
-                            data.message,
-                            'error'
-                        )
-                    }
-                },
-                error: function(xhr, status, error){
-                    console.log(error);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            })
-        }
-    })
-})
+            });
 
-})
+
+            $('body').on('click', '.delete-item', function(event) {
+                event.preventDefault();
+
+                let deleteUrl = $(this).attr('href');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            type: 'DELETE',
+                            url: deleteUrl,
+
+                            success: function(data) {
+
+                                if (data.status == 'success') {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        data.message,
+                                        'success'
+                                    )
+                                    window.location.reload();
+                                } else if (data.status == 'error') {
+                                    Swal.fire(
+                                        'Cant Delete',
+                                        data.message,
+                                        'error'
+                                    )
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(error);
+                            }
+                        })
+                    }
+                })
+            })
+
+        })
     </script>
     @stack('scripts')
 </body>
