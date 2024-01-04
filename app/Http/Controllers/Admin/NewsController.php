@@ -164,4 +164,68 @@ class NewsController extends Controller
 
         return response(['status' => 'success' , 'message' => __('News Deleted Successfully')]);
     }
+
+    public function copyNews(Request $request)
+    {
+        $languages = Language::where('status' , 1)->get();
+        $news = News::where('id' , $request->from_id)->first();
+        $categories = Category::where('language' , $news->language)->get();
+        return view('admin.news.copy' , compact('languages' , 'news' , 'categories'));
+        // $news = News::findOrFail($id);
+        // $copyNews = $news->replicate();
+        // $copyNews->save();
+        // toast(__('Copied Successfully') , 'success')->width('330');
+        // return redirect()->back();
+    }
+
+    public function pasteNews(Request $request){
+        $request->validate([
+            'language' => 'required',
+            'category' => 'required',
+            'image' => 'required|max:3000|image',
+            'title' => 'required|max:255|unique:news,title',
+            'content' => 'required',
+            'tags' => 'required',
+            'meta_title' => 'max:255',
+            'meta_description' => 'max:255',
+            'is_breaking_news' => 'boolean',
+            'show_at_slider' => 'boolean',
+            'show_at_popular' => 'boolean',
+            'status' => 'boolean',
+        ],
+        ['image.required' => __('Please select the image again')]
+    );
+
+        $imagePath = $this->handleUpload('image' , null , env('NEWS_IMAGE_UPLOAD_PATH') , 'news_image');
+        $news = new News();
+        $news->language = $request->language;
+        $news->category_id = $request->category;
+        $news->author_id = Auth::guard('admin')->user()->id;
+        $news->image = $imagePath;
+        $news->title = $request->title;
+        $news->content = $request->content;
+        $news->meta_title = $request->meta_title;
+        $news->meta_description = $request->meta_description;
+        $news->is_breaking_news = $request->is_breaking_news == 1 ? 1 : 0;
+        $news->show_at_slider = $request->show_at_slider == 1 ? 1 : 0;
+        $news->show_at_popular = $request->show_at_popular == 1 ? 1 : 0;
+        $news->status = $request->status == 1 ? 1 : 0;
+        $news->save();
+
+        $tags = explode(',' , $request->tags);
+        $tagIds = [];
+        foreach($tags as $tag){
+            $item = new Tag();
+            $item->name = $tag;
+            $item->save();
+
+            $tagIds[] = $item->id;
+
+        }
+
+        $news->tags()->attach($tagIds);
+
+        toast(__('Copied And Duplicated Successfully') , 'success')->width('400');
+        return redirect()->route('admin.news.index');
+    }
 }

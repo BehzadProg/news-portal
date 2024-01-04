@@ -37,5 +37,7 @@ Route::group(['middleware' => ['admin']],function () {
     /** News routes */
     Route::get('fetch-category' , [NewsController::class , 'fetchNewsCategory'])->name('fetch-category');
     Route::get('toggle-news-status' , [NewsController::class , 'toggleNewsStatus'])->name('toggle-news-status');
+    Route::get('copy-news' , [NewsController::class , 'copyNews'])->name('copy-news');
+    Route::post('paste-news' , [NewsController::class , 'pasteNews'])->name('paste-news');
     Route::resource('news' , NewsController::class);
 });

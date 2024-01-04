@@ -55,7 +55,7 @@
                                                         <th>{{ __('In Popular') }}</th>
                                                         <th>{{ __('status') }}</th>
 
-                                                        <th>{{ __('Action') }}</th>
+                                                        <th width="130.217px">{{ __('Action') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -110,11 +110,15 @@
                                                             </td>
                                                             <td>
                                                                 <a href="{{ route('admin.news.edit', $item->id) }}"
-                                                                    class="btn btn-primary mr-2"><i
+                                                                    class="btn btn-primary"><i
                                                                         class="fas fa-edit"></i></a>
                                                                 <a href="{{ route('admin.news.destroy', $item->id) }}"
                                                                     class="btn btn-danger delete-item"><i
                                                                         class="fas fa-trash-alt"></i></a>
+                                                                        <a href="{{ route('admin.copy-news', ['from_id' => $item->id]) }}"
+                                                                            class="btn btn-warning mr-2"><i
+                                                                                class="fas fa-copy"></i></a>
+
                                                             </td>
 
                                                         </tr>
