@@ -8,14 +8,9 @@ function formatTags($tags){
 }
 
 // text limitaion
-function limitText($text , $limit = 20){
-    return \Str::limit($text, $limit);
-}
-
-// set language session
-function setLanguage($code) : void
+function limitText(string $text , int $limit = 50) : string
 {
-    session()->put('language' , $code);
+    return \Str::limit($text, $limit);
 }
 
 
@@ -34,4 +29,10 @@ function getLanguage() : string
         return session()->get('language');
       }
     }
+}
+
+// set language session
+function setLanguage($code) : void
+{
+    session()->put('language' , $code);
 }

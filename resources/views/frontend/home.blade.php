@@ -1,9 +1,9 @@
 @extends('frontend.layouts.master')
 @section('title' , '- Home')
 @section('content')
-    <!-- Tranding news  carousel-->
-    @include('frontend.homeComponents.tranding-news')
-    <!-- End Tranding news carousel -->
+    <!-- Breaking news  carousel-->
+    @include('frontend.homeComponents.breaking-news')
+    <!-- End Breaking news carousel -->
 
     <!-- Hero news Section -->
     @include('frontend.homeComponents.hero-slider')
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <!-- Popular news category -->
+    {{-- <!-- Popular news category -->
     @include('frontend.homeComponents.main-news')
-    <!-- End Popular news category -->
+    <!-- End Popular news category --> --}}
 @endsection
