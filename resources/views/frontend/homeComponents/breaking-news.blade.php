@@ -9,7 +9,7 @@
                         <!-- Post Article -->
                         <div class="card__post card__post-list">
                             <div class="image-sm">
-                                <a href="./blog_details.html">
+                                <a href="{{route('news-details' , $new->slug)}}">
                                     <img src="{{asset(env('NEWS_IMAGE_UPLOAD_PATH').$new->image)}}" class="img-fluid" alt="">
                                 </a>
                             </div>
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="card__post__title">
                                         <h6>
-                                            <a href="./blog_details.html">
+                                            <a href="{{route('news-details' , $new->slug)}}">
                                                 {!! limitText($new->title) !!}
                                             </a>
                                         </h6>

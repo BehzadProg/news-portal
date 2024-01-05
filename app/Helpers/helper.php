@@ -36,3 +36,15 @@ function setLanguage($code) : void
 {
     session()->put('language' , $code);
 }
+
+// convert views number into k or m format
+function converToKFormat(int $number)
+{
+    if($number < 1000){
+        return $number;
+    }elseif($number < 1000000){
+        return round($number / 1000 , 1) . 'K';
+    }else{
+        return round($number / 1000000 , 1) . 'M';
+    }
+}
