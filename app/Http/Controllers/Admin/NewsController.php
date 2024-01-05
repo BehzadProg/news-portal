@@ -29,7 +29,7 @@ class NewsController extends Controller
      */
     public function fetchNewsCategory(Request $request)
     {
-        $category = Category::where(['status' => 1 , 'language' => $request->lang])->get();
+        $category = Category::where(['status' => 1 , 'language' => $request->lang])->orderByDesc('id')->get();
         return $category;
     }
 
@@ -69,6 +69,7 @@ class NewsController extends Controller
         foreach($tags as $tag){
             $item = new Tag();
             $item->name = $tag;
+            $item->language = $news->language;
             $item->save();
 
             $tagIds[] = $item->id;
@@ -140,6 +141,7 @@ class NewsController extends Controller
         foreach($tags as $tag){
             $item = new Tag();
             $item->name = $tag;
+            $item->language = $news->language;
             $item->save();
 
             $tagIds[] = $item->id;
@@ -169,7 +171,7 @@ class NewsController extends Controller
     {
         $languages = Language::where('status' , 1)->get();
         $news = News::where('id' , $request->from_id)->first();
-        $categories = Category::where('language' , $news->language)->get();
+        $categories = Category::where('language' , $news->language)->orderByDesc('id')->get();
         return view('admin.news.copy' , compact('languages' , 'news' , 'categories'));
         // $news = News::findOrFail($id);
         // $copyNews = $news->replicate();
@@ -217,6 +219,7 @@ class NewsController extends Controller
         foreach($tags as $tag){
             $item = new Tag();
             $item->name = $tag;
+            $item->language = $news->language;
             $item->save();
 
             $tagIds[] = $item->id;

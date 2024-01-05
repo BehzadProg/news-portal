@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\News;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,11 +17,18 @@ class HomeController extends Controller
     }
 
     public function showNews(string $slug) {
-        $newsDetail = News::with(['author' , 'category'])->where('slug' , $slug)
+        $newsDetail = News::with(['author' , 'category' , 'tags'])->where('slug' , $slug)
         ->activeEntries()->withLocalize()->first();
+
+        //get recent news post for sidebar
+        $recentNews = News::with(['author' , 'category'])->where('slug' , '!=' , $newsDetail->slug)
+        ->activeEntries()->withLocalize()->orderByDesc('id')->take(4)->get();
+
+        $mostPopularTag = $this->mostPopularTags();
+
         // counting view posts
         $this->countViews($newsDetail);
-        return view('frontend.news-details' , compact('newsDetail'));
+        return view('frontend.news-details' , compact('newsDetail', 'recentNews' , 'mostPopularTag'));
     }
 
     public function countViews($news)
@@ -37,5 +45,13 @@ class HomeController extends Controller
             session()->put(['viewed_posts' => [$news->id]]);
             $news->increment('views');
         }
+    }
+
+    public function mostPopularTags(){
+        return Tag::select('name' , \DB::raw('COUNT(*) as count'))
+        ->where('language' , getLanguage())
+        ->groupBy('name')
+        ->orderByDesc('count')
+        ->take(15)->get();
     }
 }
