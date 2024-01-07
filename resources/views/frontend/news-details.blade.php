@@ -1,5 +1,12 @@
 @extends('frontend.layouts.master')
 @section('title' , $newsDetail->title)
+@section('meta_description' , $newsDetail->content)
+@section('meta_og_title' , $newsDetail->meta_title)
+@section('meta_og_description' , $newsDetail->meta_description)
+@section('meta_og_image' , asset(env('NEWS_IMAGE_UPLOAD_PATH').$newsDetail->image))
+@section('meta_tw_title' , $newsDetail->meta_title)
+@section('meta_tw_description' , $newsDetail->meta_description)
+@section('meta_tw_image' , asset(env('NEWS_IMAGE_UPLOAD_PATH').$newsDetail->image))
 @section('content')
 <section class="pb-80">
     <div class="container">
@@ -10,10 +17,10 @@
                 <ul class="breadcrumbs bg-light mb-4">
                     <li class="breadcrumbs__item">
                         <a href="{{url('/')}}" class="breadcrumbs__url">
-                            <i class="fa fa-home"></i> Home</a>
+                            <i class="fa fa-home"></i> {{__('Home')}}</a>
                     </li>
                     <li class="breadcrumbs__item">
-                        <a href="javascript:;" class="breadcrumbs__url">News</a>
+                        <a href="javascript:;" class="breadcrumbs__url">{{__('News')}}</a>
                     </li>
                 </ul>
                 <!-- end breadcrumb -->
@@ -69,37 +76,37 @@
                             </div>
 
                             <ul class="list-inline">
-                                <span class="share">share on:</span>
+                                <span class="share">share on{{__(':')}}</span>
                                 <li class="list-inline-item">
-                                    <a class="btn btn-social-o facebook" href="#">
+                                    <a class="btn btn-social-o facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}" target="_blank">
                                         <i class="fa fa-facebook-f"></i>
-                                        <span>facebook</span>
+                                        <span>{{__('facebook')}}</span>
                                     </a>
 
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="btn btn-social-o twitter" href="#">
+                                    <a class="btn btn-social-o twitter" href="https://twitter.com/intent/tweet?text={{$newsDetail->title}}&url={{url()->current()}}" target="_blank">
                                         <i class="fa fa-twitter"></i>
-                                        <span>twitter</span>
+                                        <span>{{__('twitter')}}</span>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="btn btn-social-o whatsapp" href="#">
+                                    <a class="btn btn-social-o whatsapp" href="https://wa.me/?text={{$newsDetail->title}}%20{{url()->current()}}" target="_blank">
                                         <i class="fa fa-whatsapp"></i>
-                                        <span>whatsapp</span>
+                                        <span>{{__('whatsapp')}}</span>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="btn btn-social-o telegram" href="#">
+                                    <a class="btn btn-social-o telegram" href="https://t.me/share/url?url={{url()->current()}}&text={{$newsDetail->title}}" target="_blank">
                                         <i class="fa fa-telegram"></i>
-                                        <span>telegram</span>
+                                        <span>{{__('telegram')}}</span>
                                     </a>
                                 </li>
 
                                 <li class="list-inline-item">
-                                    <a class="btn btn-linkedin-o linkedin" href="#">
+                                    <a class="btn btn-linkedin-o linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$newsDetail->title}}" target="_blank">
                                         <i class="fa fa-linkedin"></i>
-                                        <span>linkedin</span>
+                                        <span>{{__('linkedin')}}</span>
                                     </a>
                                 </li>
 
@@ -143,7 +150,7 @@
                             <img style="width: 200px;height: 200px;object-fit: cover;" src="{{asset(env('ADMIN_PROFILE_IMAGE_UPLOAD_PATH').$newsDetail->author->image)}}" alt="" class="img-fluid rounded-circle">
                         </figure>
                         <div class="wrap__profile-author-detail">
-                            <div class="wrap__profile-author-detail-name">author</div>
+                            <div class="wrap__profile-author-detail-name">{{__('author')}}</div>
                             <h4>{{$newsDetail->author->name}}</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis laboriosam ad
                                 beatae itaque ea non
@@ -213,7 +220,7 @@
 
                                 <div class="reply">
                                     <a href="#" class="comment-reply-link" data-toggle="modal"
-                                        data-target="#exampleModal-{{$comment->id}}">Reply</a>
+                                        data-target="#exampleModal-{{$comment->id}}">{{__('Reply')}}</a>
                                     <span class="delete_comment" data-id="{{$comment->id}}">
                                         <i class="fa fa-trash"></i>
                                     </span>
@@ -230,7 +237,7 @@
                                             <div class="comment-author vcard">
                                                 <img src="{{asset('frontend/assets/images/avatar-1.png')}}" class="avatar" alt="image">
                                                 <b class="fn">{{$reply->user->name}}</b>
-                                                <span class="says">{{__('says')}}:</span>
+                                                <span class="says">{{__('says:')}}</span>
                                             </div>
 
                                             <div class="comment-metadata">
@@ -249,7 +256,7 @@
                                         <div class="reply">
                                             @if ($loop->last)
                                             <a href="#" class="comment-reply-link" data-toggle="modal"
-                                                data-target="#exampleModal-{{$comment->id}}">Reply</a>
+                                                data-target="#exampleModal-{{$comment->id}}">{{__('Reply')}}</a>
                                             @endif
                                             <span class="delete_comment" data-id="{{$reply->id}}" style="margin-left:auto">
                                                 <i class="fa fa-trash"></i>
@@ -283,7 +290,7 @@
                                                 @error('reply')
                                                 <p class="text-danger">{{$message}}</p>
                                                @enderror
-                                                <button type="submit">submit</button>
+                                                <button type="submit">{{__('submit')}}</button>
                                             </form>
                                         </div>
                                     </div>
@@ -295,17 +302,13 @@
                     </ol>
 
                     <div class="comment-respond">
-                        <h3 class="comment-reply-title">Leave a Reply</h3>
+                        <h3 class="comment-reply-title">{{__('Leave a Reply')}}</h3>
 
                         <form action="{{route('news-comment')}}" method="POST" class="comment-form">
                             @csrf
-                            <p class="comment-notes">
-                                <span id="email-notes">Your email address will not be published.</span>
-                                Required fields are marked
-                                <span class="required">*</span>
-                            </p>
+
                             <p class="comment-form-comment">
-                                <label for="comment">Comment</label>
+                                <label for="comment">{{__('Comment')}}</label>
                                 <textarea name="comment" id="comment" cols="45" rows="5" maxlength="65525"
                                     required="required"></textarea>
                                     <input type="hidden" name="news_id" value="{{$newsDetail->id}}">
@@ -324,7 +327,7 @@
                 @else
                 <div class="card mb-5" style="background-color: #f1f7ff">
                     <div class="card-body">
-                        <h5 style="">Please <a href="{{route('login')}}">Login</a> to comment in the post </h5>
+                        <h5 style="">{{__('Please')}} <a href="{{route('login')}}">{{__('Login')}}</a> {{__('to comment in the post')}} </h5>
                     </div>
                 </div>
                 @endauth
@@ -524,7 +527,7 @@
 
                     <!-- social media -->
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">stay conected</h4>
+                        <h4 class="border_section">{{__('stay conected')}}</h4>
                         <!-- widget Social media -->
                         <div class="wrap__social__media">
                             <a href="#" target="_blank">
@@ -589,27 +592,27 @@
                     </aside>
 
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">newsletter</h4>
+                        <h4 class="border_section">{{__('newsletter')}}</h4>
                         <!-- Form Subscribe -->
                         <div class="widget__form-subscribe bg__card-shadow">
                             <h6>
-                                The most important world news and events of the day.
+                                {{__('The most important world news and events of the day')}}.
                             </h6>
-                            <p><small>Get magzrenvi daily newsletter on your inbox.</small></p>
+                            <p><small>{{__('Get magezine daily newsletter on your inbox')}}.</small></p>
                             <div class="input-group ">
                                 <input type="text" class="form-control" placeholder="Your email address">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">sign up</button>
+                                    <button class="btn btn-primary" type="button">{{__('sign up')}}</button>
                                 </div>
                             </div>
                         </div>
                     </aside>
 
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">Advertise</h4>
+                        <h4 class="border_section">{{__('Advertise')}}</h4>
                         <a href="#">
                             <figure>
-                                <img src="images/news6.jpg" alt="" class="img-fluid">
+                                <img src="{{('frontend/assets/images/news6.jpg')}}" alt="" class="img-fluid">
                             </figure>
                         </a>
                     </aside>
@@ -628,13 +631,13 @@
                 e.preventDefault();
                 let id = $(this).data('id')
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: '{{__("Are you sure?")}}',
+                    text: "{{__('You won'\t be able to revert this!')}}",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: '{{__("Yes, delete it!")}}'
                 }).then((result) => {
                     if (result.isConfirmed) {
 

@@ -94,7 +94,7 @@ class HomeController extends Controller
         $comment->comment = $request->comment;
         $comment->save();
 
-        alert()->success('Thank you', __('By leaving your opinion in the comment section!'));
+        alert()->success(__('Thank you'), __('By leaving your opinion in the comment section!'));
         return redirect()->back();
     }
 
@@ -110,7 +110,7 @@ class HomeController extends Controller
         $comment->comment = $request->reply;
         $comment->save();
 
-        alert()->success('Thank you', __('Your replay submitted successfully'));
+        alert()->success(__('Thank you'), __('Your replay submitted successfully'));
         return redirect()->back();
     }
 
