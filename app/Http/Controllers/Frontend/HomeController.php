@@ -28,9 +28,25 @@ class HomeController extends Controller
 
         $mostPopularTag = $this->mostPopularTags();
 
+        $nextPost = News::where('id','>', $newsDetail->id)
+        ->activeEntries()
+        ->withLocalize()
+        ->orderBy('id' , 'asc')->first();
+
+        $previousPost = News::where('id','<', $newsDetail->id)
+        ->activeEntries()
+        ->withLocalize()
+        ->orderBy('id' , 'desc')->first();
+
         // counting view posts
         $this->countViews($newsDetail);
-        return view('frontend.news-details' , compact('newsDetail', 'recentNews' , 'mostPopularTag'));
+        return view('frontend.news-details' , compact(
+            'newsDetail',
+             'recentNews' ,
+              'mostPopularTag',
+              'nextPost',
+              'previousPost'
+            ));
     }
 
     public function countViews($news)
