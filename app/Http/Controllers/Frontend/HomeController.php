@@ -18,9 +18,13 @@ class HomeController extends Controller
         return view('frontend.home' , compact('news'));
     }
 
-    public function showNews(string $slug) {
+    public function showNews(string $slug)
+    {
+
         $newsDetail = News::with(['author' , 'category' , 'tags' , 'comments'])->where('slug' , $slug)
         ->activeEntries()->withLocalize()->first();
+        // counting view posts
+        $this->countViews($newsDetail);
 
         //get recent news post for sidebar
         $recentNews = News::with(['author' , 'category'])->where('slug' , '!=' , $newsDetail->slug)
@@ -38,14 +42,19 @@ class HomeController extends Controller
         ->withLocalize()
         ->orderBy('id' , 'desc')->first();
 
-        // counting view posts
-        $this->countViews($newsDetail);
+        $relatedPosts = News::where('slug' , '!=' , $newsDetail->slug)
+        ->where('category_id' , $newsDetail->category_id)
+        ->activeEntries()
+        ->withLocalize()
+        ->take(5)->get();
+
         return view('frontend.news-details' , compact(
             'newsDetail',
              'recentNews' ,
               'mostPopularTag',
               'nextPost',
-              'previousPost'
+              'previousPost',
+              'relatedPosts'
             ));
     }
 
