@@ -140,11 +140,11 @@
                 <div class="wrap__profile">
                     <div class="wrap__profile-author">
                         <figure>
-                            <img src="images/news1.jpg" alt="" class="img-fluid rounded-circle">
+                            <img style="width: 200px;height: 200px;object-fit: cover;" src="{{asset(env('ADMIN_PROFILE_IMAGE_UPLOAD_PATH').$newsDetail->author->image)}}" alt="" class="img-fluid rounded-circle">
                         </figure>
                         <div class="wrap__profile-author-detail">
                             <div class="wrap__profile-author-detail-name">author</div>
-                            <h4>jhon doe</h4>
+                            <h4>{{$newsDetail->author->name}}</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis laboriosam ad
                                 beatae itaque ea non
                                 placeat officia ipsum praesentium! Ullam?</p>
@@ -181,116 +181,124 @@
                 <!-- end author-->
 
                 <!-- Comment  -->
+                @auth
+
                 <div id="comments" class="comments-area">
-                    <h3 class="comments-title">2 Comments:</h3>
+                    <h3 class="comments-title">{{count($newsDetail->comments)}} {{__('Comments')}}:</h3>
 
                     <ol class="comment-list">
+                        @foreach ($newsDetail->comments()->whereNull('parent_id')->get() as $comment)
+
                         <li class="comment">
                             <aside class="comment-body">
                                 <div class="comment-meta">
                                     <div class="comment-author vcard">
-                                        <img src="images/news2.jpg" class="avatar" alt="image">
-                                        <b class="fn">Sinmun</b>
-                                        <span class="says">says:</span>
+                                        <img src="{{asset('frontend/assets/images/avatar-1.png')}}" class="avatar" alt="image">
+                                        <b class="fn">{{$comment->user->name}}</b>
+                                        <span class="says">{{__('says')}}:</span>
                                     </div>
 
                                     <div class="comment-metadata">
-                                        <a href="#">
-                                            <span>April 24, 2019 at 10:59 am</span>
+                                        <a href="javascript:;">
+                                            <span>{{date('F d, Y H:i' , strtotime($comment->created_at))}}</span>
                                         </a>
                                     </div>
                                 </div>
 
                                 <div class="comment-content">
-                                    <p>Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,
-                                        when an unknown
-                                        printer took a galley of type and scrambled it to make a type specimen book.
+                                    <p>
+                                        {!! $comment->comment !!}
                                     </p>
                                 </div>
 
                                 <div class="reply">
                                     <a href="#" class="comment-reply-link" data-toggle="modal"
-                                        data-target="#exampleModal">Reply</a>
-                                    <span>
+                                        data-target="#exampleModal-{{$comment->id}}">Reply</a>
+                                    <span class="delete_comment" data-id="{{$comment->id}}">
                                         <i class="fa fa-trash"></i>
                                     </span>
                                 </div>
                             </aside>
+
+                            @if ($comment->reply()->count() > 0)
+                            @foreach ($comment->reply as $reply)
 
                             <ol class="children">
                                 <li class="comment">
                                     <aside class="comment-body">
                                         <div class="comment-meta">
                                             <div class="comment-author vcard">
-                                                <img src="images/news3.jpg" class="avatar" alt="image">
-                                                <b class="fn">Sinmun</b>
-                                                <span class="says">says:</span>
+                                                <img src="{{asset('frontend/assets/images/avatar-1.png')}}" class="avatar" alt="image">
+                                                <b class="fn">{{$reply->user->name}}</b>
+                                                <span class="says">{{__('says')}}:</span>
                                             </div>
 
                                             <div class="comment-metadata">
-                                                <a href="#">
-                                                    <span>April 24, 2019 at 10:59 am</span>
+                                                <a href="javascript:;">
+                                                    <span>{{date('F d, Y H:i' , strtotime($reply->created_at))}}</span>
                                                 </a>
                                             </div>
                                         </div>
 
                                         <div class="comment-content">
-                                            <p>Lorem Ipsum has been the industry’s standard dummy text ever since
-                                                the 1500s, when an
-                                                unknown printer took a galley of type and scrambled it to make a
-                                                type specimen book.</p>
+                                            <p>
+                                                {!! $reply->comment !!}
+                                            </p>
                                         </div>
 
                                         <div class="reply">
+                                            @if ($loop->last)
                                             <a href="#" class="comment-reply-link" data-toggle="modal"
-                                                data-target="#exampleModal">Reply</a>
-                                            <span>
+                                                data-target="#exampleModal-{{$comment->id}}">Reply</a>
+                                            @endif
+                                            <span class="delete_comment" data-id="{{$reply->id}}" style="margin-left:auto">
                                                 <i class="fa fa-trash"></i>
                                             </span>
                                         </div>
                                     </aside>
                                 </li>
                             </ol>
+                            @endforeach
+                            @endif
                         </li>
 
-                        <li class="comment">
-                            <aside class="comment-body">
-                                <div class="comment-meta">
-                                    <div class="comment-author vcard">
-                                        <img src="images/news4.jpg" class="avatar" alt="image">
-                                        <b class="fn">Sinmun</b>
-                                        <span class="says">says:</span>
+                         <!-- Modal -->
+                        <div class="comment_modal">
+                            <div class="modal fade" id="exampleModal-{{$comment->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{__('Write Your Comment')}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{route('news-comment-reply')}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="news_id" value="{{$newsDetail->id}}">
+                                                <input type="hidden" name="parent_id" value="{{$comment->id}}">
+                                                <textarea name="reply" cols="30" rows="7" placeholder="Type. . ."></textarea>
+                                                @error('reply')
+                                                <p class="text-danger">{{$message}}</p>
+                                               @enderror
+                                                <button type="submit">submit</button>
+                                            </form>
+                                        </div>
                                     </div>
-
-                                    <div class="comment-metadata">
-                                        <a href="#">
-                                            <span>April 24, 2019 at 10:59 am</span>
-                                        </a>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        @endforeach
 
-                                <div class="comment-content">
-                                    <p>Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,
-                                        when an unknown
-                                        printer took a galley of type and scrambled it to make a type specimen book.
-                                    </p>
-                                </div>
-
-                                <div class="reply">
-                                    <a href="#" class="comment-reply-link" data-toggle="modal"
-                                        data-target="#exampleModal">Reply</a>
-                                    <span>
-                                        <i class="fa fa-trash"></i>
-                                    </span>
-                                </div>
-                            </aside>
-                        </li>
                     </ol>
 
                     <div class="comment-respond">
                         <h3 class="comment-reply-title">Leave a Reply</h3>
 
-                        <form class="comment-form">
+                        <form action="{{route('news-comment')}}" method="POST" class="comment-form">
+                            @csrf
                             <p class="comment-notes">
                                 <span id="email-notes">Your email address will not be published.</span>
                                 Required fields are marked
@@ -300,54 +308,27 @@
                                 <label for="comment">Comment</label>
                                 <textarea name="comment" id="comment" cols="45" rows="5" maxlength="65525"
                                     required="required"></textarea>
+                                    <input type="hidden" name="news_id" value="{{$newsDetail->id}}">
+                                    <input type="hidden" name="parent_id" value="">
+                                    @error('comment')
+                                    <p class="text-danger">{{$message}}</p>
+                                  @enderror
                             </p>
-                            <p class="comment-form-author">
-                                <label>Name <span class="required">*</span></label>
-                                <input type="text" id="author" name="name" required="required">
-                            </p>
-                            <p class="comment-form-email">
-                                <label for="email">Email <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" required="required">
-                            </p>
-                            <p class="comment-form-url">
-                                <label for="url">Website</label>
-                                <input type="url" id="url" name="url">
-                            </p>
-                            <p class="comment-form-cookies-consent">
-                                <input type="checkbox" value="yes" name="wp-comment-cookies-consent"
-                                    id="wp-comment-cookies-consent">
-                                <label for="wp-comment-cookies-consent">Save my name, email, and website in this
-                                    browser for the next
-                                    span I comment.</label>
-                            </p>
+
                             <p class="form-submit mb-0">
                                 <input type="submit" name="submit" id="submit" class="submit" value="Post Comment">
                             </p>
                         </form>
                     </div>
                 </div>
-                <!-- Modal -->
-                <div class="comment_modal">
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Write Your Comment</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="#">
-                                        <textarea cols="30" rows="7" placeholder="Type. . ."></textarea>
-                                        <button type="submit">submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                @else
+                <div class="card mb-5" style="background-color: #f1f7ff">
+                    <div class="card-body">
+                        <h5 style="">Please <a href="{{route('login')}}">Login</a> to comment in the post </h5>
                     </div>
                 </div>
+                @endauth
+
 
                 <!-- end comment -->
 
@@ -752,167 +733,52 @@
     </div>
 </section>
 
-
-<section class="wrapper__section p-0">
-    <div class="wrapper__section__components">
-        <!-- Footer -->
-        <footer>
-            <div class="wrapper__footer bg__footer-dark pb-0">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="widget__footer">
-                                <figure class="image-logo">
-                                    <img src="images/logo2.png" alt="" class="logo-footer">
-                                </figure>
-
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius magnam harum iure
-                                    officia laudantium impedit voluptatem.</p>
-
-
-                                <div class="social__media mt-4">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white facebook">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white twitter">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white whatsapp">
-                                                <i class="fa fa-whatsapp"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white telegram">
-                                                <i class="fa fa-telegram"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white linkedin">
-                                                <i class="fa fa-linkedin"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="widget__footer">
-                                <div class="dropdown-footer">
-                                    <h4 class="footer-title">
-                                        entertainment
-                                        <span class="fa fa-angle-down"></span>
-                                    </h4>
-
-                                </div>
-
-                                <ul class="list-unstyled option-content is-hidden">
-                                    <li>
-                                        <a href="#">celebity news</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">movies</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">tv news</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">music news</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">life style</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">entertainment video</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="widget__footer">
-                                <div class="dropdown-footer">
-                                    <h4 class="footer-title">
-                                        health
-                                        <span class="fa fa-angle-down"></span>
-                                    </h4>
-
-                                </div>
-                                <ul class="list-unstyled option-content is-hidden">
-                                    <li>
-                                        <a href="#">medical research</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">healthy living</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">mental health</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">virus corona</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">children's health</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="widget__footer">
-                                <div class="dropdown-footer">
-                                    <h4 class="footer-title">
-                                        business
-                                        <span class="fa fa-angle-down"></span>
-                                    </h4>
-
-                                </div>
-
-                                <ul class="list-unstyled option-content is-hidden">
-                                    <li>
-                                        <a href="#">merkets</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">technology</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">features</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">property</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">business leaders</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer bottom -->
-            <div class="wrapper__footer-bottom bg__footer-dark">
-                <div class="container ">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="border-top-1 bg__footer-bottom-section">
-                                <p class="text-white text-center">
-                                    Copyright © 2023 Top News Theme by WebSolutionUS</p>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </footer>
-    </div>
-</section>
 @endsection
+@push('script')
+<script>
+    $(document).ready(function(){
+        $('.delete_comment').on('click', function(e) {
+                e.preventDefault();
+                let id = $(this).data('id')
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            type: 'DELETE',
+                            url: "{{route('news-comment-destroy')}}",
+                            data:{id:id},
+                            success: function(data) {
+
+                                if (data.status == 'success') {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        data.message,
+                                        'success'
+                                    )
+                                    window.location.reload();
+                                } else if (data.status == 'error') {
+                                    Swal.fire(
+                                        'Cant Delete',
+                                        data.message,
+                                        'error'
+                                    )
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(error);
+                            }
+                        })
+                    }
+                })
+            })
+    })
+</script>
+@endpush

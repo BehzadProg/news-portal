@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\News;
 use App\Models\Tag;
+use App\Models\News;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -17,7 +19,7 @@ class HomeController extends Controller
     }
 
     public function showNews(string $slug) {
-        $newsDetail = News::with(['author' , 'category' , 'tags'])->where('slug' , $slug)
+        $newsDetail = News::with(['author' , 'category' , 'tags' , 'comments'])->where('slug' , $slug)
         ->activeEntries()->withLocalize()->first();
 
         //get recent news post for sidebar
@@ -53,5 +55,47 @@ class HomeController extends Controller
         ->groupBy('name')
         ->orderByDesc('count')
         ->take(15)->get();
+    }
+
+    public function handleComment(Request $request) {
+        $request->validate([
+            'comment' => 'required|max:1000|string'
+        ]);
+
+        $comment = new Comment();
+        $comment->user_id = Auth::user()->id;
+        $comment->news_id = $request->news_id;
+        $comment->parent_id = $request->parent_id;
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        alert()->success('Thank you', __('By leaving your opinion in the comment section!'));
+        return redirect()->back();
+    }
+
+    public function handleReply(Request $request) {
+        $request->validate([
+            'reply' => 'required|max:1000|string'
+        ]);
+
+        $comment = new Comment();
+        $comment->user_id = Auth::user()->id;
+        $comment->news_id = $request->news_id;
+        $comment->parent_id = $request->parent_id;
+        $comment->comment = $request->reply;
+        $comment->save();
+
+        alert()->success('Thank you', __('Your replay submitted successfully'));
+        return redirect()->back();
+    }
+
+    public function commentDestroy(Request $request)
+    {
+        $comment = Comment::findOrFail($request->id);
+        if(Auth::user()->id === $comment->user_id){
+            $comment->delete();
+            return response(['status' => 'success' , 'message' => __('Deleted successfully')]);
+        }
+        return response(['status' => 'error' , 'message' => __('something went wrong')]);
     }
 }
