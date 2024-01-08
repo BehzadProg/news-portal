@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -40,4 +41,8 @@ Route::group(['middleware' => ['admin']],function () {
     Route::get('copy-news' , [NewsController::class , 'copyNews'])->name('copy-news');
     Route::post('paste-news' , [NewsController::class , 'pasteNews'])->name('paste-news');
     Route::resource('news' , NewsController::class);
+
+    /** News Section Setting routes */
+    Route::get('home-section-setting' , [HomeSectionSettingController::class , 'index'])->name('home-section-setting.index');
+    Route::put('home-section-setting' , [HomeSectionSettingController::class , 'update'])->name('home-section-setting.update');
 });

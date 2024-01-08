@@ -24,7 +24,7 @@
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Language')}}</label>
                                     <div class="col-sm-12 col-md-7">
                                         <select name="language"  class="form-control select2">
-                                            <option value="">--Select--</option>
+                                            <option value="">--{{__('Select')}}--</option>
                                             @foreach ($languages as $language)
 
                                             <option value="{{$language->lang}}">{{$language->name}}</option>
