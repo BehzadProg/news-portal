@@ -18,7 +18,14 @@ class HomeController extends Controller
 
         $heroSlider = News::with(['category' , 'author'])->where('show_at_slider' , 1)
         ->activeEntries()->withLocalize()->orderByDesc('id')->take(8)->get();
-        return view('frontend.home' , compact('breakingNews' , 'heroSlider'));
+
+        $recentPosts = News::with(['category' , 'author'])
+        ->activeEntries()->withLocalize()->orderByDesc('id')->take(6)->get();
+
+        $popularPosts = News::with('category')->where('show_at_popular' , 1)
+        ->activeEntries()->withLocalize()->orderByDesc('updated_at')->take(4)->get();
+
+        return view('frontend.home' , compact('breakingNews' , 'heroSlider' , 'recentPosts' , 'popularPosts'));
     }
 
     public function showNews(string $slug)
