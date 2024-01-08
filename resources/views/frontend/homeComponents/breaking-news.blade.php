@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="wrapp__list__article-responsive wrapp__list__article-responsive-carousel">
-                    @foreach ($news as $new)
+                    @foreach ($breakingNews as $new)
 
                     <div class="item">
                         <!-- Post Article -->

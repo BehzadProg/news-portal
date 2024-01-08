@@ -13,9 +13,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $news = News::where(['is_breaking_news' => 1])
+        $breakingNews = News::where('is_breaking_news' , 1)
         ->activeEntries()->withLocalize()->orderByDesc('id')->take(10)->get();
-        return view('frontend.home' , compact('news'));
+
+        $heroSlider = News::with(['category' , 'author'])->where('show_at_slider' , 1)
+        ->activeEntries()->withLocalize()->orderByDesc('id')->take(8)->get();
+        return view('frontend.home' , compact('breakingNews' , 'heroSlider'));
     }
 
     public function showNews(string $slug)
