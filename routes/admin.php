@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SocialCountController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login' , [AdminAuthenticationController::class , 'login'])->name('login');
@@ -45,4 +46,7 @@ Route::group(['middleware' => ['admin']],function () {
     /** News Section Setting routes */
     Route::get('home-section-setting' , [HomeSectionSettingController::class , 'index'])->name('home-section-setting.index');
     Route::put('home-section-setting' , [HomeSectionSettingController::class , 'update'])->name('home-section-setting.update');
+
+    /** Social Count routes */
+    Route::resource('social-count' , SocialCountController::class);
 });

@@ -19,6 +19,9 @@
         href="{{ asset('backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet"
         href="{{ asset('backend/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('backend/assets/css/bootstrap-iconpicker.min.css') }}">
+        <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
 
 
     <!-- Template CSS -->
@@ -68,6 +71,8 @@
     <script src="{{ asset('backend/assets/modules/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
     </script>
+    <script src="{{asset('backend/assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
+    <script src="{{ asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <!-- Sweet Alert PHP Version -->
