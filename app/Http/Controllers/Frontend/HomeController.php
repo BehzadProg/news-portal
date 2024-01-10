@@ -7,6 +7,7 @@ use App\Models\News;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\HomeSectionSetting;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -25,7 +26,31 @@ class HomeController extends Controller
         $popularPosts = News::with('category')->where('show_at_popular' , 1)
         ->activeEntries()->withLocalize()->orderByDesc('updated_at')->take(4)->get();
 
-        return view('frontend.home' , compact('breakingNews' , 'heroSlider' , 'recentPosts' , 'popularPosts'));
+        $homeSectionSetting = HomeSectionSetting::where('language' , getLanguage())->first();
+        $sectionOneNews = News::where('category_id' , $homeSectionSetting->category_section_one)
+        ->activeEntries()->withLocalize()->orderByDesc('id')->take(8)->get();
+        $sectionTwoNews = News::where('category_id' , $homeSectionSetting->category_section_two)
+        ->activeEntries()->withLocalize()->orderByDesc('id')->take(8)->get();
+        $sectionThreeNews = News::where('category_id' , $homeSectionSetting->category_section_three)
+        ->activeEntries()->withLocalize()->orderByDesc('id')->take(6)->get();
+        $sectionFourNews = News::where('category_id' , $homeSectionSetting->category_section_four)
+        ->activeEntries()->withLocalize()->orderByDesc('id')->take(4)->get();
+
+         //get recent news post for sidebar
+         $mostViewedNews = News::with(['author' , 'category'])
+         ->activeEntries()->withLocalize()->orderByDesc('views')->take(3)->get();
+
+        return view('frontend.home' , compact(
+            'breakingNews',
+            'heroSlider',
+            'recentPosts',
+            'popularPosts',
+            'sectionOneNews',
+            'sectionTwoNews',
+            'sectionThreeNews',
+            'sectionFourNews',
+            'mostViewedNews'
+            ));
     }
 
     public function showNews(string $slug)

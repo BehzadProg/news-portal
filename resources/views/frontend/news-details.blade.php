@@ -194,7 +194,7 @@
                     <h3 class="comments-title">{{count($newsDetail->comments)}} {{__('Comments')}}:</h3>
 
                     <ol class="comment-list">
-                        @foreach ($newsDetail->comments()->whereNull('parent_id')->get() as $comment)
+                        @foreach ($newsDetail->comments()->whereNull('parent_id')->orderBy('id' , 'Desc')->get() as $comment)
 
                         <li class="comment">
                             <aside class="comment-body">
