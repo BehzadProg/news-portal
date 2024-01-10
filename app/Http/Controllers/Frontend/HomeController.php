@@ -8,6 +8,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\HomeSectionSetting;
+use App\Models\SocialCount;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -40,6 +41,10 @@ class HomeController extends Controller
          $mostViewedNews = News::with(['author' , 'category'])
          ->activeEntries()->withLocalize()->orderByDesc('views')->take(3)->get();
 
+        $socialCounts = SocialCount::where(['status' => 1 , 'language' => getLanguage()])->get();
+
+        $mostPopularTag = $this->mostPopularTags();
+
         return view('frontend.home' , compact(
             'breakingNews',
             'heroSlider',
@@ -49,7 +54,9 @@ class HomeController extends Controller
             'sectionTwoNews',
             'sectionThreeNews',
             'sectionFourNews',
-            'mostViewedNews'
+            'mostViewedNews',
+            'socialCounts',
+            'mostPopularTag'
             ));
     }
 
