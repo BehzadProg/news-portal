@@ -60,6 +60,27 @@ class HomeController extends Controller
             ));
     }
 
+    public function news(Request $request)
+    {
+        if($request->has('search')){
+            $news = News::where(function($query) use ($request) {
+                $query->where('title' , 'like' , '%'.$request->search.'%')
+                ->orWhere('content' , 'like' , '%'.$request->search.'%');
+            })
+            ->orWhereHas('category' , function($query) use ($request){
+                $query->where('name', 'like' , '%'.$request->search.'%');
+            })->orderByDesc('id')->activeEntries()->withLocalize()->paginate(8);
+        }
+
+        //get recent news post for sidebar
+        $recentNews = News::with(['author' , 'category'])
+        ->activeEntries()->withLocalize()->orderByDesc('id')->take(4)->get();
+
+        $mostPopularTag = $this->mostPopularTags();
+
+        return view('frontend.news' , compact('news' , 'recentNews' , 'mostPopularTag'));
+    }
+
     public function showNews(string $slug)
     {
 

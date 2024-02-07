@@ -58,7 +58,10 @@
                                             </td>
                                             <td>
                                                 <a href="{{route('admin.language.edit' , $lang->id)}}" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
+                                                @if ($lang->lang !== 'en')
+
                                                 <a href="{{route('admin.language.destroy' , $lang->id)}}" class="btn btn-danger delete-item"><i class="fas fa-trash-alt"></i></a>
+                                                @endif
                                             </td>
 
                                         </tr>
