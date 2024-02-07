@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Tag;
 use App\Models\News;
 use App\Models\Comment;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\HomeSectionSetting;
+use App\Models\Category;
 use App\Models\SocialCount;
+use Illuminate\Http\Request;
+use App\Models\HomeSectionSetting;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -62,15 +63,30 @@ class HomeController extends Controller
 
     public function news(Request $request)
     {
-        if($request->has('search')){
-            $news = News::where(function($query) use ($request) {
+        if($request->search === null){
+            return redirect()->back();
+        }
+
+
+        $news = News::query();
+
+        $news->when($request->has('category') && !empty($request->category) , function($query) use ($request){
+            $query->whereHas('category' , function($query) use ($request){
+                $query->where('slug' , $request->category);
+            });
+        });
+
+        $news->when($request->has('search') , function($query) use ($request){
+            $query->where(function($query) use ($request) {
                 $query->where('title' , 'like' , '%'.$request->search.'%')
                 ->orWhere('content' , 'like' , '%'.$request->search.'%');
             })
             ->orWhereHas('category' , function($query) use ($request){
                 $query->where('name', 'like' , '%'.$request->search.'%');
-            })->orderByDesc('id')->activeEntries()->withLocalize()->paginate(8);
-        }
+            });
+        });
+
+        $news = $news->orderByDesc('id')->activeEntries()->withLocalize()->paginate(8);
 
         //get recent news post for sidebar
         $recentNews = News::with(['author' , 'category'])
@@ -78,7 +94,9 @@ class HomeController extends Controller
 
         $mostPopularTag = $this->mostPopularTags();
 
-        return view('frontend.news' , compact('news' , 'recentNews' , 'mostPopularTag'));
+        $categories = Category::where(['status' => 1 , 'language' => getLanguage()])->get();
+
+        return view('frontend.news' , compact('news' , 'recentNews' , 'mostPopularTag' , 'categories'));
     }
 
     public function showNews(string $slug)

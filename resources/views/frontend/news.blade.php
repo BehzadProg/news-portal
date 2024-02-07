@@ -10,10 +10,10 @@
                 <ul class="breadcrumbs bg-light mb-4">
                     <li class="breadcrumbs__item">
                         <a href="{{url('/')}}" class="breadcrumbs__url">
-                            <i class="fa fa-home"></i> Home</a>
+                            <i class="fa fa-home"></i> {{__('Home')}}</a>
                     </li>
                     <li class="breadcrumbs__item">
-                        <a href="javascript:;" class="breadcrumbs__url">News</a>
+                        <a href="javascript:;" class="breadcrumbs__url">{{__('News')}}</a>
                     </li>
                     @if (request()->has('search'))
                     <li class="breadcrumbs__item breadcrumbs__item--current">
@@ -36,30 +36,31 @@
                                 <input type="text" placeholder="Type here" name="search" value="{{request()->search}}">
                             </div>
                             <div class="col-lg-4">
-                                <select>
-                                    <option value="#">Select Category</option>
-                                    <option value="#">Category 1</option>
-                                    <option value="#">Category 2</option>
-                                    <option value="#">Category 3</option>
-                                    <option value="#">Category 4</option>
-                                    <option value="#">Category 5</option>
-                                    <option value="#">Category 6</option>
+                                <select name="category">
+                                    <option value="">{{__('All')}}</option>
+                                    @foreach ($categories as $category)
+
+                                    <option {{$category->slug === request()->category ? 'selected' : ''}} value="{{$category->slug}}">{{$category->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <button type="submit">search</button>
+                                <button type="submit">{{__('search')}}</button>
                             </div>
                         </div>
                     </form>
                 </div>
 
                 <aside class="wrapper__list__article ">
-                    <h4 class="border_section">Category title</h4>
+                    @if (request()->has('category') && !empty(request()->category))
+
+                    <h4 class="border_section">{{__('Category')}} : {{request()->category}}</h4>
+                    @endif
 
                     <div class="row">
                         @if (count($news) === 0)
                         <div class="text-center w-100 p-3" style="background-color: #f1f7ff; border-radius: 60px !important;">
-                            <h4 style="margin: 0">{{__('No News Found')}} :(</h4>
+                            <h4 style="margin: 0">{{__('No Results Found')}} :(</h4>
                         </div>
 
                         @else
