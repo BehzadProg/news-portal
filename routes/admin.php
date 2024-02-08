@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAuthenticationController;
+use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
@@ -49,4 +50,8 @@ Route::group(['middleware' => ['admin']],function () {
 
     /** Social Count routes */
     Route::resource('social-count' , SocialCountController::class);
+
+    /** Advertisement route */
+    Route::get('advertisement' , [AdvertisementController::class ,'index'])->name('advertisement.index');
+    Route::put('advertisement/update' , [AdvertisementController::class ,'update'])->name('advertisement.update');
 });

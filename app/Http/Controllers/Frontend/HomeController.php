@@ -10,6 +10,7 @@ use App\Models\SocialCount;
 use Illuminate\Http\Request;
 use App\Models\HomeSectionSetting;
 use App\Http\Controllers\Controller;
+use App\Models\Advertisement;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -46,6 +47,8 @@ class HomeController extends Controller
 
         $mostPopularTag = $this->mostPopularTags();
 
+        $ad = Advertisement::first();
+
         return view('frontend.home' , compact(
             'breakingNews',
             'heroSlider',
@@ -57,7 +60,8 @@ class HomeController extends Controller
             'sectionFourNews',
             'mostViewedNews',
             'socialCounts',
-            'mostPopularTag'
+            'mostPopularTag',
+            'ad'
             ));
     }
 
@@ -98,7 +102,9 @@ class HomeController extends Controller
 
         $categories = Category::where(['status' => 1 , 'language' => getLanguage()])->get();
 
-        return view('frontend.news' , compact('news' , 'recentNews' , 'mostPopularTag' , 'categories'));
+        $ad = Advertisement::first();
+
+        return view('frontend.news' , compact('news' , 'recentNews' , 'mostPopularTag' , 'categories' , 'ad'));
     }
 
     public function showNews(string $slug)
@@ -133,6 +139,8 @@ class HomeController extends Controller
 
         $socialCounts = SocialCount::where(['status' => 1 , 'language' => getLanguage()])->get();
 
+        $ad = Advertisement::first();
+
         return view('frontend.news-details' , compact(
             'newsDetail',
              'recentNews' ,
@@ -140,7 +148,8 @@ class HomeController extends Controller
               'nextPost',
               'previousPost',
               'relatedPosts',
-              'socialCounts'
+              'socialCounts',
+              'ad'
             ));
     }
 

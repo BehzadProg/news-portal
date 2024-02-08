@@ -376,12 +376,16 @@
                             </div>
                         </div>
                     </aside>
+                    @if ($ad->home_middle_ad_status == 1)
 
                     <div class="small_add_banner">
                         <div class="small_add_banner_img">
-                            <img src="{{asset('frontend/assets/images/placeholder_large.jpg')}}" alt="adds">
+                            <a href="{{$ad->home_middle_ad_url}}">
+                                <img src="{{asset(env('AD_IMAGE_UPLOAD_PATH').$ad->home_middle_ad)}}" alt="adds">
+                            </a>
                         </div>
                     </div>
+                    @endif
 
                     <aside class="wrapper__list__article mt-5">
                         <h4 class="border_section">{{@$sectionFourNews->first()->category->name}}</h4>
@@ -573,21 +577,24 @@
                             </div>
                         </aside>
 
+                        @if ($ad->sidebar_ad_status == 1)
+
                         <aside class="wrapper__list__article">
-                            <h4 class="border_section">Advertise</h4>
-                            <a href="#">
+                            <h4 class="border_section">{{__('Advertise')}}</h4>
+                            <a href="{{$ad->sidebar_ad_url}}">
                                 <figure>
-                                    <img src="{{asset('frontend/assets/images/newsimage3.png')}}" alt="" class="img-fluid">
+                                    <img src="{{asset(env('AD_IMAGE_UPLOAD_PATH').$ad->sidebar_ad)}}" alt="" class="img-fluid">
                                 </figure>
                             </a>
                         </aside>
+                        @endif
 
                         <aside class="wrapper__list__article">
                             <h4 class="border_section">{{__('newsletter')}}</h4>
                             <!-- Form Subscribe -->
                             <div class="widget__form-subscribe bg__card-shadow">
                                 <h6>
-                                    {{__('The most important world news and events of the day').}}
+                                    {{__('The most important world news and events of the day')}}.
                                 </h6>
                                 <p><small>{{__('Get magzrenvi daily newsletter on your inbox')}}.</small></p>
                                 <div class="input-group ">

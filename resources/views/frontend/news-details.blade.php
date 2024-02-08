@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title' , $newsDetail->title)
+@section('title' , '- '. $newsDetail->title)
 @section('meta_description' , $newsDetail->content)
 @section('meta_og_title' , $newsDetail->meta_title)
 @section('meta_og_description' , $newsDetail->meta_description)
@@ -361,12 +361,16 @@
                     </div>
                 </div>
 
+                @if ($ad->view_page_ad_status == 1)
+
                 <div class="small_add_banner mb-5 pb-4">
                     <div class="small_add_banner_img">
-                        <img src="{{asset('frontend/assets/images/placeholder_large.jpg')}}" alt="adds">
+                        <a href="{{$ad->view_page_ad_url}}">
+                            <img src="{{asset(env('AD_IMAGE_UPLOAD_PATH').$ad->view_page_ad)}}" alt="adds">
+                        </a>
                     </div>
                 </div>
-
+                @endif
 
                 <div class="clearfix"></div>
 
@@ -587,14 +591,17 @@
                         </div>
                     </aside>
 
+                    @if ($ad->sidebar_ad_status == 1)
+
                     <aside class="wrapper__list__article">
                         <h4 class="border_section">{{__('Advertise')}}</h4>
-                        <a href="#">
+                        <a href="{{$ad->sidebar_ad_url}}">
                             <figure>
-                                <img src="{{('frontend/assets/images/news6.jpg')}}" alt="" class="img-fluid">
+                                <img src="{{asset(env('AD_IMAGE_UPLOAD_PATH').$ad->sidebar_ad)}}" alt="" class="img-fluid">
                             </figure>
                         </a>
                     </aside>
+                    @endif
 
                 </div>
             </div>
