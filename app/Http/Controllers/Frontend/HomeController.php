@@ -63,30 +63,32 @@ class HomeController extends Controller
 
     public function news(Request $request)
     {
-        if($request->search === null){
-            return redirect()->back();
-        }
 
+            $news = News::query();
 
-        $news = News::query();
-
-        $news->when($request->has('category') && !empty($request->category) , function($query) use ($request){
-            $query->whereHas('category' , function($query) use ($request){
-                $query->where('slug' , $request->category);
+            $news->when($request->has('tag') && !empty($request->tag) , function($query) use ($request){
+                $query->whereHas('tags' , function($query) use ($request){
+                    $query->where('name' , $request->tag);
+                });
             });
-        });
 
-        $news->when($request->has('search') , function($query) use ($request){
-            $query->where(function($query) use ($request) {
-                $query->where('title' , 'like' , '%'.$request->search.'%')
-                ->orWhere('content' , 'like' , '%'.$request->search.'%');
-            })
-            ->orWhereHas('category' , function($query) use ($request){
-                $query->where('name', 'like' , '%'.$request->search.'%');
+            $news->when($request->has('category') && !empty($request->category) , function($query) use ($request){
+                $query->whereHas('category' , function($query) use ($request){
+                    $query->where('slug' , $request->category);
+                });
             });
-        });
 
-        $news = $news->orderByDesc('id')->activeEntries()->withLocalize()->paginate(8);
+            $news->when($request->has('search') , function($query) use ($request){
+                $query->where(function($query) use ($request) {
+                    $query->where('title' , 'like' , '%'.$request->search.'%')
+                    ->orWhere('content' , 'like' , '%'.$request->search.'%');
+                })
+                ->orWhereHas('category' , function($query) use ($request){
+                    $query->where('name', 'like' , '%'.$request->search.'%');
+                });
+            });
+
+            $news = $news->orderByDesc('id')->activeEntries()->withLocalize()->paginate(8);
 
         //get recent news post for sidebar
         $recentNews = News::with(['author' , 'category'])
@@ -129,13 +131,16 @@ class HomeController extends Controller
         ->withLocalize()
         ->take(5)->get();
 
+        $socialCounts = SocialCount::where(['status' => 1 , 'language' => getLanguage()])->get();
+
         return view('frontend.news-details' , compact(
             'newsDetail',
              'recentNews' ,
               'mostPopularTag',
               'nextPost',
               'previousPost',
-              'relatedPosts'
+              'relatedPosts',
+              'socialCounts'
             ));
     }
 
