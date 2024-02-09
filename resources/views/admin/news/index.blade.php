@@ -61,7 +61,7 @@
                                                 <tbody>
                                                     @foreach ($news as $item)
                                                         <tr>
-                                                            <td>{{ $loop->index + 1 }}</td>
+                                                            <td>{{++ $loop->index }}</td>
                                                             <td>
                                                                 <img width="100" height="60"
                                                                     src="{{ asset(env('NEWS_IMAGE_UPLOAD_PATH') . $item->image) }}"

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SocialCountController;
+use App\Http\Controllers\Admin\SocialLinkController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login' , [AdminAuthenticationController::class , 'login'])->name('login');
@@ -50,6 +51,9 @@ Route::group(['middleware' => ['admin']],function () {
 
     /** Social Count routes */
     Route::resource('social-count' , SocialCountController::class);
+
+    /** Social Links routes */
+    Route::resource('social-link' , SocialLinkController::class);
 
     /** Advertisement route */
     Route::get('advertisement' , [AdvertisementController::class ,'index'])->name('advertisement.index');
