@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FooterInfoController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\NewsController;
@@ -58,4 +59,7 @@ Route::group(['middleware' => ['admin']],function () {
     /** Advertisement route */
     Route::get('advertisement' , [AdvertisementController::class ,'index'])->name('advertisement.index');
     Route::put('advertisement/update' , [AdvertisementController::class ,'update'])->name('advertisement.update');
+
+    /** Footer Info route */
+    Route::resource('footer-info' , FooterInfoController::class)->only('index' , 'store');
 });
