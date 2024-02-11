@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\SocialCountController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use Illuminate\Support\Facades\Route;
@@ -62,4 +63,9 @@ Route::group(['middleware' => ['admin']],function () {
 
     /** Footer Info route */
     Route::resource('footer-info' , FooterInfoController::class)->only('index' , 'store');
+
+    /** Role And Permission Route */
+    Route::get('role' , [RolePermissionController::class , 'index'])->name('role.index');
+    Route::get('role/create' , [RolePermissionController::class , 'create'])->name('role.create');
+    Route::post('role/create' , [RolePermissionController::class , 'store'])->name('role.store');
 });

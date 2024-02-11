@@ -22,7 +22,7 @@
                             <div class="tab-content tab-bordered" id="myTab3Content">
 
                                         <div class="table-responsive">
-                                            <table class="table table-striped">
+                                            <table class="table table-striped" id="table">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">
@@ -71,3 +71,14 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script>
+        $("#table").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }]
+        });
+
+    </script>
+@endpush
