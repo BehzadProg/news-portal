@@ -49,7 +49,8 @@
       <li class="dropdown">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-lock"></i> <span>{{__('Access Managment')}}</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{route('admin.role.index')}}">Role And {{__('Permission')}}</a></li>
+          <li><a class="nav-link" href="{{route('admin.role.index')}}">{{__('Role And Permission')}}</a></li>
+          <li><a class="nav-link" href="{{route('admin.role-users.index')}}">{{__('Role Users')}}</a></li>
 
         </ul>
       </li>
