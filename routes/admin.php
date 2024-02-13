@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FooterGridOneController;
+use App\Http\Controllers\Admin\FooterGridTwoController;
 use App\Http\Controllers\Admin\FooterInfoController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\LanguageController;
@@ -67,6 +68,8 @@ Route::group(['middleware' => ['admin']],function () {
     Route::resource('footer-info' , FooterInfoController::class)->only('index' , 'store');
     /** Footer Grid One route */
     Route::resource('footer-grid-one' , FooterGridOneController::class);
+    /** Footer Grid Two route */
+    Route::resource('footer-grid-two' , FooterGridTwoController::class);
 
     /** Role And Permission Route */
     Route::get('role' , [RolePermissionController::class , 'index'])->name('role.index');
