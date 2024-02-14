@@ -10,6 +10,56 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
+                        <div class="card-body">
+
+                            <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                                @foreach ($languages as $language)
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ $loop->index === 0 ? 'active' : '' }}" id="home-tab2"
+                                            data-toggle="tab" href="#home-{{ $language->lang }}" role="tab"
+                                            aria-controls="home" aria-selected="true">{{ $language->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div class="tab-content tab-bordered" id="myTab3Content">
+                                @foreach ($languages as $language)
+                                    @php
+                                        $footerTitle = \App\Models\FooterTitle::where(['language' => $language->lang , 'key' => 'grid_three_title'])
+                                            ->first();
+                                    @endphp
+
+                                    <div class="tab-pane fade {{ $loop->index === 0 ? 'show active' : '' }} "
+                                        id="home-{{ $language->lang }}" role="tabpanel" aria-labelledby="home-tab2">
+                                        <div class="card-body">
+                                            <form action="{{route('admin.footer-grid-three-title')}}" method="POST">
+                                                @csrf
+                                                <div class="form-group row mb-4">
+                                                    <label
+                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Footer Grid Three Title') }}</label>
+                                                    <div class="col-sm-12 col-md-7">
+                                                        <input name="title" type="text" value="{{@$footerTitle->value}}" class="form-control">
+                                                        <input name="language" type="hidden" value="{{$language->lang}}" class="form-control">
+                                                        @error('title')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-4">
+                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                                    <div class="col-sm-12 col-md-7">
+                                                        <button class="btn btn-primary">{{__('Save')}}</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card card-primary">
                         <div class="card-header">
                             <h4>{{__('All Footer Grid Three Links')}}</h4>
                             <div class="card-header-action">
@@ -55,7 +105,7 @@
                                                     <td>{{$loop->index + 1}}</td>
                                                     <td>{{$footer->name}}</td>
                                                     <td>{{$footer->language}}</td>
-                                                    
+
                                                     <td>
                                                         @if ($footer->status === 1)
                                                         <span class="badge badge-success">{{__('Active')}}</span>

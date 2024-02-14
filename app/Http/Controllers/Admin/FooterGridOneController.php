@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\FooterGridOne;
+use App\Models\FooterTitle;
 use App\Models\Language;
 use Illuminate\Http\Request;
 
@@ -99,5 +100,24 @@ class FooterGridOneController extends Controller
         $footer = FooterGridOne::findOrFail($id);
         $footer->delete();
         return response(['status' => 'success' , 'message' => __('Deleted Successfully')]);
+    }
+
+    public function handleTitle(Request $request) {
+        $request->validate([
+            'title' => 'required|max:255'
+        ]);
+
+        FooterTitle::updateOrCreate(
+            [
+                'key' => 'grid_one_title',
+                'language' => $request->language
+            ],
+            [
+                'value' => $request->title
+            ]
+        );
+
+        toast(__('Updated Successfully') , 'success');
+        return redirect()->back();
     }
 }

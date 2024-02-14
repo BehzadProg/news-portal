@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
+use App\Models\FooterTitle;
 use Illuminate\Http\Request;
 use App\Models\FooterGridThree;
 use App\Http\Controllers\Controller;
@@ -99,5 +100,24 @@ class FooterGridThreeController extends Controller
         $footer = FooterGridThree::findOrFail($id);
         $footer->delete();
         return response(['status' => 'success' , 'message' => __('Deleted Successfully')]);
+    }
+
+    public function handleTitle(Request $request) {
+        $request->validate([
+            'title' => 'required|max:255'
+        ]);
+
+        FooterTitle::updateOrCreate(
+            [
+                'key' => 'grid_three_title',
+                'language' => $request->language
+            ],
+            [
+                'value' => $request->title
+            ]
+        );
+
+        toast(__('Updated Successfully') , 'success');
+        return redirect()->back();
     }
 }

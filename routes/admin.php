@@ -68,10 +68,13 @@ Route::group(['middleware' => ['admin']],function () {
     /** Footer Info route */
     Route::resource('footer-info' , FooterInfoController::class)->only('index' , 'store');
     /** Footer Grid One route */
+    Route::post('footer-grid-one-title' , [FooterGridOneController::class , 'handleTitle'])->name('footer-grid-one-title');
     Route::resource('footer-grid-one' , FooterGridOneController::class);
     /** Footer Grid Two route */
+    Route::post('footer-grid-two-title' , [FooterGridTwoController::class , 'handleTitle'])->name('footer-grid-two-title');
     Route::resource('footer-grid-two' , FooterGridTwoController::class);
     /** Footer Grid Two route */
+    Route::post('footer-grid-three-title' , [FooterGridThreeController::class , 'handleTitle'])->name('footer-grid-three-title');
     Route::resource('footer-grid-three' , FooterGridThreeController::class);
 
     /** Role And Permission Route */

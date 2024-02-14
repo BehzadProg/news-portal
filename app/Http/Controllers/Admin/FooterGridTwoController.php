@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
+use App\Models\FooterTitle;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\FooterGridTwo;
+use App\Http\Controllers\Controller;
 
 class FooterGridTwoController extends Controller
 {
@@ -99,5 +100,24 @@ class FooterGridTwoController extends Controller
         $footer = FooterGridTwo::findOrFail($id);
         $footer->delete();
         return response(['status' => 'success' , 'message' => __('Deleted Successfully')]);
+    }
+
+    public function handleTitle(Request $request) {
+        $request->validate([
+            'title' => 'required|max:255'
+        ]);
+
+        FooterTitle::updateOrCreate(
+            [
+                'key' => 'grid_two_title',
+                'language' => $request->language
+            ],
+            [
+                'value' => $request->title
+            ]
+        );
+
+        toast(__('Updated Successfully') , 'success');
+        return redirect()->back();
     }
 }
