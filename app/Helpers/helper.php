@@ -48,3 +48,13 @@ function converToKFormat(int $number)
         return round($number / 1000000 , 1) . 'M';
     }
 }
+
+// make sidebar active
+function setSidebarActive(array $routes)
+{
+    foreach($routes as $route){
+        if(request()->routeIs($route)){
+            return 'active';
+        }
+    }
+}
