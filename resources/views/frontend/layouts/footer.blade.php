@@ -1,5 +1,11 @@
 @php
     $footerInfo = \App\Models\FooterInfo::where('language' , getLanguage())->first();
+    $gridOneTitle = \App\Models\FooterTitle::where(['language' => getLanguage() , 'key' => 'grid_one_title'])->first();
+    $gridTwoTitle = \App\Models\FooterTitle::where(['language' => getLanguage() , 'key' => 'grid_two_title'])->first();
+    $gridThreeTitle = \App\Models\FooterTitle::where(['language' => getLanguage() , 'key' => 'grid_three_title'])->first();
+    $footerGridOne = \App\Models\FooterGridOne::where(['language' => getLanguage() , 'status' => 1])->get();
+    $footerGridTwo = \App\Models\FooterGridTwo::where(['language' => getLanguage() , 'status' => 1])->get();
+    $footerGridThree = \App\Models\FooterGridThree::where(['language' => getLanguage() , 'status' => 1])->get();
 @endphp
 <section class="wrapper__section p-0">
     <div class="wrapper__section__components">
@@ -36,31 +42,20 @@
                             <div class="widget__footer">
                                 <div class="dropdown-footer">
                                     <h4 class="footer-title">
-                                        entertainment
+                                        {{@$gridOneTitle->value}}
                                         <span class="fa fa-angle-down"></span>
                                     </h4>
 
                                 </div>
 
                                 <ul class="list-unstyled option-content is-hidden">
+                                    @foreach ($footerGridOne as $gridOne)
+
                                     <li>
-                                        <a href="#">celebity news</a>
+                                        <a href="{{$gridOne->url}}">{{$gridOne->name}}</a>
                                     </li>
-                                    <li>
-                                        <a href="#">movies</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">tv news</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">music news</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">life style</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">entertainment video</a>
-                                    </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </div>
@@ -68,27 +63,18 @@
                             <div class="widget__footer">
                                 <div class="dropdown-footer">
                                     <h4 class="footer-title">
-                                        health
+                                        {{@$gridTwoTitle->value}}
                                         <span class="fa fa-angle-down"></span>
                                     </h4>
 
                                 </div>
                                 <ul class="list-unstyled option-content is-hidden">
+                                    @foreach ($footerGridTwo as $gridTwo)
+
                                     <li>
-                                        <a href="#">medical research</a>
+                                        <a href="{{$gridTwo->url}}">{{$gridTwo->name}}</a>
                                     </li>
-                                    <li>
-                                        <a href="#">healthy living</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">mental health</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">virus corona</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">children's health</a>
-                                    </li>
+                                    @endforeach
 
                                 </ul>
                             </div>
@@ -97,28 +83,19 @@
                             <div class="widget__footer">
                                 <div class="dropdown-footer">
                                     <h4 class="footer-title">
-                                        business
+                                        {{@$gridThreeTitle->value}}
                                         <span class="fa fa-angle-down"></span>
                                     </h4>
 
                                 </div>
 
                                 <ul class="list-unstyled option-content is-hidden">
+                                    @foreach ($footerGridThree as $gridThree)
+
                                     <li>
-                                        <a href="#">merkets</a>
+                                        <a href="{{$gridThree->url}}">{{$gridThree->name}}</a>
                                     </li>
-                                    <li>
-                                        <a href="#">technology</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">features</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">property</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">business leaders</a>
-                                    </li>
+                                    @endforeach
 
                                 </ul>
                             </div>
