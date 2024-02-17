@@ -82,6 +82,7 @@ Route::group(['middleware' => ['admin']],function () {
     Route::get('setting' , [SettingController::class , 'index'])->name('setting.index');
     Route::put('general-setting-update' , [SettingController::class , 'genralSettingUpdate'])->name('general-setting.update');
     Route::get('setting-change-view-list' , [SettingController::class , 'changeViewList'])->name('setting-change-view-list');
+    Route::put('seo-setting' , [SettingController::class , 'SeoSettingUpdate'])->name('seo-setting.update');
 
     /** Role And Permission Route */
     Route::get('role' , [RolePermissionController::class , 'index'])->name('role.index');

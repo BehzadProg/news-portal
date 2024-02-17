@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\FileUploadTrait;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
@@ -26,7 +27,7 @@ class SettingController extends Controller
 
         $site_logo = $this->handleUploadSettingLogo('site_logo' , getSetting('site_logo') , env('SITE_LOGO_IMAGE_UPLOAD_PATH') , 'site_logo');
         $site_favicon = $this->handleUploadSettingLogo('site_favicon' , getSetting('site_favicon'), env('SITE_LOGO_IMAGE_UPLOAD_PATH') , 'site_favicon');
-        
+
         Setting::updateOrCreate(
             ['key' => 'site_name'],
             ['value' => $request->site_name]
@@ -45,6 +46,33 @@ class SettingController extends Controller
                 ['value' => $site_favicon]
             );
         }
+
+        toast(__('Updated Successfully') , 'success');
+        return redirect()->back();
+    }
+
+    public function SeoSettingUpdate(Request $request) : RedirectResponse
+    {
+        $request->validate([
+            'site_seo_title' => 'required|max:60',
+            'site_seo_description' => 'required|max:160',
+            'site_seo_keywords' => 'required',
+        ]);
+
+        Setting::updateOrCreate(
+            ['key' => 'site_seo_title'],
+            ['value' => $request->site_seo_title]
+        );
+
+        Setting::updateOrCreate(
+            ['key' => 'site_seo_description'],
+            ['value' => $request->site_seo_description]
+        );
+
+        Setting::updateOrCreate(
+            ['key' => 'site_seo_keywords'],
+            ['value' => $request->site_seo_keywords]
+        );
 
         toast(__('Updated Successfully') , 'success');
         return redirect()->back();
