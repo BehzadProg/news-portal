@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\RoleUserController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SocialCountController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,11 @@ Route::group(['middleware' => ['admin']],function () {
     /** Footer Grid Two route */
     Route::post('footer-grid-three-title' , [FooterGridThreeController::class , 'handleTitle'])->name('footer-grid-three-title');
     Route::resource('footer-grid-three' , FooterGridThreeController::class);
+
+    /** Setting route */
+    Route::get('setting' , [SettingController::class , 'index'])->name('setting.index');
+    Route::put('general-setting-update' , [SettingController::class , 'genralSettingUpdate'])->name('general-setting.update');
+    Route::get('setting-change-view-list' , [SettingController::class , 'changeViewList'])->name('setting-change-view-list');
 
     /** Role And Permission Route */
     Route::get('role' , [RolePermissionController::class , 'index'])->name('role.index');

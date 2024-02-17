@@ -41,6 +41,28 @@ trait FileUploadTrait
         }
     }
 
+    function handleUploadSettingLogo($inputName, $value = null, $pathFile = null , $privateName = null)
+    {
+        try {
+            if (request()->hasFile($inputName)) {
+
+                if ($value) {
+                    \File::delete(public_path($pathFile) . $value);
+                }
+
+                $file = request()->file($inputName);
+
+                $fileName = $this->generateFileName($file->getClientOriginalExtension() , $privateName);
+
+                $file->move(public_path($pathFile), $fileName);
+
+                return $fileName;
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     function deleteFileIfExist($filePath)
 {
     try{

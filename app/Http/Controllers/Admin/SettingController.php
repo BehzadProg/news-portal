@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Setting;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Traits\FileUploadTrait;
+use Illuminate\Support\Facades\Session;
+
+class SettingController extends Controller
+{
+    use FileUploadTrait;
+
+    public function index(){
+        return view('admin.setting.index');
+    }
+
+    public function genralSettingUpdate(Request $request)
+    {
+        $request->validate([
+            'site_name' => 'required|max:255',
+            'site_logo' => 'nullable|image|max:3000',
+            'site_favicon' => 'nullable|image|max:1000',
+        ]);
+
+        $site_logo = $this->handleUploadSettingLogo('site_logo' , getSetting('site_logo') , env('SITE_LOGO_IMAGE_UPLOAD_PATH') , 'site_logo');
+        $site_favicon = $this->handleUploadSettingLogo('site_favicon' , getSetting('site_favicon'), env('SITE_LOGO_IMAGE_UPLOAD_PATH') , 'site_favicon');
+        
+        Setting::updateOrCreate(
+            ['key' => 'site_name'],
+            ['value' => $request->site_name]
+        );
+        if(!empty($site_logo)){
+
+            Setting::updateOrCreate(
+                ['key' => 'site_logo'],
+                ['value' => $site_logo]
+            );
+        }
+        if(!empty($site_favicon)){
+
+            Setting::updateOrCreate(
+                ['key' => 'site_favicon'],
+                ['value' => $site_favicon]
+            );
+        }
+
+        toast(__('Updated Successfully') , 'success');
+        return redirect()->back();
+    }
+
+    public function changeViewList(Request $request)
+    {
+        Session::put('setting_list_style', $request->style);
+    }
+}

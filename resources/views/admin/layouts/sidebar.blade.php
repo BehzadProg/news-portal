@@ -29,9 +29,9 @@
         </ul>
       </li>
 
-      <li class="{{setSidebarActive(['admin.social-count.*'])}}"><a class="nav-link" href="{{route('admin.social-count.index')}}"><i class="fa fa-share-alt"></i> <span>Social {{__('Count')}}</span></a></li>
+      <li class="{{setSidebarActive(['admin.social-count.*'])}}"><a class="nav-link" href="{{route('admin.social-count.index')}}"><i class="fa fa-share-alt"></i> <span>{{__('Social Count')}}</span></a></li>
 
-      <li class="{{setSidebarActive(['admin.home-section-setting.*'])}}"><a class="nav-link" href="{{route('admin.home-section-setting.index')}}"><i class="fas fa-th-large"></i> <span>Home Section {{__('Setting')}}</span></a></li>
+      <li class="{{setSidebarActive(['admin.home-section-setting.*'])}}"><a class="nav-link" href="{{route('admin.home-section-setting.index')}}"><i class="fas fa-th-large"></i> <span>{{__('Home Section Setting')}}</span></a></li>
 
       <li class="{{setSidebarActive(['admin.advertisement.*'])}}"><a class="nav-link" href="{{route('admin.advertisement.index')}}"><i class="fas fa-ad"></i> <span>{{__('Advertisement')}}</span></a></li>
 
@@ -58,7 +58,7 @@
         </ul>
       </li>
 
-
+      <li class="{{setSidebarActive(['admin.setting.*'])}}"><a class="nav-link" href="{{route('admin.setting.index')}}"><i class="fa fa-cog"></i> <span>{{__('Setting')}}</span></a></li>
       {{-- <li class="menu-header">Starter</li>
       <li class="dropdown">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>

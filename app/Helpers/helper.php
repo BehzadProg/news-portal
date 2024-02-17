@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Setting;
 use App\Models\Language;
 
 // formation tags with , for showing in edit news page
@@ -57,4 +58,10 @@ function setSidebarActive(array $routes)
             return 'active';
         }
     }
+}
+
+//access setting data in all files
+function getSetting($key){
+    $data = Setting::where('key' , $key)->first();
+    return $data->value;
 }
