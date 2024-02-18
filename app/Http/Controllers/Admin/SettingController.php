@@ -20,7 +20,6 @@ class SettingController extends Controller
     public function genralSettingUpdate(Request $request)
     {
         $request->validate([
-            'site_name' => 'required|max:255',
             'site_logo' => 'nullable|image|max:3000',
             'site_favicon' => 'nullable|image|max:1000',
         ]);
@@ -28,10 +27,6 @@ class SettingController extends Controller
         $site_logo = $this->handleUploadSettingLogo('site_logo' , getSetting('site_logo') , env('SITE_LOGO_IMAGE_UPLOAD_PATH') , 'site_logo');
         $site_favicon = $this->handleUploadSettingLogo('site_favicon' , getSetting('site_favicon'), env('SITE_LOGO_IMAGE_UPLOAD_PATH') , 'site_favicon');
 
-        Setting::updateOrCreate(
-            ['key' => 'site_name'],
-            ['value' => $request->site_name]
-        );
         if(!empty($site_logo)){
 
             Setting::updateOrCreate(
@@ -72,6 +67,21 @@ class SettingController extends Controller
         Setting::updateOrCreate(
             ['key' => 'site_seo_keywords'],
             ['value' => $request->site_seo_keywords]
+        );
+
+        toast(__('Updated Successfully') , 'success');
+        return redirect()->back();
+    }
+
+    public function appearanceSetting(Request $request) : RedirectResponse
+    {
+        $request->validate([
+            'site_color' => 'required|max:20',
+        ]);
+
+        Setting::updateOrCreate(
+            ['key' => 'site_color'],
+            ['value' => $request->site_color]
         );
 
         toast(__('Updated Successfully') , 'success');

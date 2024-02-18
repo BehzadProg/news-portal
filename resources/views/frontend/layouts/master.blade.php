@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{{$settings['site_name']}} @yield('title') </title>
+    <title>{{@$settings['site_seo_title']}} @yield('title') </title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="description" content="@hasSection('meta_description') @yield('meta_description') @else {{$settings['site_seo_description']}} @endif">
     <meta name="keywords" content="{{$settings['site_seo_keywords']}}">
@@ -18,6 +18,11 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
     <link href="{{asset('frontend/assets/css/styles.css')}}" rel="stylesheet">
+    <style>
+        :root{
+            --colorPrimary: {{@$settings['site_color']}};
+        }
+    </style>
 </head>
 
 <body>

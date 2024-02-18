@@ -6,16 +6,6 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group row mb-4">
-                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Site Name')}}</label>
-                    <div class="col-sm-12 col-md-7">
-                        <input name="site_name" type="text" value="{{$settings['site_name']}}" class="form-control">
-                        @error('site_name')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row mb-4">
                     <label
                         class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                 <img width="150px"  src="{{asset(env('SITE_LOGO_IMAGE_UPLOAD_PATH').$settings['site_logo'])}}" alt="">
