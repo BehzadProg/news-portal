@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Models\Advertisement;
 use App\Models\HomeSectionSetting;
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
+use App\Models\SocialLink;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -224,5 +226,12 @@ class HomeController extends Controller
     {
         $about = About::where('language' , getLanguage())->first();
         return view('frontend.about' , compact('about'));
+    }
+
+    public function contact()
+    {
+        $contact = Contact::where('language' , getLanguage())->first();
+        $socialLinks = SocialLink::where('status' , 1)->get();       
+        return view('frontend.contact' , compact('contact' , 'socialLinks'));
     }
 }

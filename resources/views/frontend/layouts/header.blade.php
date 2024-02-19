@@ -65,10 +65,10 @@
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{url('/')}}">home</a>
+                            <a class="nav-link active" href="{{url('/')}}">{{__('home')}}</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route('about.index')}}"> about </a>
+                            <a class="nav-link" href="{{route('about.index')}}"> {{__('about')}} </a>
                         </li>
                         <li class="nav-item dropdown has-megamenu">
                             <a class="nav-link" href="blog.html">blog </a>
@@ -81,7 +81,7 @@
                                 <li><a class="dropdown-item" href="404.html"> 404 Error </a>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html"> contact </a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('contact.index')}}"> {{__('contact')}} </a></li>
                     </ul>
 
 
@@ -152,10 +152,10 @@
                     <nav class="list-group list-group-flush">
                         <ul class="navbar-nav ">
                             <li class="nav-item">
-                                <a class="nav-link active text-dark" href="{{url('/')}}"> Home</a>
+                                <a class="nav-link active text-dark" href="{{url('/')}}"> {{__('Home')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{route('about.index')}}"> About </a>
+                                <a class="nav-link text-dark" href="{{route('about.index')}}"> {{__('About')}} </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="blog.html">Blog </a>
@@ -169,7 +169,7 @@
 
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link  text-dark" href="contact.html"> Contact </a>
+                            <li class="nav-item"><a class="nav-link  text-dark" href="{{route('contact.index')}}"> {{__('Contact')}} </a>
                             </li>
                         </ul>
 

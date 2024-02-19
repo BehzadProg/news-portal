@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\FooterGridThreeController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
+use App\Http\Controllers\Admin\ContactController;
 
 Route::get('login' , [AdminAuthenticationController::class , 'login'])->name('login');
 Route::post('login' , [AdminAuthenticationController::class , 'handleLogin'])->name('handle.login');
@@ -82,6 +83,10 @@ Route::group(['middleware' => ['admin']],function () {
     /** About route */
     Route::get('about' , [AboutController::class , 'index'])->name('about.index');
     Route::put('about' , [AboutController::class , 'update'])->name('about.update');
+
+    /** Contact route */
+    Route::get('contact' , [ContactController::class , 'index'])->name('contact.index');
+    Route::put('contact' , [ContactController::class , 'update'])->name('contact.update');
 
     /** Setting route */
     Route::get('setting' , [SettingController::class , 'index'])->name('setting.index');

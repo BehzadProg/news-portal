@@ -29,10 +29,11 @@
         </ul>
       </li>
 
-      <li class="dropdown {{setSidebarActive(['admin.about.index'])}}">
+      <li class="dropdown {{setSidebarActive(['admin.about.index' , 'admin.contact.index'])}}">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-file"></i> <span>{{__('Pages')}}</span></a>
         <ul class="dropdown-menu">
           <li class="{{setSidebarActive(['admin.about.index'])}}"><a class="nav-link" href="{{route('admin.about.index')}}">{{__('About Page')}}</a></li>
+          <li class="{{setSidebarActive(['admin.contact.index'])}}"><a class="nav-link" href="{{route('admin.contact.index')}}">{{__('Contact Page')}}</a></li>
 
         </ul>
       </li>
