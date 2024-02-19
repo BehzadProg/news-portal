@@ -24,7 +24,15 @@
       <li class="dropdown {{setSidebarActive(['admin.news.*'])}}">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-newspaper"></i> <span>{{__('News')}}</span></a>
         <ul class="dropdown-menu">
-          <li class="{{setSidebarActive(['admin.news.*'])}}"><a class="nav-link" href="{{route('admin.news.index')}}">All {{__('News')}}</a></li>
+          <li class="{{setSidebarActive(['admin.news.*'])}}"><a class="nav-link" href="{{route('admin.news.index')}}">{{__('All News')}}</a></li>
+
+        </ul>
+      </li>
+
+      <li class="dropdown {{setSidebarActive(['admin.about.index'])}}">
+        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-file"></i> <span>{{__('Pages')}}</span></a>
+        <ul class="dropdown-menu">
+          <li class="{{setSidebarActive(['admin.about.index'])}}"><a class="nav-link" href="{{route('admin.about.index')}}">{{__('About Page')}}</a></li>
 
         </ul>
       </li>

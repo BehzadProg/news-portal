@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Tag;
 use App\Models\News;
+use App\Models\About;
 use App\Models\Comment;
 use App\Models\Category;
 use App\Models\SocialCount;
 use Illuminate\Http\Request;
+use App\Models\Advertisement;
 use App\Models\HomeSectionSetting;
 use App\Http\Controllers\Controller;
-use App\Models\Advertisement;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -217,5 +218,11 @@ class HomeController extends Controller
             return response(['status' => 'success' , 'message' => __('Deleted successfully')]);
         }
         return response(['status' => 'error' , 'message' => __('something went wrong')]);
+    }
+
+    public function about()
+    {
+        $about = About::where('language' , getLanguage())->first();
+        return view('frontend.about' , compact('about'));
     }
 }

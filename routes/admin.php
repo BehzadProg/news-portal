@@ -1,23 +1,24 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminAuthenticationController;
-use App\Http\Controllers\Admin\AdvertisementController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\FooterGridOneController;
-use App\Http\Controllers\Admin\FooterGridThreeController;
-use App\Http\Controllers\Admin\FooterGridTwoController;
-use App\Http\Controllers\Admin\FooterInfoController;
-use App\Http\Controllers\Admin\HomeSectionSettingController;
-use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\NewsController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\RolePermissionController;
-use App\Http\Controllers\Admin\RoleUserController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\SocialCountController;
-use App\Http\Controllers\Admin\SocialLinkController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\RoleUserController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FooterInfoController;
+use App\Http\Controllers\Admin\SocialLinkController;
+use App\Http\Controllers\Admin\SocialCountController;
+use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\FooterGridOneController;
+use App\Http\Controllers\Admin\FooterGridTwoController;
+use App\Http\Controllers\Admin\RolePermissionController;
+use App\Http\Controllers\Admin\FooterGridThreeController;
+use App\Http\Controllers\Admin\HomeSectionSettingController;
+use App\Http\Controllers\Admin\AdminAuthenticationController;
 
 Route::get('login' , [AdminAuthenticationController::class , 'login'])->name('login');
 Route::post('login' , [AdminAuthenticationController::class , 'handleLogin'])->name('handle.login');
@@ -77,6 +78,10 @@ Route::group(['middleware' => ['admin']],function () {
     /** Footer Grid Two route */
     Route::post('footer-grid-three-title' , [FooterGridThreeController::class , 'handleTitle'])->name('footer-grid-three-title');
     Route::resource('footer-grid-three' , FooterGridThreeController::class);
+
+    /** About route */
+    Route::get('about' , [AboutController::class , 'index'])->name('about.index');
+    Route::put('about' , [AboutController::class , 'update'])->name('about.update');
 
     /** Setting route */
     Route::get('setting' , [SettingController::class , 'index'])->name('setting.index');

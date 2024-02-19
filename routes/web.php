@@ -42,3 +42,7 @@ Route::get('news' , [HomeController::class , 'news'])->name('news');
 Route::post('news-comment' , [HomeController::class , 'handleComment'])->name('news-comment');
 Route::post('news-comment-reply' , [HomeController::class , 'handleReply'])->name('news-comment-reply');
 Route::delete('news-comment-destroy' , [HomeController::class , 'commentDestroy'])->name('news-comment-destroy');
+
+
+/** about page route */
+Route::get('about' , [HomeController::class , 'about'])->name('about.index');

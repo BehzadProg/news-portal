@@ -65,10 +65,10 @@
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">home</a>
+                            <a class="nav-link active" href="{{url('/')}}">home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="about-us.html"> about </a>
+                            <a class="nav-link" href="{{route('about.index')}}"> about </a>
                         </li>
                         <li class="nav-item dropdown has-megamenu">
                             <a class="nav-link" href="blog.html">blog </a>
@@ -130,10 +130,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="widget__form-search-bar  ">
+                        <form action="{{route('news')}}" method="GET">
                         <div class="row no-gutters">
                             <div class="col">
                                 <input class="form-control border-secondary border-right-0 rounded-0" value=""
-                                    placeholder="Search">
+                                    placeholder="Search" name="search">
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
@@ -141,6 +142,7 @@
                                 </button>
                             </div>
                         </div>
+                        </form>
                     </div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -150,10 +152,10 @@
                     <nav class="list-group list-group-flush">
                         <ul class="navbar-nav ">
                             <li class="nav-item">
-                                <a class="nav-link active text-dark" href="index.html"> Home</a>
+                                <a class="nav-link active text-dark" href="{{url('/')}}"> Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="about-us.html"> About </a>
+                                <a class="nav-link text-dark" href="{{route('about.index')}}"> About </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="blog.html">Blog </a>
