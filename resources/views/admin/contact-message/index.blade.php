@@ -73,13 +73,30 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <textarea name="replay" style="height: 250px !important" class="form-control"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                        <button type="button" class="btn btn-primary" type="submit">{{__('Send')}}</button>
-                    </div>
+                    <form action="{{route('admin.contact.send-reply')}}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">{{__('Subject')}}</label>
+                                @error('subject')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                                <input type="text" name="subject" class="form-control">
+                                <input type="hidden" name="email" value="{{$message->email}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">{{__('Message')}}</label>
+                                @error('reply')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                               <textarea name="reply" style="height: 250px !important" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                            <button class="btn btn-primary" type="submit">{{__('Send')}}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -97,7 +114,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>{{ $message->message }}</p>
+                        <div class="form-group">
+                            <label for="">{{__('Subject')}}</label>
+                            <p class="border p-2 m-0" style="border-radius: 5px">{{ $message->subject }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{__('Message')}}</label>
+                            <p class="border p-2 m-0" style="border-radius: 5px">{{ $message->message }}</p>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
@@ -115,5 +140,14 @@
                 "targets": [2, 3]
             }]
         });
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ $error }}'
+                });
+            @endforeach
+        @endif
     </script>
 @endpush

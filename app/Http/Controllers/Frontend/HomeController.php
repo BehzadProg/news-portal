@@ -251,9 +251,9 @@ class HomeController extends Controller
 
         try {
             //send mail
-            // $toMail = Contact::where('language', 'en')->first();
+            $toMail = Contact::where('language', 'en')->first();
 
-            // Mail::to($toMail->email)->send(new ContactMail($request->email, $request->subject, $request->message));
+            Mail::to($toMail->email)->send(new ContactMail($request->email, $request->subject, $request->message));
 
             //store into database
             $mail = new ReceivedMail();
@@ -262,7 +262,7 @@ class HomeController extends Controller
             $mail->message = $request->message;
             $mail->save();
 
-            toast(__('Mail sent Successfully'), 'success');
+            toast(__('Your message sent Successfully'), 'success');
             return redirect()->back();
         } catch (\Exception $e) {
             toast(__($e->getMessage()), 'error');

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Language;
+use App\Mail\ContactMail;
 use App\Models\ReceivedMail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -39,7 +41,28 @@ class ContactController extends Controller
 
     public function contactMessage()
     {
-        $messages = ReceivedMail::all();
+        $messages = ReceivedMail::OrderByDesc('id')->get();
         return view('admin.contact-message.index' , compact('messages'));
+    }
+
+    public function replyMessage(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required|max:255',
+            'reply' => 'required',
+        ]);
+
+       try {
+        $mailFrom = Contact::where('language' , 'en')->first();
+
+        Mail::to($request->email)->send(new ContactMail($mailFrom->email , $request->subject , $request->reply));
+
+        toast(__('Reply sent Successfully'), 'success');
+        return redirect()->back();
+
+       }catch (\Exception $e) {
+        toast(__($e->getMessage()), 'error');
+        return redirect()->back();
+       }
     }
 }
