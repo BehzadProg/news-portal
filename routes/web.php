@@ -46,6 +46,6 @@ Route::delete('news-comment-destroy' , [HomeController::class , 'commentDestroy'
 /** about page route */
 Route::get('about' , [HomeController::class , 'about'])->name('about.index');
 
-/** about page route */
+/** contact page route */
 Route::get('contact' , [HomeController::class , 'contact'])->name('contact.index');
 Route::post('contact' , [HomeController::class , 'contactHandleForm'])->name('contact.submit');

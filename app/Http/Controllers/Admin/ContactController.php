@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Language;
+use App\Models\ReceivedMail;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -34,5 +35,11 @@ class ContactController extends Controller
 
         toast(__('Updated Successfully') , 'success');
         return redirect()->back();
+    }
+
+    public function contactMessage()
+    {
+        $messages = ReceivedMail::all();
+        return view('admin.contact-message.index' , compact('messages'));
     }
 }

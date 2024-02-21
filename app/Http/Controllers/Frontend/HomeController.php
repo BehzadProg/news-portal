@@ -251,9 +251,9 @@ class HomeController extends Controller
 
         try {
             //send mail
-            $toMail = Contact::where('language', 'en')->first();
+            // $toMail = Contact::where('language', 'en')->first();
 
-            Mail::to($toMail->email)->send(new ContactMail($request->email, $request->subject, $request->message));
+            // Mail::to($toMail->email)->send(new ContactMail($request->email, $request->subject, $request->message));
 
             //store into database
             $mail = new ReceivedMail();

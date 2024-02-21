@@ -38,6 +38,8 @@
         </ul>
       </li>
 
+      <li class="{{setSidebarActive(['admin.contact-message.*'])}}"><a class="nav-link" href="{{route('admin.contact-message.index')}}"><i class="fa fa-envelope"></i> <span>{{__('Contact Messages')}}</span></a></li>
+
       <li class="{{setSidebarActive(['admin.social-count.*'])}}"><a class="nav-link" href="{{route('admin.social-count.index')}}"><i class="fa fa-share-alt"></i> <span>{{__('Social Count')}}</span></a></li>
 
       <li class="{{setSidebarActive(['admin.home-section-setting.*'])}}"><a class="nav-link" href="{{route('admin.home-section-setting.index')}}"><i class="fas fa-th-large"></i> <span>{{__('Home Section Setting')}}</span></a></li>

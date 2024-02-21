@@ -87,6 +87,8 @@ Route::group(['middleware' => ['admin']],function () {
     /** Contact route */
     Route::get('contact' , [ContactController::class , 'index'])->name('contact.index');
     Route::put('contact' , [ContactController::class , 'update'])->name('contact.update');
+    /** Contact Message route */
+    Route::get('contact-message' , [ContactController::class , 'contactMessage'])->name('contact-message.index');
 
     /** Setting route */
     Route::get('setting' , [SettingController::class , 'index'])->name('setting.index');
