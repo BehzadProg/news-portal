@@ -48,3 +48,4 @@ Route::get('about' , [HomeController::class , 'about'])->name('about.index');
 
 /** about page route */
 Route::get('contact' , [HomeController::class , 'contact'])->name('contact.index');
+Route::post('contact' , [HomeController::class , 'contactHandleForm'])->name('contact.submit');
