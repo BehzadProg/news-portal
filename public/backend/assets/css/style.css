@@ -2175,18 +2175,18 @@ pre {
   .beep:after {
     content: '';
     position: absolute;
-    top: 2px;
-    right: 8px;
-    width: 7px;
-    height: 7px;
+    top: 22px;
+    right: 19px;
+    width: 10px;
+    height: 10px;
     background-color: #ffa426;
     border-radius: 50%;
     animation: pulsate 1s ease-out;
     animation-iteration-count: infinite;
     opacity: 1; }
-  .beep.beep-sidebar:after {
+  /* .beep.beep-sidebar:after {
     position: static;
-    margin-left: 10px; }
+    margin-left: 10px; } */
 
 @media (max-width: 575.98px) {
   .fc-overflow {

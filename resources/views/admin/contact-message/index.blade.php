@@ -11,7 +11,13 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('All Contact Messages') }}</h4>
+                            <h4>{{ __('All Contact Messages') }}
+
+                                 @if ($unReadMessages > 0)
+                            <i class="badge badge-warning">{{$unReadMessages}}</i>
+                            {{__('New')}}
+                            @endif
+                            </h4>
                         </div>
                         <div class="card-body">
 
@@ -27,6 +33,7 @@
                                                 <th>{{ __('Email') }}</th>
                                                 <th>{{ __('Subject') }}</th>
                                                 <th>{{ __('Message Summery') }}</th>
+                                                <th>{{ __('Replied') }}</th>
 
                                                 <th width="150px">{{ __('Action') }}</th>
                                             </tr>
@@ -38,13 +45,20 @@
                                                     <td>{{ $message->email }}</td>
                                                     <td>{{ $message->subject }}</td>
                                                     <td>{{ limitText($message->message, 140) }}</td>
+                                                    <td>
+                                                        @if ($message->replied == 1)
+                                                        <i style="font-size: 20px" class="fas fa-check text-success"></i>
+                                                        @else
+                                                        <i style="font-size: 20px" class="fas fa-hourglass-half text-warning"></i>
+                                                        @endif
+                                                    </td>
 
                                                     <td>
-                                                        <a href="" class="btn btn-primary mr-2" data-toggle="modal"
+                                                        <a href="" class="btn btn-primary mr-2 seen" data-id="{{ $message->id }}" data-toggle="modal"
                                                             data-target="#messageModal-{{ $message->id }}"><i class="fas fa-eye"></i></a>
                                                         <a href="" class="btn btn-primary mr-2" data-toggle="modal"
                                                             data-target="#exampleModal-{{ $message->id }}"><i class="fas fa-reply"></i></a>
-                                                        <a href="" class="btn btn-danger delete-item"><i class="fas fa-trash-alt"></i></a>
+                                                        <a href="{{route('admin.contact-message.destroy' , $message->id)}}" class="btn btn-danger delete-item"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
 
                                                 </tr>
@@ -83,6 +97,7 @@
                                 @enderror
                                 <input type="text" name="subject" class="form-control">
                                 <input type="hidden" name="email" value="{{$message->email}}">
+                                <input type="hidden" name="message_id" value="{{$message->id}}">
                             </div>
                             <div class="form-group">
                                 <label for="">{{__('Message')}}</label>
@@ -149,5 +164,36 @@
                 });
             @endforeach
         @endif
+
+        $(document).ready(function() {
+            $('.seen').on('click', function() {
+                let id = $(this).data('id')
+
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{ route('admin.contact.seen') }}",
+                    data: {
+                        id: id,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        if (data.status === 'success') {
+                            Toast.fire({
+                                icon: "success",
+                                title: data.message
+                            });
+                        }else if(data.status === 'info'){
+                            Toast.fire({
+                                icon: "info",
+                                title: data.message
+                            });
+                        }
+                    },
+                    error: function(data) {
+
+                    }
+                })
+            })
+        })
     </script>
 @endpush

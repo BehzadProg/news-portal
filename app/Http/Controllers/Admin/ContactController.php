@@ -42,7 +42,8 @@ class ContactController extends Controller
     public function contactMessage()
     {
         $messages = ReceivedMail::OrderByDesc('id')->get();
-        return view('admin.contact-message.index' , compact('messages'));
+        $unReadMessages = ReceivedMail::where('seen' , 0)->count();
+        return view('admin.contact-message.index' , compact('messages' , 'unReadMessages'));
     }
 
     public function replyMessage(Request $request)
@@ -57,6 +58,10 @@ class ContactController extends Controller
 
         Mail::to($request->email)->send(new ContactMail($mailFrom->email , $request->subject , $request->reply));
 
+        $didReplied = ReceivedMail::find($request->message_id);
+        $didReplied->replied = 1;
+        $didReplied->save();
+
         toast(__('Reply sent Successfully'), 'success');
         return redirect()->back();
 
@@ -64,5 +69,26 @@ class ContactController extends Controller
         toast(__($e->getMessage()), 'error');
         return redirect()->back();
        }
+    }
+
+    public function destroyMessage(Request $request) {
+        $receivedMessage = ReceivedMail::findOrFail($request->id);
+
+        $receivedMessage->delete();
+
+        return response(['status' => 'success' , 'message' => __('Message Deleted Successfully')]);
+    }
+
+    public function hasSeen(Request $request) {
+        $seen = ReceivedMail::findOrFail($request->id);
+        if($seen->seen == 0){
+            $seen->seen = 1;
+            $seen->save();
+            return response(['status' => 'success' , 'message' => __('Seen')]);
+        }elseif($seen->seen == 1){
+
+            return response(['status' => 'info' , 'message' => __('You have seen this mail massege before')]);
+        }
+
     }
 }

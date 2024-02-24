@@ -90,6 +90,8 @@ Route::group(['middleware' => ['admin']],function () {
     /** Contact Message route */
     Route::get('contact-message' , [ContactController::class , 'contactMessage'])->name('contact-message.index');
     Route::post('contact-reply-message' , [ContactController::class , 'replyMessage'])->name('contact.send-reply');
+    Route::put('contact-message-seen' , [ContactController::class , 'hasSeen'])->name('contact.seen');
+    Route::delete('contact-message/{id}/destroy' , [ContactController::class , 'destroyMessage'])->name('contact-message.destroy');
 
     /** Setting route */
     Route::get('setting' , [SettingController::class , 'index'])->name('setting.index');
