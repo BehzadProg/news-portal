@@ -29,17 +29,16 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <hr>
                                 @foreach ($permissions as $groupName => $permission)
-
-                                <h6 class="mb-3">{{$groupName}}</h6>
+                                <hr>
+                                <h6 class="text-success mb-3">{{$groupName}}</h6>
 
                                 <div class="form-group row mb-4 ml-5">
                                     @foreach ($permission as $item)
 
                                     <div class="col-md-3">
                                         <div class="form-group text-center">
-                                            <div class="control-label">{{$item->name}}</div>
+                                            <div class="control-label text-primary">{{$item->name}}</div>
                                             <label class="custom-switch mt-2">
                                               <input {{in_array($item->name , $rolePermissions) ? 'checked' : ''}} value="{{$item->name}}" type="checkbox" name="permissions[]" class="custom-switch-input">
                                               <span class="custom-switch-indicator"></span>
