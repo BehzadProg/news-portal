@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:category index,admin'])->only('index');
+        $this->middleware(['permission:category create,admin'])->only(['create' , 'store']);
+        $this->middleware(['permission:category update,admin'])->only(['edit' , 'update']);
+        $this->middleware(['permission:category delete,admin'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -51,15 +58,6 @@ class CategoryController extends Controller
         toast(__('Created Successfully') , 'success')->width('400');
         return redirect()->route('admin.category.index');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */

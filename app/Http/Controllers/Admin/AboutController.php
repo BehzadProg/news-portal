@@ -9,10 +9,16 @@ use App\Http\Controllers\Controller;
 
 class AboutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:about index,admin'])->only('index');
+        $this->middleware(['permission:about update,admin'])->only('update');
+    }
+
     public function index()
     {
         $languages = Language::where('status' , 1)->get();
-        return view('admin.about.index' , compact('languages'));
+        return view('admin.about-page.index' , compact('languages'));
     }
 
     public function update(Request $request)

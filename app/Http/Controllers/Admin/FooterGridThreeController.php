@@ -10,6 +10,13 @@ use App\Http\Controllers\Controller;
 
 class FooterGridThreeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:footer index,admin'])->only(['index' ,'handleTitle']);
+        $this->middleware(['permission:footer create,admin'])->only(['create' , 'store']);
+        $this->middleware(['permission:footer update,admin'])->only(['edit' , 'update']);
+        $this->middleware(['permission:footer delete,admin'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -50,15 +57,6 @@ class FooterGridThreeController extends Controller
         toast(__('Created Successfully') , 'success');
         return redirect()->route('admin.footer-grid-three.index');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */

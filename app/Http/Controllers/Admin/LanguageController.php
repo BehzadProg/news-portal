@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:language index,admin'])->only('index');
+        $this->middleware(['permission:language create,admin'])->only(['create' , 'store']);
+        $this->middleware(['permission:language update,admin'])->only(['edit' , 'update']);
+        $this->middleware(['permission:language delete,admin'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -50,15 +57,6 @@ class LanguageController extends Controller
         toast(__('Created Successfully') , 'success')->width('400');
         return redirect()->route('admin.language.index');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */

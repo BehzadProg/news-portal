@@ -65,3 +65,16 @@ function getSetting($key){
     $data = Setting::where('key' , $key)->first();
     return $data->value;
 }
+
+// check permissions
+function canAccess(array $permissions)
+{
+    $permission = auth()->guard('admin')->user()->hasAnyPermission($permissions);
+    $isSuperAdmin = auth()->guard('admin')->user()->hasRole('Super Admin');
+
+    if($permission || $isSuperAdmin){
+        return true;
+    }else{
+        return false;
+    }
+}

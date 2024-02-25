@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Mail;
 
 class RoleUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:access management index,admin'])->only('index');
+        $this->middleware(['permission:access management create,admin'])->only(['create' , 'store']);
+        $this->middleware(['permission:access management update,admin'])->only(['edit' , 'update']);
+        $this->middleware(['permission:access management delete,admin'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -63,15 +70,6 @@ class RoleUserController extends Controller
         }
 
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */

@@ -11,12 +11,19 @@ class AdvertisementController extends Controller
 {
     use FileUploadTrait;
 
+    public function __construct()
+    {
+        $this->middleware(['permission:advertisement index,admin'])->only('index');
+        $this->middleware(['permission:advertisement update,admin'])->only('update');
+    }
+
     public function index() {
         $ad = Advertisement::first();
         return view('admin.advertisement.index' , compact('ad'));
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $request->validate([
             'home_topbar_ad' => 'nullable|image|max:3000',
             'home_topbar_ad_url' => 'nullable|url',
@@ -61,4 +68,5 @@ class AdvertisementController extends Controller
 
         toast(__('Updated Successfully') , 'success')->width('400');
         return redirect()->route('admin.advertisement.index');
-}}
+    }
+}

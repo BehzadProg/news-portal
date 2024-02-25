@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:contact index,admin'])->only('index');
+        $this->middleware(['permission:contact update,admin'])->only('update');
+        $this->middleware(['permission:contact message index,admin'])->only(['contactMessage' , 'replyMessage']);
+        $this->middleware(['permission:contact message delete,admin'])->only('destroyMessage');
+    }
     public function index()
     {
         $languages = Language::where('status' , 1)->get();

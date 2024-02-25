@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class SocialLinkController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:footer index,admin'])->only('index');
+        $this->middleware(['permission:footer create,admin'])->only(['create' , 'store']);
+        $this->middleware(['permission:footer update,admin'])->only(['edit' , 'update']);
+        $this->middleware(['permission:footer delete,admin'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -45,15 +52,6 @@ class SocialLinkController extends Controller
         toast()->success(__('Created Successfully'));
         return redirect()->route('admin.social-link.index');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
