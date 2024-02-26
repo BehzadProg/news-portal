@@ -124,6 +124,7 @@
                                             </label>
                                           </div>
                                     </div>
+                                    @if (canAccess(['news all-access' , 'news status']))
                                     <div class="col-md-6">
                                         <div class="form-group text-center">
                                             <div class="control-label">{{__('Is Breaking News')}}</div>
@@ -151,6 +152,7 @@
                                             </label>
                                           </div>
                                     </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group row mb-4">

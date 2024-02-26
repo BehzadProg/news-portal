@@ -52,6 +52,8 @@ Route::group(['middleware' => ['admin']],function () {
     Route::get('toggle-news-status' , [NewsController::class , 'toggleNewsStatus'])->name('toggle-news-status');
     Route::get('copy-news' , [NewsController::class , 'copyNews'])->name('copy-news');
     Route::post('paste-news' , [NewsController::class , 'pasteNews'])->name('paste-news');
+    Route::get('pending-news' , [NewsController::class , 'pendingNews'])->name('pending-news');
+    Route::put('approve-news' , [NewsController::class , 'approveNews'])->name('approve-news');
     Route::resource('news' , NewsController::class);
 
     /** News Section Setting routes */
