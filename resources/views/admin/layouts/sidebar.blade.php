@@ -124,6 +124,22 @@
                         href="{{ route('admin.setting.index') }}"><i class="fa fa-cog"></i>
                         <span>{{ __('Setting') }}</span></a></li>
             @endif
+
+
+
+                <li class="dropdown {{ setSidebarActive(['admin.admin-localization.index', 'admin.frontend-localization.index']) }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-language"></i>
+                        <span>{{ __('Localization') }}</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ setSidebarActive(['admin.admin-localization.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.admin-localization.index') }}">
+                            <span>{{ __('Admin') }}</span></a></li>
+
+                        <li class="{{ setSidebarActive(['admin.frontend-localization.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.frontend-localization.index') }}">
+                            <span>{{ __('Frontend') }}</span></a></li>
+                    </ul>
+                </li>
         </ul>
 
     </aside>

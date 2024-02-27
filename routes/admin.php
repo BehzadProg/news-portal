@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FooterInfoController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\SocialCountController;
+use App\Http\Controllers\Admin\LocalizationController;
 use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\FooterGridOneController;
 use App\Http\Controllers\Admin\FooterGridTwoController;
@@ -19,7 +21,6 @@ use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\FooterGridThreeController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
-use App\Http\Controllers\Admin\ContactController;
 
 Route::get('login' , [AdminAuthenticationController::class , 'login'])->name('login');
 Route::post('login' , [AdminAuthenticationController::class , 'handleLogin'])->name('handle.login');
@@ -112,4 +113,8 @@ Route::group(['middleware' => ['admin']],function () {
 
     /** Role User Route */
     Route::resource('role-users' , RoleUserController::class);
+
+    /** Localization Route */
+    Route::get('admin-localization' , [LocalizationController::class , 'adminIndex'])->name('admin-localization.index');
+    Route::get('frontend-localization' , [LocalizationController::class , 'frontendIndex'])->name('frontend-localization.index');
 });
