@@ -76,7 +76,7 @@
                             </div>
 
                             <ul class="list-inline">
-                                <span class="share">share on{{__(':')}}</span>
+                                <span class="share">{{__('share on')}} :</span>
                                 <li class="list-inline-item">
                                     <a class="btn btn-social-o facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}" target="_blank">
                                         <i class="fa fa-facebook-f"></i>

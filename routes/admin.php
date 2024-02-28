@@ -117,4 +117,6 @@ Route::group(['middleware' => ['admin']],function () {
     /** Localization Route */
     Route::get('admin-localization' , [LocalizationController::class , 'adminIndex'])->name('admin-localization.index');
     Route::get('frontend-localization' , [LocalizationController::class , 'frontendIndex'])->name('frontend-localization.index');
+    Route::post('extract-localization-string' , [LocalizationController::class , 'extractLocalizationStrings'])->name('extract-localization-string');
+    Route::post('translate-string/update' , [LocalizationController::class , 'updateLangString'])->name('translate-string.update');
 });
