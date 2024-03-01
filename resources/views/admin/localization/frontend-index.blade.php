@@ -12,10 +12,6 @@
                     <div class="card card-primary">
                         <div class="card-header">
                             <h4>{{ __('All Strings') }}</h4>
-                            <div class="card-header-action">
-                                <a href="{{ route('admin.category.create') }}" class="btn btn-primary">{{ __('Create New') }}
-                                    <i class="fas fa-plus"></i></a>
-                            </div>
                         </div>
                         <div class="card-body">
 
@@ -39,15 +35,20 @@
                                                         method="post">
                                                         @csrf
                                                         <input type="hidden" name="directory"
-                                                            value="{{ resource_path('views/frontend') }}">
+                                                            value="{{ resource_path('views/frontend') }},{{resource_path('views/mail')}},{{app_path('Http/Controllers/frontend')}}">
                                                         <input type="hidden" name="language_code"
                                                             value="{{ $language->lang }}">
                                                         <input type="hidden" name="file_name" value="frontend_localize">
                                                         <button type="submit"
-                                                            class="badge badge-primary mx-2">{{ __('Generate String') }}</button>
+                                                            class="btn btn-primary mx-2">{{ __('Generate String') }}</button>
                                                     </form>
-                                                    <button
-                                                        class="badge badge-dark mx-2">{{ __('Translate String') }}</button>
+
+                                                    <form  class="translate-form">
+                                                        <input type="hidden" name="language_code"
+                                                        value="{{ $language->lang }}">
+                                                        <input type="hidden" name="file_name" value="frontend_localize">
+                                                        <button type="submit" class="btn btn-dark mx-2 translate_button">{{ __('Translate String') }}</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -160,6 +161,40 @@
                 $('input[name="key"]').val(key);
                 $('input[name="value"]').val(value);
                 $('input[name="file_name"]').val(filename);
+            });
+
+            $('.translate-form').on('submit' , function(e){
+                e.preventDefault();
+                let formDate = $(this).serialize();
+
+                $.ajax({
+                    method: 'POST',
+                    url: "{{route('admin.translate-string-api')}}",
+                    data: formDate,
+                    beforeSend: function(){
+                        $('.translate_button').text('Translating Please Wait...')
+                        $('.translate_button').prop('disabled' , true)
+                    },
+                    success: function(data){
+                        if (data.status == 'success') {
+                            Swal.fire(
+                                'Done!',
+                                data.message,
+                                'success'
+                            )
+                            window.location.reload();
+                        }else {
+                            Swal.fire(
+                                'Error!',
+                                data.message,
+                                'error'
+                            )
+                        }
+                    },
+                    error:function(data){
+                        console.log(data);
+                    }
+                })
             })
         })
     </script>
