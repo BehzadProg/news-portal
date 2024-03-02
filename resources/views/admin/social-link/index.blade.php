@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Social-links'))
+@section('title', __('Social-links'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -30,7 +30,7 @@
                                                         </th>
                                                         <th>{{__('Icon')}}</th>
                                                         <th>{{__('Link')}}</th>
-                                                        <th>{{__('status')}}</th>
+                                                        <th>{{__('Status')}}</th>
 
                                                         <th width="150px">{{ __('Action') }}</th>
                                                     </tr>

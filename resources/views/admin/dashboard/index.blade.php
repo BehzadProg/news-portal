@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title' , '- Dashboard')
+@section('title' , 'Dashboard')
 @section('content')
   <section class="section">
     <div class="section-header">

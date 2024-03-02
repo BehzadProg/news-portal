@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Create News'))
+@section('title', __('Create News'))
 @section('content')
     <section class="section">
         <div class="section-header">

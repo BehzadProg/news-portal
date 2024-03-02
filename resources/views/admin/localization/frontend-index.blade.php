@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Localization'))
+@section('title', __('Localization'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -35,7 +35,7 @@
                                                         method="post">
                                                         @csrf
                                                         <input type="hidden" name="directory"
-                                                            value="{{ resource_path('views/frontend') }},{{resource_path('views/mail')}},{{app_path('Http/Controllers/frontend')}}">
+                                                            value="{{ resource_path('views/frontend') }},{{resource_path('views/mail')}},{{app_path('Http/Controllers/Frontend')}}">
                                                         <input type="hidden" name="language_code"
                                                             value="{{ $language->lang }}">
                                                         <input type="hidden" name="file_name" value="frontend_localize">
@@ -117,7 +117,7 @@
                     <form action="{{route('admin.translate-string.update')}}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="">{{ __('string') }}</label>
+                            <label for="">{{ __('Strings') }}</label>
                             <input type="text" name="value" class="form-control">
                             <input type="hidden" name="key">
                             <input type="hidden" name="lang">
@@ -146,16 +146,11 @@
         @endforeach
 
         $(document).ready(function() {
-            $('.modal_lang').on('click', function() {
+            $(document).on('click', '.modal_lang', function() {
                 let lang = $(this).data('lang');
                 let key = $(this).data('key');
                 let value = $(this).data('value');
                 let filename = $(this).data('filename');
-
-                $('input[name="lang"]').val("");
-                $('input[name="key"]').val("");
-                $('input[name="value"]').val("");
-                $('input[name="filename"]').val("");
 
                 $('input[name="lang"]').val(lang);
                 $('input[name="key"]').val(key);

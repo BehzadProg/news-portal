@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Create Social Count'))
+@section('title', __('Create Social Count'))
 @section('content')
     <section class="section">
         <div class="section-header">

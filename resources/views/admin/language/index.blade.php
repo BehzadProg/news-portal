@@ -28,7 +28,7 @@
                                             <th>{{__('Laguage Name')}}</th>
                                             <th>{{__('Laguage Code')}}</th>
                                             <th>{{__('Default')}}</th>
-                                            <th>{{__('status')}}</th>
+                                            <th>{{__('Status')}}</th>
 
                                             <th>{{__('Action')}}</th>
                                         </tr>

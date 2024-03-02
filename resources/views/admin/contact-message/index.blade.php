@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Contact Messages'))
+@section('title', __('Contact Messages'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -32,7 +32,7 @@
                                                 </th>
                                                 <th>{{ __('Email') }}</th>
                                                 <th>{{ __('Subject') }}</th>
-                                                <th>{{ __('Message Summery') }}</th>
+                                                <th>{{ __('Message Summary') }}</th>
                                                 <th>{{ __('Replied') }}</th>
 
                                                 <th width="150px">{{ __('Action') }}</th>

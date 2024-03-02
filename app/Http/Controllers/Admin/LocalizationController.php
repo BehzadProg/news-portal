@@ -91,8 +91,7 @@ class LocalizationController extends Controller
 
             $keyStrings = array_keys($languageStrings);
 
-            $text = implode(' | ' , $keyStrings);
-
+            $text = implode('|' , $keyStrings);
 
             $response = Http::withHeaders([
                 'X-RapidAPI-Host' => 'microsoft-translator-text.p.rapidapi.com',
@@ -106,24 +105,34 @@ class LocalizationController extends Controller
 
             $translatedText = json_decode($response->body())[0]->translations[0]->text;
 
+            $translatedValues = explode('|' , $translatedText);
 
-            $translatedValues = explode(' | ' , $translatedText);
+
+            // function custom_array_combine($keys, $values) {
+            //     $combinedArray = array();
+            //     $countKeys = count($keys);
+            //     $countValues = count($values);
+            //     $maxLength = max($countKeys, $countValues);
+
+            //     for ($i = 0; $i < $maxLength; $i++) {
+            //         $key = isset($keys[$i]) ? $keys[$i] : null;
+            //         $value = isset($values[$i]) ? $values[$i] : $key; // Use key as value if value is null
+            //         $combinedArray[$key] = $value;
+            //     }
+
+            //     return $combinedArray;
+            // }
 
 
             $updatedArray = array_combine($keyStrings , $translatedValues);
-
-            // dd($updatedArray);
 
             $phpArray = "<?php\n\nreturn " . var_export($updatedArray, true) . ";\n";
 
             file_put_contents(lang_path($languageCode . '/' . $request->file_name . '.php'), $phpArray);
 
-            return response(['status' => 'success' , 'message' => __('Translation is completed')]);
+            return response(['status' => 'success']);
         } catch (\Throwable $th) {
-            return response(['status' => 'error', $th->getMessage()]);
+            return response(['status' => 'error', 'message' => $th->getMessage()]);
         }
-
-
-
     }
 }

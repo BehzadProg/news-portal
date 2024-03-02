@@ -76,6 +76,6 @@ class RolePermissionController extends Controller
             return response(['status' => 'error' , 'message' => __('Can\'t Delete Super Admin Role')]);
         }
         $role->delete();
-        return response(['status' => 'success' , 'message' => __('Role Deleted Successfully')]);
+        return response(['status' => 'success' , 'message' => __('Role deleted successfully')]);
     }
 }

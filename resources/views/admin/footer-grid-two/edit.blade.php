@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Edit Footer Grid Two Links'))
+@section('title', __('Edit Footer Grid Two Links'))
 @section('content')
     <section class="section">
         <div class="section-header">

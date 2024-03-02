@@ -47,7 +47,7 @@ class NewsController extends Controller
         $news = News::findOrFail($request->id);
         $news->is_approved = 1;
         $news->save();
-        return response(['status' => 'success' , 'message' => __('News Approved Successfully')]);
+        return response(['status' => 'success' , 'message' => __('Approved Successfully')]);
     }
     /**
      * Fetch Category Base On Language.
@@ -130,7 +130,7 @@ class NewsController extends Controller
     {
         $languages = Language::where('status', 1)->get();
         $news = News::findOrFail($id);
-       
+
         if(!canAccess(['news all-access'])){
 
             if($news->author_id != auth()->guard('admin')->user()->id){

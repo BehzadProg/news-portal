@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title' , '- News Page')
+@section('title' , 'News Page')
 
 @section('content')
 <section class="blog_pages">

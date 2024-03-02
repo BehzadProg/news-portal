@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- News'))
+@section('title', __('News'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -36,7 +36,7 @@
                                     if(canAccess(['news all-access'])){
                                         $news = \App\Models\News::with('category')
                                         ->where('is_approved' , 1)
-                                        ->where('language', $language->lang)                                         
+                                        ->where('language', $language->lang)
                                         ->orderByDesc('id')
                                         ->get();
                                     }else{
@@ -67,7 +67,7 @@
                                                             <th>{{ __('In Breaking') }}</th>
                                                             <th>{{ __('In Popular') }}</th>
                                                         @endif
-                                                            <th>{{ __('status') }}</th>
+                                                            <th>{{ __('Status') }}</th>
                                                         <th width="130.217px">{{ __('Action') }}</th>
                                                     </tr>
                                                 </thead>

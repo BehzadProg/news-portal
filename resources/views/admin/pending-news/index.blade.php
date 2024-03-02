@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Pending News'))
+@section('title', __('Pending News'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -65,9 +65,9 @@
                                                     </div>
                                                   </form>
                                                   @else
-                                                  
+
                                                   @if ($item->is_approved == 1)
-                                                    
+
                                                   <i style="font-size: 20px" class="fas fa-check text-success"></i>
                                                   @else
                                                   <i style="font-size: 20px" class="fas fa-hourglass-half text-warning"></i>

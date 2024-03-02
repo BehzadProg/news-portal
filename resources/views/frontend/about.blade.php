@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title' , '- About')
+@section('title' , 'About')
 @section('content')
 <section>
     <div class="container">
@@ -14,7 +14,7 @@
                     </li>
                     <li class="breadcrumbs__item">
                         <a href="javascript:;" class="breadcrumbs__url">{{__('About')}}</a>
-                    </li>           
+                    </li>
                 </ul>
                 <!-- End breadcrumb -->
 

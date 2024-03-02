@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Footer Grid One'))
+@section('title', __('Footer Grid One'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -98,7 +98,7 @@
                                                             </th>
                                                             <th>{{ __('Name') }}</th>
                                                             <th>{{ __('Laguage Code') }}</th>
-                                                            <th>{{ __('status') }}</th>
+                                                            <th>{{ __('Status') }}</th>
 
                                                             <th>{{ __('Action') }}</th>
                                                         </tr>

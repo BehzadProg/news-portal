@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Social Count'))
+@section('title', __('Social Count'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -44,7 +44,7 @@
                                                     </th>
                                                     <th>{{__('Icon')}}</th>
                                                     <th>{{__('Link')}}</th>
-                                                    <th>{{__('status')}}</th>
+                                                    <th>{{__('Status')}}</th>
                                                     <th>{{__('Language')}}</th>
 
                                                     <th>{{__('Action')}}</th>

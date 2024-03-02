@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title' , '- Home')
+@section('title' , 'Home')
 @section('content')
     <!-- Breaking news  carousel-->
     @include('frontend.homeComponents.breaking-news')

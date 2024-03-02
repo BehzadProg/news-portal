@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Edit Footer Grid One Links'))
+@section('title', __('Edit Footer Grid One Links'))
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -14,7 +14,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>{{__('Edit Footer Grid One Link')}}</h4>
+                            <h4>{{__('Edit Footer Grid One Links')}}</h4>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('admin.footer-grid-one.update' , $footer->id) }}" method="post">

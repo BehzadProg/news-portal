@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Edit Social Link'))
+@section('title', __('Edit Social Link'))
 @section('content')
     <section class="section">
         <div class="section-header">

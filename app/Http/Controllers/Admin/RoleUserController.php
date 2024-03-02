@@ -63,7 +63,7 @@ class RoleUserController extends Controller
 
             Mail::to($request->email)->send(new RoleUserCreateMail($request->email,$request->password));
 
-            toast(__('User With Role Created Successfully') , 'success');
+            toast(__('User with role created successfully') , 'success');
             return redirect()->route('admin.role-users.index');
         } catch (\Throwable $th) {
             throw $th;

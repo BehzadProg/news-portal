@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', __('- Role And Permission'))
+@section('title', __('Role And Permission'))
 @section('content')
     <section class="section">
         <div class="section-header">
