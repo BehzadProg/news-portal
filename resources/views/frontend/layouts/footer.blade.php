@@ -109,7 +109,7 @@
                 <div class="container ">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="border-top-1 bg__footer-bottom-section">
+                            <div class="bg__footer-bottom-section">
                                 <p class="text-white text-center">
                                     {{@$footerInfo->copyright}}</p>
 

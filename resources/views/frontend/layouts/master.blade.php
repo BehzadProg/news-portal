@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{{@$settings['site_seo_title']}} - @yield('title') </title>
+    <title>{{@$settings['site_seo_title']}} &mdash; @yield('title') </title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="description" content="@hasSection('meta_description') @yield('meta_description') @else {{$settings['site_seo_description']}} @endif">
     <meta name="keywords" content="{{$settings['site_seo_keywords']}}">

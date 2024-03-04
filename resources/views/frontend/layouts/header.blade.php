@@ -1,5 +1,5 @@
 @php
-    $languages = \App\Models\Language::where('status' , 1)->get()
+    $languages = \App\Models\Language::where('status', 1)->get();
 @endphp
 
 <header class="bg-light">
@@ -12,14 +12,13 @@
 
                         <ul class="topbar-sosmed p-0">
                             @foreach ($socialLinks as $socialLink)
-
-                            <li>
-                                <a href="{{$socialLink->url}}"><i class="{{$socialLink->icon}}"></i></a>
-                            </li>
+                                <li>
+                                    <a href="{{ $socialLink->url }}"><i class="{{ $socialLink->icon }}"></i></a>
+                                </li>
                             @endforeach
                         </ul>
                         <div class="topbar-text">
-                           {{date("l, F j, Y")}}
+                            {{ date('l, F j, Y') }}
                         </div>
                     </div>
                 </div>
@@ -28,15 +27,24 @@
                         <div class="topbar_language">
                             <select id="site-language">
                                 @foreach ($languages as $language)
-
-                                <option {{$language->lang === getLanguage() ? 'selected' : ''}} value="{{$language->lang}}">{{$language->name}}</option>
+                                    <option {{ $language->lang === getLanguage() ? 'selected' : '' }}
+                                        value="{{ $language->lang }}">{{ $language->name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <ul class="topbar-link">
-                            <li><a href="login.html">{{__('frontend_localize.Login')}}</a></li>
-                            <li><a href="register.html">{{__('frontend_localize.Register')}}</a></li>
+                            @auth
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();">
+                                        {{ __('frontend_localize.Logout') }}
+                                    </a>
+                                </form>
+                            @else
+                                <li><a href="{{ route('login') }}">{{ __('frontend_localize.Login') }}</a></li>
+                                <li><a href="{{ route('register') }}">{{ __('frontend_localize.Register') }}</a></li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
@@ -57,18 +65,21 @@
                     </div>
                 </div>
                 <figure class="mb-0 mx-auto">
-                    <a href="{{url('/')}}">
-                        <img src="{{asset(env('SITE_LOGO_IMAGE_UPLOAD_PATH').$settings['site_logo'])}}" alt="" class="img-fluid logo">
+                    <a href="{{ url('/') }}">
+                        <img src="{{ asset(env('SITE_LOGO_IMAGE_UPLOAD_PATH') . $settings['site_logo']) }}"
+                            alt="" class="img-fluid logo">
                     </a>
                 </figure>
 
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{url('/')}}">{{__('frontend_localize.home')}}</a>
+                            <a class="nav-link active"
+                                href="{{ url('/') }}">{{ __('frontend_localize.home') }}</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route('about.index')}}"> {{__('frontend_localize.about')}} </a>
+                            <a class="nav-link" href="{{ route('about.index') }}"> {{ __('frontend_localize.about') }}
+                            </a>
                         </li>
                         <li class="nav-item dropdown has-megamenu">
                             <a class="nav-link" href="blog.html">blog </a>
@@ -81,7 +92,8 @@
                                 <li><a class="dropdown-item" href="404.html"> 404 Error </a>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('contact.index')}}"> {{__('frontend_localize.Contact')}} </a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('contact.index') }}">
+                                {{ __('frontend_localize.Contact') }} </a></li>
                     </ul>
 
 
@@ -98,7 +110,7 @@
                     <div class="top-search navigation-shadow">
                         <div class="container">
                             <div class="input-group ">
-                                <form action="{{route('news')}}" method="GET">
+                                <form action="{{ route('news') }}" method="GET">
 
                                     <div class="row no-gutters mt-3">
                                         <div class="col">
@@ -108,7 +120,9 @@
                                         </div>
                                         <div class="col-auto">
 
-                                            <button type="submit" class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right" ><i class="fa fa-search"></i></button>
+                                            <button type="submit"
+                                                class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right"><i
+                                                    class="fa fa-search"></i></button>
                                         </div>
                                     </div>
 
@@ -130,18 +144,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="widget__form-search-bar  ">
-                        <form action="{{route('news')}}" method="GET">
-                        <div class="row no-gutters">
-                            <div class="col">
-                                <input class="form-control border-secondary border-right-0 rounded-0" value=""
-                                    placeholder="Search" name="search">
+                        <form action="{{ route('news') }}" method="GET">
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <input class="form-control border-secondary border-right-0 rounded-0" value=""
+                                        placeholder="Search" name="search">
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
                         </form>
                     </div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -152,10 +166,12 @@
                     <nav class="list-group list-group-flush">
                         <ul class="navbar-nav ">
                             <li class="nav-item">
-                                <a class="nav-link active text-dark" href="{{url('/')}}"> {{__('frontend_localize.Home')}}</a>
+                                <a class="nav-link active text-dark" href="{{ url('/') }}">
+                                    {{ __('frontend_localize.Home') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{route('about.index')}}"> {{__('frontend_localize.About')}} </a>
+                                <a class="nav-link text-dark" href="{{ route('about.index') }}">
+                                    {{ __('frontend_localize.About') }} </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="blog.html">Blog </a>
@@ -169,7 +185,8 @@
 
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link  text-dark" href="{{route('contact.index')}}"> {{__('frontend_localize.Contact')}} </a>
+                            <li class="nav-item"><a class="nav-link  text-dark" href="{{ route('contact.index') }}">
+                                    {{ __('frontend_localize.Contact') }} </a>
                             </li>
                         </ul>
 

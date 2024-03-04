@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>{{__('frontend.User Information')}}</title>
+    <title>{{__('frontend_localize.User Information')}}</title>
     <style media="all" type="text/css">
         /* -------------------------------------
           GLOBAL RESETS
@@ -327,12 +327,12 @@
                         <!-- START MAIN CONTENT AREA -->
                         <tr>
                             <td class="wrapper">
-                                <p>{{__('frontend.Hi Dear')}}</p>
-                                <p>{{__('frontend.Here is your Login credential')}}</p>
-                                <p>{{__('frontend.Mail')}} : {{$email}}</p>
-                                <p>{{__('frontend.Password')}} : {{$password}}</p>
+                                <p>{{__('frontend_localize.Hi Dear')}}</p>
+                                <p>{{__('frontend_localize.Here is your Login credential')}}</p>
+                                <p>{{__('frontend_localize.Mail')}} : {{$email}}</p>
+                                <p>{{__('frontend_localize.Password')}} : {{$password}}</p>
 
-                                <p>{{__('frontend.Good luck!')}}.</p>
+                                <p>{{__('frontend_localize.Good luck!')}}.</p>
                             </td>
                         </tr>
 

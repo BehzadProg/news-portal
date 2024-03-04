@@ -27,7 +27,7 @@ class LocalizationController extends Controller
 
     public function extractLocalizationStrings(Request $request)
     {
-        $directories = explode(',' , $request->directory);
+        $directories = explode(',', $request->directory);
         $languageCode = $request->language_code;
         $fileName = $request->file_name;
         $localizationStrings = [];
@@ -47,7 +47,7 @@ class LocalizationController extends Controller
 
                 if (!empty($matches[1])) {
                     foreach ($matches[1] as $match) {
-                        $match = preg_replace('/^(frontend_localize|admin_localize)\./' , '' , $match);
+                        $match = preg_replace('/^(frontend_localize|admin_localize)\./', '', $match);
                         $localizationStrings[$match] = $match;
                     }
                 }
@@ -91,13 +91,13 @@ class LocalizationController extends Controller
 
             $keyStrings = array_keys($languageStrings);
 
-            $text = implode('|' , $keyStrings);
+            $text = implode('|', $keyStrings);
 
             $response = Http::withHeaders([
                 'X-RapidAPI-Host' => 'microsoft-translator-text.p.rapidapi.com',
                 'X-RapidAPI-Key' => '5c076bc59emsh84222108eb04faep14e837jsn86b5b7372f4f',
                 'content-type' => 'application/json',
-            ])->post("https://microsoft-translator-text.p.rapidapi.com/translate?api-version=3.0&to%5B0%5D=$languageCode&textType=plain&profanityAction=NoAction" , [
+            ])->post("https://microsoft-translator-text.p.rapidapi.com/translate?api-version=3.0&to%5B0%5D=$languageCode&textType=plain&profanityAction=NoAction", [
                 [
                     "Text" => $text
                 ]
@@ -105,26 +105,32 @@ class LocalizationController extends Controller
 
             $translatedText = json_decode($response->body())[0]->translations[0]->text;
 
-            $translatedValues = explode('|' , $translatedText);
+            $translatedValues = explode('|', $translatedText);
 
 
-            // function custom_array_combine($keys, $values) {
-            //     $combinedArray = array();
-            //     $countKeys = count($keys);
-            //     $countValues = count($values);
-            //     $maxLength = max($countKeys, $countValues);
+            if (count($keyStrings) === count($translatedValues)) {
 
-            //     for ($i = 0; $i < $maxLength; $i++) {
-            //         $key = isset($keys[$i]) ? $keys[$i] : null;
-            //         $value = isset($values[$i]) ? $values[$i] : $key; // Use key as value if value is null
-            //         $combinedArray[$key] = $value;
-            //     }
+                $updatedArray = array_combine($keyStrings, $translatedValues);
+            } else {
+                function custom_array_combine($keys, $values)
+                {
+                    $combinedArray = array();
+                    $countKeys = count($keys);
+                    $countValues = count($values);
+                    $maxLength = max($countKeys, $countValues);
 
-            //     return $combinedArray;
-            // }
+                    for ($i = 0; $i < $maxLength; $i++) {
+                        $key = isset($keys[$i]) ? $keys[$i] : null;
+                        $value = isset($values[$i]) ? $values[$i] : $key; // Use key as value if value is null
+                        $combinedArray[$key] = $value;
+                    }
+
+                    return $combinedArray;
+                }
+                $updatedArray = custom_array_combine($keyStrings, $translatedValues);
+            }
 
 
-            $updatedArray = array_combine($keyStrings , $translatedValues);
 
             $phpArray = "<?php\n\nreturn " . var_export($updatedArray, true) . ";\n";
 

@@ -237,7 +237,7 @@
                                             <div class="comment-author vcard">
                                                 <img src="{{asset('frontend/assets/images/avatar-1.png')}}" class="avatar" alt="image">
                                                 <b class="fn">{{$reply->user->name}}</b>
-                                                <span class="says">{{__('frontend_localize.says:')}}</span>
+                                                <span class="says">{{__('frontend_localize.says')}}:</span>
                                             </div>
 
                                             <div class="comment-metadata">
@@ -617,13 +617,13 @@
                 e.preventDefault();
                 let id = $(this).data('id')
                 Swal.fire({
-                    title: '{{__('frontend_localizeAre you sure")?}}',
-                    text: "{{__('frontend_localizeYou won'\t be able to revert this!")}}",
+                    title: '{{__("frontend_localize.Are you sure")?}}',
+                    text: "{{__('frontend_localize.You won'\t be able to revert this!')}}",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: '{{__('frontend_localizeYes, delete it!")}}'
+                    confirmButtonText: '{{__('frontend_localize.Yes, delete it!')}}'
                 }).then((result) => {
                     if (result.isConfirmed) {
 
