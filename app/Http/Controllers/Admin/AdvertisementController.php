@@ -66,7 +66,7 @@ class AdvertisementController extends Controller
             ]
         );
 
-        toast(__('Updated Successfully') , 'success')->width('400');
+        toast(__('admin_localize.Updated Successfully') , 'success')->width('400');
         return redirect()->route('admin.advertisement.index');
     }
 }

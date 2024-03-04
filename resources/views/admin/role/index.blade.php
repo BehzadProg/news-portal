@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Role And Permission'))
+@section('title', __('admin_localize.Role And Permission'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{__('Role And Permission')}}</h1>
+            <h1>{{__('admin_localize.Role And Permission')}}</h1>
         </div>
 
         <div class="section-body">
@@ -11,9 +11,9 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{__('All Role And Permission')}}</h4>
+                            <h4>{{__('admin_localize.All Role And Permission')}}</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('admin.role.create') }}" class="btn btn-primary">{{__('Create New')}} <i
+                                <a href="{{ route('admin.role.create') }}" class="btn btn-primary">{{__('admin_localize.Create New')}} <i
                                         class="fas fa-plus"></i></a>
                             </div>
                         </div>
@@ -26,10 +26,10 @@
                                             <th class="text-center">
                                                 #
                                             </th>
-                                            <th>{{__('Role Name')}}</th>
-                                            <th>{{__('Permissions')}}</th>
+                                            <th>{{__('admin_localize.Role Name')}}</th>
+                                            <th>{{__('admin_localize.Permissions')}}</th>
 
-                                            <th>{{__('Action')}}</th>
+                                            <th>{{__('admin_localize.Action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,7 +42,7 @@
                                                 <span class="badge badge-primary">{{$permission->name}}</span>
                                                 @endforeach
                                                 @if ($role->name == 'Super Admin')
-                                                <span class="badge badge-success">{{__('All Permissions')}} *</span>
+                                                <span class="badge badge-success">{{__('admin_localize.All Permissions')}} *</span>
                                                 @endif
                                             </td>
                                             <td>

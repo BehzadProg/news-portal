@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Localization'))
+@section('title', __('admin_localize.Localization'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Admin Localization') }}</h1>
+            <h1>{{ __('admin_localize.Admin Localization') }}</h1>
         </div>
 
         <div class="section-body">
@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('All Strings') }}</h4>
+                            <h4>{{ __('admin_localize.All Strings') }}</h4>
                         </div>
                         <div class="card-body">
 
@@ -40,7 +40,7 @@
                                                             value="{{ $language->lang }}">
                                                         <input type="hidden" name="file_name" value="admin_localize">
                                                         <button type="submit"
-                                                            class="btn btn-primary mx-2">{{ __('Generate String') }}</button>
+                                                            class="btn btn-primary mx-2">{{ __('admin_localize.Generate String') }}</button>
                                                     </form>
 
                                                     <form class="translate-form">
@@ -48,7 +48,7 @@
                                                             value="{{ $language->lang }}">
                                                         <input type="hidden" name="file_name" value="admin_localize">
                                                         <button type="submit"
-                                                            class="btn btn-dark mx-2 translate_button">{{ __('Translate String') }}</button>
+                                                            class="btn btn-dark mx-2 translate_button">{{ __('admin_localize.Translate String') }}</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -61,9 +61,9 @@
                                                             <th class="text-center">
                                                                 #
                                                             </th>
-                                                            <th>{{ __('Strings') }}</th>
-                                                            <th>{{ __('Translation') }}</th>
-                                                            <th>{{ __('Action') }}</th>
+                                                            <th>{{ __('admin_localize.Strings') }}</th>
+                                                            <th>{{ __('admin_localize.Translation') }}</th>
+                                                            <th>{{ __('admin_localize.Action') }}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -115,7 +115,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Translation') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('admin_localize.Translation') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -124,7 +124,7 @@
                     <form action="{{ route('admin.translate-string.update') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="">{{ __('Strings') }}</label>
+                            <label for="">{{ __('admin_localize.Strings') }}</label>
                             <input type="text" name="value" class="form-control" >
                             <input type="hidden" name="key">
                             <input type="hidden" name="lang">
@@ -132,8 +132,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
-                    <button type="submit" class="btn btn-primary">{{ __('Save changes') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('admin_localize.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __('admin_localize.Save changes') }}</button>
                 </div>
                 </form>
             </div>

@@ -29,7 +29,7 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <a href="javascript:;">
-                                                        {{__('by')}} {{$slider->author->name}}
+                                                        {{__('frontend_localize.by')}} {{$slider->author->name}}
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
@@ -74,7 +74,7 @@
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <a href="javascript:;">
-                                                    {{__('by')}} {{$slider->author->name}}
+                                                    {{__('frontend_localize.by')}} {{$slider->author->name}}
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">

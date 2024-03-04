@@ -42,7 +42,7 @@ class RolePermissionController extends Controller
 
         $role->syncPermissions($request->permissions);
 
-        toast(__('Created Successfully') , 'success');
+        toast(__('admin_localize.Created Successfully') , 'success');
         return redirect()->route('admin.role.index');
     }
 
@@ -66,16 +66,16 @@ class RolePermissionController extends Controller
 
         $role->syncPermissions($request->permissions);
 
-        toast(__('Updated Successfully') , 'success');
+        toast(__('admin_localize.Updated Successfully') , 'success');
         return redirect()->route('admin.role.index');
     }
 
     function destroy(string $id) : Response {
         $role = Role::findOrFail($id);
         if($role->name === 'Super Admin'){
-            return response(['status' => 'error' , 'message' => __('Can\'t Delete Super Admin Role')]);
+            return response(['status' => 'error' , 'message' => __('admin_localize.Can\'t Delete Super Admin Role')]);
         }
         $role->delete();
-        return response(['status' => 'success' , 'message' => __('Role deleted successfully')]);
+        return response(['status' => 'success' , 'message' => __('admin_localize.Role deleted successfully')]);
     }
 }

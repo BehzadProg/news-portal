@@ -50,7 +50,7 @@ class FooterInfoController extends Controller
             ]
         );
 
-        toast()->success(__('Updated Successfully'));
+        toast()->success(__('admin_localize.Updated Successfully'));
         return redirect()->back();
     }
 

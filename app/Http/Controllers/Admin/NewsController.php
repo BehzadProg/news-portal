@@ -47,7 +47,7 @@ class NewsController extends Controller
         $news = News::findOrFail($request->id);
         $news->is_approved = 1;
         $news->save();
-        return response(['status' => 'success' , 'message' => __('Approved Successfully')]);
+        return response(['status' => 'success' , 'message' => __('admin_localize.Approved Successfully')]);
     }
     /**
      * Fetch Category Base On Language.
@@ -103,7 +103,7 @@ class NewsController extends Controller
 
         $news->tags()->attach($tagIds);
 
-        toast(__('Created Successfully'), 'success')->width('400');
+        toast(__('admin_localize.Created Successfully'), 'success')->width('400');
         return redirect()->route('admin.news.index');
     }
 
@@ -117,7 +117,7 @@ class NewsController extends Controller
             $news->{$request->name} = $request->status;
             $news->save();
 
-            return response(['status' => 'success', 'message' => __('Updated Successfully')]);
+            return response(['status' => 'success', 'message' => __('admin_localize.Updated Successfully')]);
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -187,7 +187,7 @@ class NewsController extends Controller
 
         $news->tags()->attach($tagIds);
 
-        toast(__('Updated Successfully'), 'success')->width('400');
+        toast(__('admin_localize.Updated Successfully'), 'success')->width('400');
         return redirect()->route('admin.news.index');
     }
 
@@ -201,7 +201,7 @@ class NewsController extends Controller
         $news->tags()->delete();
         $news->delete();
 
-        return response(['status' => 'success', 'message' => __('News Deleted Successfully')]);
+        return response(['status' => 'success', 'message' => __('admin_localize.News Deleted Successfully')]);
     }
 
     public function copyNews(Request $request)
@@ -213,7 +213,7 @@ class NewsController extends Controller
         // $news = News::findOrFail($id);
         // $copyNews = $news->replicate();
         // $copyNews->save();
-        // toast(__('Copied Successfully') , 'success')->width('330');
+        // toast(__('admin_localize.Copied Successfully') , 'success')->width('330');
         // return redirect()->back();
     }
 
@@ -234,7 +234,7 @@ class NewsController extends Controller
                 'show_at_popular' => 'boolean',
                 'status' => 'boolean',
             ],
-            ['image.required' => __('Please select the image again')]
+            ['image.required' => __('admin_localize.Please select the image again')]
         );
 
         $imagePath = $this->handleUpload('image', null, env('NEWS_IMAGE_UPLOAD_PATH'), 'news_image');
@@ -266,7 +266,7 @@ class NewsController extends Controller
 
         $news->tags()->attach($tagIds);
 
-        toast(__('Copied And Duplicated Successfully'), 'success')->width('400');
+        toast(__('admin_localize.Copied And Duplicated Successfully'), 'success')->width('400');
         return redirect()->route('admin.news.index');
     }
 }

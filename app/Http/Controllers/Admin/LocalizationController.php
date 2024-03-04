@@ -47,7 +47,7 @@ class LocalizationController extends Controller
 
                 if (!empty($matches[1])) {
                     foreach ($matches[1] as $match) {
-
+                        $match = preg_replace('/^(frontend_localize|admin_localize)\./' , '' , $match);
                         $localizationStrings[$match] = $match;
                     }
                 }
@@ -63,7 +63,7 @@ class LocalizationController extends Controller
 
         file_put_contents(lang_path($languageCode . '/' . $fileName . '.php'), $phpArray);
 
-        toast(__('Strings Generated Successfully'), 'success');
+        toast(__('admin_localize.Generated Successfully'), 'success');
         return redirect()->back();
     }
 
@@ -78,7 +78,7 @@ class LocalizationController extends Controller
 
         file_put_contents(lang_path($request->lang . '/' . $request->file_name . '.php'), $phpArray);
 
-        toast(__('Updated Successfully'), 'success');
+        toast(__('admin_localize.Updated Successfully'), 'success');
         return redirect()->back();
     }
 

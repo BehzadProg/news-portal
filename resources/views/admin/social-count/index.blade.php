@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Social Count'))
+@section('title', __('admin_localize.Social Count'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{__('Social Count')}}</h1>
+            <h1>{{__('admin_localize.Social Count')}}</h1>
         </div>
 
         <div class="section-body">
@@ -11,9 +11,9 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{__('All Social Count')}}</h4>
+                            <h4>{{__('admin_localize.All Social Count')}}</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('admin.social-count.create') }}" class="btn btn-primary">{{__('Create New')}} <i
+                                <a href="{{ route('admin.social-count.create') }}" class="btn btn-primary">{{__('admin_localize.Create New')}} <i
                                         class="fas fa-plus"></i></a>
                             </div>
                         </div>
@@ -42,12 +42,12 @@
                                                     <th class="text-center">
                                                         #
                                                     </th>
-                                                    <th>{{__('Icon')}}</th>
-                                                    <th>{{__('Link')}}</th>
-                                                    <th>{{__('Status')}}</th>
-                                                    <th>{{__('Language')}}</th>
+                                                    <th>{{__('admin_localize.Icon')}}</th>
+                                                    <th>{{__('admin_localize.Link')}}</th>
+                                                    <th>{{__('admin_localize.Status')}}</th>
+                                                    <th>{{__('admin_localize.Language')}}</th>
 
-                                                    <th>{{__('Action')}}</th>
+                                                    <th>{{__('admin_localize.Action')}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -59,9 +59,9 @@
 
                                                     <td>
                                                         @if ($socialCount->status === 1)
-                                                        <span class="badge badge-success">{{__('Active')}}</span>
+                                                        <span class="badge badge-success">{{__('admin_localize.Active')}}</span>
                                                         @else
-                                                        <span class="badge badge-danger">{{__('InActive')}}</span>
+                                                        <span class="badge badge-danger">{{__('admin_localize.InActive')}}</span>
                                                         @endif
 
                                                     </td>

@@ -7,7 +7,7 @@
                 @method('PUT')
 
                 <div class="form-group row mb-4">
-                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Site Theme Color')}}</label>
+                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('admin_localize.Site Theme Color')}}</label>
                     <div class="col-sm-12 col-md-7">
                          <div class="input-group colorpickerinput">
                       <input type="text" name="site_color" value="{{@$settings['site_color']}}" class="form-control">
@@ -27,7 +27,7 @@
                 <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                     <div class="col-sm-12 col-md-7">
-                        <button class="btn btn-primary">{{__('Save')}}</button>
+                        <button class="btn btn-primary">{{__('admin_localize.Save')}}</button>
                     </div>
                 </div>
 

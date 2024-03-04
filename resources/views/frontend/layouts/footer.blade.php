@@ -17,10 +17,10 @@
                         <div class="col-md-4">
                             <div class="widget__footer">
                                 <figure class="image-logo">
-                                    <img src="{{asset(env('SITE_LOGO_IMAGE_UPLOAD_PATH').$footerInfo->logo)}}" alt="" class="logo-footer">
+                                    <img src="{{asset(env('SITE_LOGO_IMAGE_UPLOAD_PATH').@$footerInfo->logo)}}" alt="" class="logo-footer">
                                 </figure>
 
-                                <p>{!!$footerInfo->description!!}</p>
+                                <p>{!!@$footerInfo->description!!}</p>
 
 
                                 <div class="social__media mt-4">
@@ -111,7 +111,7 @@
                         <div class="col-md-12">
                             <div class="border-top-1 bg__footer-bottom-section">
                                 <p class="text-white text-center">
-                                    {{$footerInfo->copyright}}</p>
+                                    {{@$footerInfo->copyright}}</p>
 
                             </div>
 

@@ -63,7 +63,7 @@ class RoleUserController extends Controller
 
             Mail::to($request->email)->send(new RoleUserCreateMail($request->email,$request->password));
 
-            toast(__('User with role created successfully') , 'success');
+            toast(__('admin_localize.User with role created successfully') , 'success');
             return redirect()->route('admin.role-users.index');
         } catch (\Throwable $th) {
             throw $th;
@@ -108,7 +108,7 @@ class RoleUserController extends Controller
             $user->syncRoles($request->role);
 
 
-            toast(__('Updated Successfully') , 'success');
+            toast(__('admin_localize.Updated Successfully') , 'success');
             return redirect()->route('admin.role-users.index');
     }
 

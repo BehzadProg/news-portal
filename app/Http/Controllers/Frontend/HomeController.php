@@ -36,13 +36,13 @@ class HomeController extends Controller
             ->activeEntries()->withLocalize()->orderByDesc('updated_at')->take(4)->get();
 
         $homeSectionSetting = HomeSectionSetting::where('language', getLanguage())->first();
-        $sectionOneNews = News::where('category_id', $homeSectionSetting->category_section_one)
+        $sectionOneNews = News::where('category_id', @$homeSectionSetting->category_section_one)
             ->activeEntries()->withLocalize()->orderByDesc('id')->take(8)->get();
-        $sectionTwoNews = News::where('category_id', $homeSectionSetting->category_section_two)
+        $sectionTwoNews = News::where('category_id', @$homeSectionSetting->category_section_two)
             ->activeEntries()->withLocalize()->orderByDesc('id')->take(8)->get();
-        $sectionThreeNews = News::where('category_id', $homeSectionSetting->category_section_three)
+        $sectionThreeNews = News::where('category_id', @$homeSectionSetting->category_section_three)
             ->activeEntries()->withLocalize()->orderByDesc('id')->take(6)->get();
-        $sectionFourNews = News::where('category_id', $homeSectionSetting->category_section_four)
+        $sectionFourNews = News::where('category_id', @$homeSectionSetting->category_section_four)
             ->activeEntries()->withLocalize()->orderByDesc('id')->take(4)->get();
 
         //get recent news post for sidebar
@@ -197,7 +197,7 @@ class HomeController extends Controller
         $comment->comment = $request->comment;
         $comment->save();
 
-        alert()->success(__('Thank you'), __('By leaving your opinion in the comment section!'));
+        alert()->success(__('frontend_localize.Thank you'), __('frontend_localize.By leaving your opinion in the comment section!'));
         return redirect()->back();
     }
 
@@ -214,7 +214,7 @@ class HomeController extends Controller
         $comment->comment = $request->reply;
         $comment->save();
 
-        alert()->success(__('Thank you'), __('Your replay submitted successfully'));
+        alert()->success(__('frontend_localize.Thank you'), __('frontend_localize.Your replay submitted successfully'));
         return redirect()->back();
     }
 
@@ -223,9 +223,9 @@ class HomeController extends Controller
         $comment = Comment::findOrFail($request->id);
         if (Auth::user()->id === $comment->user_id) {
             $comment->delete();
-            return response(['status' => 'success', 'message' => __('Deleted successfully')]);
+            return response(['status' => 'success', 'message' => __('frontend_localize.Deleted successfully')]);
         }
-        return response(['status' => 'error', 'message' => __('something went wrong')]);
+        return response(['status' => 'error', 'message' => __('frontend_localize.something went wrong')]);
     }
 
     public function about()
@@ -262,7 +262,7 @@ class HomeController extends Controller
             $mail->message = $request->message;
             $mail->save();
 
-            toast(__('Your message sent Successfully'), 'success');
+            toast(__('frontend_localize.Your message sent Successfully'), 'success');
             return redirect()->back();
         } catch (\Exception $e) {
             toast(__($e->getMessage()), 'error');

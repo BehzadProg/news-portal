@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Home Section Settings'))
+@section('title', __('admin_localize.Home Section Settings'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Home Section Settings') }}</h1>
+            <h1>{{ __('admin_localize.Home Section Settings') }}</h1>
         </div>
 
         <div class="section-body">
@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('Update Home Section Setting') }}</h4>
+                            <h4>{{ __('admin_localize.Update Home Section Setting') }}</h4>
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="myTab2" role="tablist">
@@ -40,13 +40,13 @@
                                                 @method('PUT')
                                                 <div class="form-group row mb-4">
                                                     <label
-                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Category Section One') }}</label>
+                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Category Section One') }}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <input type="hidden" name="language" value="{{ $language->lang }}">
                                                         <select name="category_section_one" class="form-control select2">
-                                                            <option value="">--{{ __('Select') }}--</option>
+                                                            <option value="">--{{ __('admin_localize.Select') }}--</option>
                                                             @foreach ($categories as $category)
-                                                                <option {{$category->id === $homeSectionSetting->category_section_one ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}
+                                                                <option {{$category->id === @$homeSectionSetting->category_section_one ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -56,12 +56,12 @@
 
                                                 <div class="form-group row mb-4">
                                                     <label
-                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Category Section Two') }}</label>
+                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Category Section Two') }}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <select name="category_section_two" class="form-control select2">
-                                                            <option value="">--{{ __('Select') }}--</option>
+                                                            <option value="">--{{ __('admin_localize.Select') }}--</option>
                                                             @foreach ($categories as $category)
-                                                                <option {{$category->id === $homeSectionSetting->category_section_two ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}
+                                                                <option {{$category->id === @$homeSectionSetting->category_section_two ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -71,12 +71,12 @@
 
                                                 <div class="form-group row mb-4">
                                                     <label
-                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Category Section Three') }}</label>
+                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Category Section Three') }}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <select name="category_section_three" class="form-control select2">
-                                                            <option value="">--{{ __('Select') }}--</option>
+                                                            <option value="">--{{ __('admin_localize.Select') }}--</option>
                                                             @foreach ($categories as $category)
-                                                                <option {{$category->id === $homeSectionSetting->category_section_three ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}
+                                                                <option {{$category->id === @$homeSectionSetting->category_section_three ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -86,12 +86,12 @@
 
                                                 <div class="form-group row mb-4">
                                                     <label
-                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Category Section Four') }}</label>
+                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Category Section Four') }}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <select name="category_section_four" class="form-control select2">
-                                                            <option value="">--{{ __('Select') }}--</option>
+                                                            <option value="">--{{ __('admin_localize.Select') }}--</option>
                                                             @foreach ($categories as $category)
-                                                                <option {{$category->id === $homeSectionSetting->category_section_four ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}
+                                                                <option {{$category->id === @$homeSectionSetting->category_section_four ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -104,7 +104,7 @@
                                                     <label
                                                         class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                                     <div class="col-sm-12 col-md-7">
-                                                        <button class="btn btn-primary">{{ __('Update') }}</button>
+                                                        <button class="btn btn-primary">{{ __('admin_localize.Update') }}</button>
                                                     </div>
                                                 </div>
                                             </form>

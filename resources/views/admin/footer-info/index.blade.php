@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Footer Info'))
+@section('title', __('admin_localize.Footer Info'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Footer Info') }}</h1>
+            <h1>{{ __('admin_localize.Footer Info') }}</h1>
         </div>
 
         <div class="section-body">
@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('Update Footer Info') }}</h4>
+                            <h4>{{ __('admin_localize.Update Footer Info') }}</h4>
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="myTab2" role="tablist">
@@ -46,7 +46,7 @@
                                                 @endif
                                                 <div class="form-group row mb-4">
                                                     <label
-                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Logo') }}</label>
+                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Logo') }}</label>
 
                                                     <div class="col-sm-12 col-md-7">
                                                         <input type="file" name="logo" id="image-upload" />
@@ -55,14 +55,14 @@
                                                 </div>
 
                                                 <div class="form-group row mb-4">
-                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Description')}}</label>
+                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('admin_localize.Description')}}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <textarea name="description" class="form-control" cols="30" rows="10">{!!@$footerInfo->description!!}</textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row mb-4">
-                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('CopyRight Text')}}</label>
+                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('admin_localize.CopyRight Text')}}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <input name="copyright" type="text" value="{{@$footerInfo->copyright}}" class="form-control">
 
@@ -74,7 +74,7 @@
                                                     <label
                                                         class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                                     <div class="col-sm-12 col-md-7">
-                                                        <button class="btn btn-primary">{{ __('Save') }}</button>
+                                                        <button class="btn btn-primary">{{ __('admin_localize.Save') }}</button>
                                                     </div>
                                                 </div>
                                             </form>

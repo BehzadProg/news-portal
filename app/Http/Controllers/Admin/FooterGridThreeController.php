@@ -54,7 +54,7 @@ class FooterGridThreeController extends Controller
         $footer->status = $request->status;
         $footer->save();
 
-        toast(__('Created Successfully') , 'success');
+        toast(__('admin_localize.Created Successfully') , 'success');
         return redirect()->route('admin.footer-grid-three.index');
     }
     /**
@@ -86,7 +86,7 @@ class FooterGridThreeController extends Controller
         $footer->status = $request->status;
         $footer->save();
 
-        toast(__('Updated Successfully') , 'success');
+        toast(__('admin_localize.Updated Successfully') , 'success');
         return redirect()->route('admin.footer-grid-three.index');
     }
 
@@ -97,7 +97,7 @@ class FooterGridThreeController extends Controller
     {
         $footer = FooterGridThree::findOrFail($id);
         $footer->delete();
-        return response(['status' => 'success' , 'message' => __('Deleted Successfully')]);
+        return response(['status' => 'success' , 'message' => __('admin_localize.Deleted Successfully')]);
     }
 
     public function handleTitle(Request $request) {
@@ -115,7 +115,7 @@ class FooterGridThreeController extends Controller
             ]
         );
 
-        toast(__('Updated Successfully') , 'success');
+        toast(__('admin_localize.Updated Successfully') , 'success');
         return redirect()->back();
     }
 }

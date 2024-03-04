@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>{{__('Reset Email Link')}}</title>
+    <title>{{__('frontend.Reset Email Link')}}</title>
     <style media="all" type="text/css">
         /* -------------------------------------
           GLOBAL RESETS
@@ -327,8 +327,8 @@
                         <!-- START MAIN CONTENT AREA -->
                         <tr>
                             <td class="wrapper">
-                                <p>{{__('Hi Dear')}}</p>
-                                <p>{{__('Here is your password reset link')}}</p>
+                                <p>{{__('frontend.Hi Dear')}}</p>
+                                <p>{{__('frontend.Here is your password reset link')}}</p>
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0"
                                     class="btn btn-primary">
                                     <tbody>
@@ -339,7 +339,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td> <a href="{{ route('admin.password.reset', ['token' => $token, 'email' => $email]) }}"
-                                                                    target="_blank">{{__('Click Here to continue')}}</a> </td>
+                                                                    target="_blank">{{__('frontend.Click Here to continue')}}</a> </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -347,7 +347,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p>{{__('Good luck! Hope it works')}}.</p>
+                                <p>{{__('frontend.Good luck! Hope it works')}}.</p>
                             </td>
                         </tr>
 

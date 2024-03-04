@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Contact Messages'))
+@section('title', __('admin_localize.Contact Messages'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Contact Messages') }}</h1>
+            <h1>{{ __('admin_localize.Contact Messages') }}</h1>
         </div>
 
         <div class="section-body">
@@ -11,11 +11,11 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('All Contact Messages') }}
+                            <h4>{{ __('admin_localize.All Contact Messages') }}
 
                                  @if ($unReadMessages > 0)
                             <i class="badge badge-warning">{{$unReadMessages}}</i>
-                            {{__('New')}}
+                            {{__('admin_localize.New')}}
                             @endif
                             </h4>
                         </div>
@@ -30,12 +30,12 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
-                                                <th>{{ __('Email') }}</th>
-                                                <th>{{ __('Subject') }}</th>
-                                                <th>{{ __('Message Summary') }}</th>
-                                                <th>{{ __('Replied') }}</th>
+                                                <th>{{ __('admin_localize.Email') }}</th>
+                                                <th>{{ __('admin_localize.Subject') }}</th>
+                                                <th>{{ __('admin_localize.Message Summary') }}</th>
+                                                <th>{{ __('admin_localize.Replied') }}</th>
 
-                                                <th width="150px">{{ __('Action') }}</th>
+                                                <th width="150px">{{ __('admin_localize.Action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -82,7 +82,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{__('Replay to')}} : {{$message->email}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{__('admin_localize.Replay to')}} : {{$message->email}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -91,7 +91,7 @@
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">{{__('Subject')}}</label>
+                                <label for="">{{__('admin_localize.Subject')}}</label>
                                 @error('subject')
                                 <p class="text-danger">{{$message}}</p>
                                 @enderror
@@ -100,7 +100,7 @@
                                 <input type="hidden" name="message_id" value="{{$message->id}}">
                             </div>
                             <div class="form-group">
-                                <label for="">{{__('Message')}}</label>
+                                <label for="">{{__('admin_localize.Message')}}</label>
                                 @error('reply')
                                 <p class="text-danger">{{$message}}</p>
                                 @enderror
@@ -108,8 +108,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button class="btn btn-primary" type="submit">{{__('Send')}}</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('admin_localize.Close')}}</button>
+                            <button class="btn btn-primary" type="submit">{{__('admin_localize.Send')}}</button>
                         </div>
                     </form>
                 </div>
@@ -123,24 +123,24 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{__('Full Message')}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{__('admin_localize.Full Message')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">{{__('Subject')}}</label>
+                            <label for="">{{__('admin_localize.Subject')}}</label>
                             <p class="border p-2 m-0" style="border-radius: 5px">{{ $message->subject }}</p>
                         </div>
                         <div class="form-group">
-                            <label for="">{{__('Message')}}</label>
+                            <label for="">{{__('admin_localize.Message')}}</label>
                             <p class="border p-2 m-0" style="border-radius: 5px">{{ $message->message }}</p>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('admin_localize.Close')}}</button>
                     </div>
                 </div>
             </div>

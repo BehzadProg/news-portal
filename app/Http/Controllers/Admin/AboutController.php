@@ -31,7 +31,7 @@ class AboutController extends Controller
             ['content' => $request->content]
         );
 
-        toast(__('Updated Successfully') , 'success');
+        toast(__('admin_localize.Updated Successfully') , 'success');
         return redirect()->back();
     }
 }

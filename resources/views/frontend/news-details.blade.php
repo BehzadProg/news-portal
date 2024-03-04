@@ -17,10 +17,10 @@
                 <ul class="breadcrumbs bg-light mb-4">
                     <li class="breadcrumbs__item">
                         <a href="{{url('/')}}" class="breadcrumbs__url">
-                            <i class="fa fa-home"></i> {{__('Home')}}</a>
+                            <i class="fa fa-home"></i> {{__('frontend_localize.Home')}}</a>
                     </li>
                     <li class="breadcrumbs__item">
-                        <a href="javascript:;" class="breadcrumbs__url">{{__('News')}}</a>
+                        <a href="javascript:;" class="breadcrumbs__url">{{__('frontend_localize.News')}}</a>
                     </li>
                 </ul>
                 <!-- end breadcrumb -->
@@ -38,7 +38,7 @@
                     <div class="wrap__article-detail-info">
                         <ul class="list-inline d-flex flex-wrap justify-content-start">
                             <li class="list-inline-item">
-                                {{__('By')}}
+                                {{__('frontend_localize.By')}}
                                 <a href="#">
                                     {{$newsDetail->author->name}}
                                 </a>
@@ -50,7 +50,7 @@
                             </li>
                             <li class="list-inline-item">
                                 <span class="text-dark text-capitalize">
-                                    {{__('in')}}
+                                    {{__('frontend_localize.in')}}
                                 </span>
                                 <a href="#">
                                     {{$newsDetail->category->name}}
@@ -71,42 +71,42 @@
                             <div class="total-views-read">
                                 {{ converToKFormat($newsDetail->views)}}
                                 <span>
-                                    {{__('views')}}
+                                    {{__('frontend_localize.views')}}
                                 </span>
                             </div>
 
                             <ul class="list-inline">
-                                <span class="share">{{__('share on')}} :</span>
+                                <span class="share">{{__('frontend_localize.share on')}} :</span>
                                 <li class="list-inline-item">
                                     <a class="btn btn-social-o facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}" target="_blank">
                                         <i class="fa fa-facebook-f"></i>
-                                        <span>{{__('facebook')}}</span>
+                                        <span>{{__('frontend_localize.facebook')}}</span>
                                     </a>
 
                                 </li>
                                 <li class="list-inline-item">
                                     <a class="btn btn-social-o twitter" href="https://twitter.com/intent/tweet?text={{$newsDetail->title}}&url={{url()->current()}}" target="_blank">
                                         <i class="fa fa-twitter"></i>
-                                        <span>{{__('twitter')}}</span>
+                                        <span>{{__('frontend_localize.twitter')}}</span>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a class="btn btn-social-o whatsapp" href="https://wa.me/?text={{$newsDetail->title}}%20{{url()->current()}}" target="_blank">
                                         <i class="fa fa-whatsapp"></i>
-                                        <span>{{__('whatsapp')}}</span>
+                                        <span>{{__('frontend_localize.whatsapp')}}</span>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a class="btn btn-social-o telegram" href="https://t.me/share/url?url={{url()->current()}}&text={{$newsDetail->title}}" target="_blank">
                                         <i class="fa fa-telegram"></i>
-                                        <span>{{__('telegram')}}</span>
+                                        <span>{{__('frontend_localize.telegram')}}</span>
                                     </a>
                                 </li>
 
                                 <li class="list-inline-item">
                                     <a class="btn btn-linkedin-o linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$newsDetail->title}}" target="_blank">
                                         <i class="fa fa-linkedin"></i>
-                                        <span>{{__('linkedin')}}</span>
+                                        <span>{{__('frontend_localize.linkedin')}}</span>
                                     </a>
                                 </li>
 
@@ -150,7 +150,7 @@
                             <img style="width: 200px;height: 200px;object-fit: cover;" src="{{asset(env('ADMIN_PROFILE_IMAGE_UPLOAD_PATH').$newsDetail->author->image)}}" alt="" class="img-fluid rounded-circle">
                         </figure>
                         <div class="wrap__profile-author-detail">
-                            <div class="wrap__profile-author-detail-name">{{__('author')}}</div>
+                            <div class="wrap__profile-author-detail-name">{{__('frontend_localize.author')}}</div>
                             <h4>{{$newsDetail->author->name}}</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis laboriosam ad
                                 beatae itaque ea non
@@ -191,7 +191,7 @@
                 @auth
 
                 <div id="comments" class="comments-area">
-                    <h3 class="comments-title">{{count($newsDetail->comments)}} {{__('Comments')}}:</h3>
+                    <h3 class="comments-title">{{count($newsDetail->comments)}} {{__('frontend_localize.Comments')}}:</h3>
 
                     <ol class="comment-list">
                         @foreach ($newsDetail->comments()->whereNull('parent_id')->orderBy('id' , 'Desc')->get() as $comment)
@@ -202,7 +202,7 @@
                                     <div class="comment-author vcard">
                                         <img src="{{asset('frontend/assets/images/avatar-1.png')}}" class="avatar" alt="image">
                                         <b class="fn">{{$comment->user->name}}</b>
-                                        <span class="says">{{__('says')}}:</span>
+                                        <span class="says">{{__('frontend_localize.says')}}:</span>
                                     </div>
 
                                     <div class="comment-metadata">
@@ -220,7 +220,7 @@
 
                                 <div class="reply">
                                     <a href="#" class="comment-reply-link" data-toggle="modal"
-                                        data-target="#exampleModal-{{$comment->id}}">{{__('Reply')}}</a>
+                                        data-target="#exampleModal-{{$comment->id}}">{{__('frontend_localize.Reply')}}</a>
                                     <span class="delete_comment" data-id="{{$comment->id}}">
                                         <i class="fa fa-trash"></i>
                                     </span>
@@ -237,7 +237,7 @@
                                             <div class="comment-author vcard">
                                                 <img src="{{asset('frontend/assets/images/avatar-1.png')}}" class="avatar" alt="image">
                                                 <b class="fn">{{$reply->user->name}}</b>
-                                                <span class="says">{{__('says:')}}</span>
+                                                <span class="says">{{__('frontend_localize.says:')}}</span>
                                             </div>
 
                                             <div class="comment-metadata">
@@ -256,7 +256,7 @@
                                         <div class="reply">
                                             @if ($loop->last)
                                             <a href="#" class="comment-reply-link" data-toggle="modal"
-                                                data-target="#exampleModal-{{$comment->id}}">{{__('Reply')}}</a>
+                                                data-target="#exampleModal-{{$comment->id}}">{{__('frontend_localize.Reply')}}</a>
                                             @endif
                                             <span class="delete_comment" data-id="{{$reply->id}}" style="margin-left:auto">
                                                 <i class="fa fa-trash"></i>
@@ -276,7 +276,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">{{__('Write Your Comment')}}</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">{{__('frontend_localize.Write Your Comment')}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -290,7 +290,7 @@
                                                 @error('reply')
                                                 <p class="text-danger">{{$message}}</p>
                                                @enderror
-                                                <button type="submit">{{__('submit')}}</button>
+                                                <button type="submit">{{__('frontend_localize.submit')}}</button>
                                             </form>
                                         </div>
                                     </div>
@@ -302,13 +302,13 @@
                     </ol>
 
                     <div class="comment-respond">
-                        <h3 class="comment-reply-title">{{__('Leave a Reply')}}</h3>
+                        <h3 class="comment-reply-title">{{__('frontend_localize.Leave a Reply')}}</h3>
 
                         <form action="{{route('news-comment')}}" method="POST" class="comment-form">
                             @csrf
 
                             <p class="comment-form-comment">
-                                <label for="comment">{{__('Comment')}}</label>
+                                <label for="comment">{{__('frontend_localize.Comment')}}</label>
                                 <textarea name="comment" id="comment" cols="45" rows="5" maxlength="65525"
                                     required="required"></textarea>
                                     <input type="hidden" name="news_id" value="{{$newsDetail->id}}">
@@ -327,7 +327,7 @@
                 @else
                 <div class="card mb-5" style="background-color: #f1f7ff">
                     <div class="card-body">
-                        <h5 style="">{{__('Please')}} <a href="{{route('login')}}">{{__('Login')}}</a> {{__('to comment in the post')}} </h5>
+                        <h5 style="">{{__('frontend_localize.Please')}} <a href="{{route('login')}}">{{__('frontend_localize.Login')}}</a> {{__('frontend_localize.to comment in the post')}} </h5>
                     </div>
                 </div>
                 @endauth
@@ -343,7 +343,7 @@
                             @if ($previousPost)
 
                             <a href="{{route('news-details' , $previousPost->slug)}}">
-                                <span>{{__('previous post')}}</span>
+                                <span>{{__('frontend_localize.previous post')}}</span>
                                 {!!limitText($previousPost->title , 70)!!}
                             </a>
                             @endif
@@ -353,7 +353,7 @@
                         <div class="single_navigation-next text-left text-md-right">
                             @if ($nextPost)
                             <a href="{{route('news-details' , $nextPost->slug)}}">
-                                <span>{{__('next post')}}</span>
+                                <span>{{__('frontend_localize.next post')}}</span>
                                 {!!limitText($nextPost->title , 70)!!}
                             </a>
                             @endif
@@ -378,7 +378,7 @@
 
                 <div class="related-article">
                     <h4>
-                        {{__('you may also like')}}
+                        {{__('frontend_localize.you may also like')}}
                     </h4>
 
                     <div class="article__entry-carousel-three">
@@ -396,7 +396,7 @@
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <span class="text-primary">
-                                                {{__('by')}} {{$post->author->name}}
+                                                {{__('frontend_localize.by')}} {{$post->author->name}}
                                             </span>
                                         </li>
                                         <li class="list-inline-item">
@@ -464,7 +464,7 @@
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item">
                                                         <span class="text-primary">
-                                                            {{__('by')}} {{$news->author->name}}
+                                                            {{__('frontend_localize.by')}} {{$news->author->name}}
                                                         </span>
                                                     </li>
                                                     <li class="list-inline-item">
@@ -503,7 +503,7 @@
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <span class="text-primary">
-                                                {{__('by')}} {{$news->author->name}}
+                                                {{__('frontend_localize.by')}} {{$news->author->name}}
                                             </span>
                                         </li>
                                         <li class="list-inline-item">
@@ -521,7 +521,7 @@
                                     <p>
                                        {!! limitText($news->content , 200) !!}
                                     </p>
-                                    <a href="{{route('news-details' , $news->slug)}}" class="btn btn-outline-primary mb-4 text-capitalize"> {{__('read more')}}</a>
+                                    <a href="{{route('news-details' , $news->slug)}}" class="btn btn-outline-primary mb-4 text-capitalize"> {{__('frontend_localize.read more')}}</a>
                                 </div>
                             </div>
                             @endif
@@ -533,7 +533,7 @@
 
                     <!-- social media -->
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{__('stay conected')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.stay conected')}}</h4>
                         <!-- widget Social media -->
                         <div class="wrap__social__media">
                             @foreach ($socialCounts as $socialCount)
@@ -558,7 +558,7 @@
                     <!-- End social media -->
 
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{__('tags')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.tags')}}</h4>
                         <div class="blog-tags p-0">
                             <ul class="list-inline">
                                 @foreach ($mostPopularTag as $tag)
@@ -575,17 +575,17 @@
                     </aside>
 
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{__('newsletter')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.newsletter')}}</h4>
                         <!-- Form Subscribe -->
                         <div class="widget__form-subscribe bg__card-shadow">
                             <h6>
-                                {{__('The most important world news and events of the day')}}.
+                                {{__('frontend_localize.The most important world news and events of the day')}}.
                             </h6>
-                            <p><small>{{__('Get magezine daily newsletter on your inbox')}}.</small></p>
+                            <p><small>{{__('frontend_localize.Get magezine daily newsletter on your inbox')}}.</small></p>
                             <div class="input-group ">
                                 <input type="text" class="form-control" placeholder="Your email address">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">{{__('sign up')}}</button>
+                                    <button class="btn btn-primary" type="button">{{__('frontend_localize.sign up')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -594,7 +594,7 @@
                     @if ($ad->sidebar_ad_status == 1)
 
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{__('Advertise')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.Advertise')}}</h4>
                         <a href="{{$ad->sidebar_ad_url}}">
                             <figure>
                                 <img src="{{asset(env('AD_IMAGE_UPLOAD_PATH').$ad->sidebar_ad)}}" alt="" class="img-fluid">
@@ -617,13 +617,13 @@
                 e.preventDefault();
                 let id = $(this).data('id')
                 Swal.fire({
-                    title: '{{__("Are you sure")?}}',
-                    text: "{{__("You won'\t be able to revert this!")}}",
+                    title: '{{__('frontend_localizeAre you sure")?}}',
+                    text: "{{__('frontend_localizeYou won'\t be able to revert this!")}}",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: '{{__("Yes, delete it!")}}'
+                    confirmButtonText: '{{__('frontend_localizeYes, delete it!")}}'
                 }).then((result) => {
                     if (result.isConfirmed) {
 

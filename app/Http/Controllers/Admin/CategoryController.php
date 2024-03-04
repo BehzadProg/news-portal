@@ -55,7 +55,7 @@ class CategoryController extends Controller
         $category->status = $request->status;
         $category->save();
 
-        toast(__('Created Successfully') , 'success')->width('400');
+        toast(__('admin_localize.Created Successfully') , 'success')->width('400');
         return redirect()->route('admin.category.index');
     }
     /**
@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $category->status = $request->status;
         $category->save();
 
-        toast(__('Updated Successfully') , 'success')->width('400');
+        toast(__('admin_localize.Updated Successfully') , 'success')->width('400');
         return redirect()->route('admin.category.index');
     }
 
@@ -98,6 +98,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return response(['status' => 'success' , 'message' => __('Deleted Successfully')]);
+        return response(['status' => 'success' , 'message' => __('admin_localize.Deleted Successfully')]);
     }
 }

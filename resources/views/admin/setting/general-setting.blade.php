@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-group row mb-4">
                     <label
-                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Site Logo') }}</label>
+                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Site Logo') }}</label>
 
                     <div class="col-sm-12 col-md-7">
                         <input type="file" name="site_logo" id="image-upload" />
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group row mb-4">
                     <label
-                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Site Favicon') }}</label>
+                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Site Favicon') }}</label>
 
                     <div class="col-sm-12 col-md-7">
                         <input type="file" name="site_favicon" id="image-upload" />
@@ -42,7 +42,7 @@
                 <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                     <div class="col-sm-12 col-md-7">
-                        <button class="btn btn-primary">{{__('Update')}}</button>
+                        <button class="btn btn-primary">{{__('admin_localize.Update')}}</button>
                     </div>
                 </div>
 

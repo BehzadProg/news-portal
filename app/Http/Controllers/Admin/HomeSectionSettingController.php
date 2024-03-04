@@ -38,7 +38,7 @@ class HomeSectionSettingController extends Controller
             ]
             );
 
-            toast(__('Updated Successfully') , 'success');
+            toast(__('admin_localize.Updated Successfully') , 'success');
             return redirect()->back();
     }
 }

@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('News'))
+@section('title', __('admin_localize.News'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('News') }}</h1>
+            <h1>{{ __('admin_localize.News') }}</h1>
         </div>
 
         <div class="section-body">
@@ -11,10 +11,10 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('All News') }}</h4>
+                            <h4>{{ __('admin_localize.All News') }}</h4>
                             @if (canAccess(['news create']))
                                 <div class="card-header-action">
-                                    <a href="{{ route('admin.news.create') }}" class="btn btn-primary">{{ __('Create New') }}
+                                    <a href="{{ route('admin.news.create') }}" class="btn btn-primary">{{ __('admin_localize.Create New') }}
                                         <i class="fas fa-plus"></i></a>
                                 </div>
                             @endif
@@ -59,16 +59,16 @@
                                                         <th class="text-center">
                                                             #
                                                         </th>
-                                                        <th>{{ __('Image') }}</th>
-                                                        <th>{{ __('Title') }}</th>
-                                                        <th>{{ __('Category') }}</th>
+                                                        <th>{{ __('admin_localize.Image') }}</th>
+                                                        <th>{{ __('admin_localize.Title') }}</th>
+                                                        <th>{{ __('admin_localize.Category') }}</th>
                                                         @if (canAccess(['news all-access' , 'news status']))
-                                                            <th>{{ __('In Slider') }}</th>
-                                                            <th>{{ __('In Breaking') }}</th>
-                                                            <th>{{ __('In Popular') }}</th>
+                                                            <th>{{ __('admin_localize.In Slider') }}</th>
+                                                            <th>{{ __('admin_localize.In Breaking') }}</th>
+                                                            <th>{{ __('admin_localize.In Popular') }}</th>
                                                         @endif
-                                                            <th>{{ __('Status') }}</th>
-                                                        <th width="130.217px">{{ __('Action') }}</th>
+                                                            <th>{{ __('admin_localize.Status') }}</th>
+                                                        <th width="130.217px">{{ __('admin_localize.Action') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

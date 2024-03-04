@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Pending News'))
+@section('title', __('admin_localize.Pending News'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Pending News') }}</h1>
+            <h1>{{ __('admin_localize.Pending News') }}</h1>
         </div>
 
         <div class="section-body">
@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('All Pending News') }}</h4>
+                            <h4>{{ __('admin_localize.All Pending News') }}</h4>
                         </div>
                         <div class="card-body">
                             @php
@@ -35,11 +35,11 @@
                                             <th class="text-center">
                                                 #
                                             </th>
-                                            <th>{{ __('Image') }}</th>
-                                            <th>{{ __('Title') }}</th>
-                                            <th>{{ __('Category') }}</th>
-                                            <th>{{ __('Approval Status') }}</th>
-                                            <th width="130.217px">{{ __('Action') }}</th>
+                                            <th>{{ __('admin_localize.Image') }}</th>
+                                            <th>{{ __('admin_localize.Title') }}</th>
+                                            <th>{{ __('admin_localize.Category') }}</th>
+                                            <th>{{ __('admin_localize.Approval Status') }}</th>
+                                            <th width="130.217px">{{ __('admin_localize.Action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -59,8 +59,8 @@
                                                     <input type="hidden" name="id" value="{{$item->id}}">
                                                     <div class="form-group">
                                                         <select name="is_approved" class="form-control" id="">
-                                                            <option {{$item->is_approved == 0 ? 'selected' : ''}} value="0">{{__('Pending')}}</option>
-                                                            <option value="1">{{__('Approve')}}</option>
+                                                            <option {{$item->is_approved == 0 ? 'selected' : ''}} value="0">{{__('admin_localize.Pending')}}</option>
+                                                            <option value="1">{{__('admin_localize.Approve')}}</option>
                                                         </select>
                                                     </div>
                                                   </form>

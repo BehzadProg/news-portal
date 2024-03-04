@@ -10,10 +10,10 @@
                 <ul class="breadcrumbs bg-light mb-4">
                     <li class="breadcrumbs__item">
                         <a href="{{url('/')}}" class="breadcrumbs__url">
-                            <i class="fa fa-home"></i> {{__('Home')}}</a>
+                            <i class="fa fa-home"></i> {{__('frontend_localize.Home')}}</a>
                     </li>
                     <li class="breadcrumbs__item">
-                        <a href="javascript:;" class="breadcrumbs__url">{{__('News')}}</a>
+                        <a href="javascript:;" class="breadcrumbs__url">{{__('frontend_localize.News')}}</a>
                     </li>
                     @if (request()->has('search'))
                     <li class="breadcrumbs__item breadcrumbs__item--current">
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <select name="category">
-                                    <option value="">{{__('All')}}</option>
+                                    <option value="">{{__('frontend_localize.All')}}</option>
                                     @foreach ($categories as $category)
 
                                     <option {{$category->slug === request()->category ? 'selected' : ''}} value="{{$category->slug}}">{{$category->name}}</option>
@@ -45,7 +45,7 @@
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <button type="submit">{{__('search')}}</button>
+                                <button type="submit">{{__('frontend_localize.search')}}</button>
                             </div>
                         </div>
                     </form>
@@ -54,15 +54,15 @@
                 <aside class="wrapper__list__article ">
                     @if (request()->has('category') && !empty(request()->category))
 
-                    <h4 class="border_section">{{__('Category')}} : {{request()->category}}</h4>
+                    <h4 class="border_section">{{__('frontend_localize.Category')}} : {{request()->category}}</h4>
                     @elseif(request()->has('tag') && !empty(request()->tag))
-                    <h4 class="border_section">{{__('Tag')}} : {{request()->tag}}</h4>
+                    <h4 class="border_section">{{__('frontend_localize.Tag')}} : {{request()->tag}}</h4>
                     @endif
 
                     <div class="row">
                         @if (count($news) === 0)
                         <div class="text-center w-100 p-3" style="background-color: #f1f7ff; border-radius: 60px !important;">
-                            <h4 style="margin: 0">{{__('No Results Found')}} :(</h4>
+                            <h4 style="margin: 0">{{__('frontend_localize.No Results Found')}} :(</h4>
                         </div>
 
                         @else
@@ -83,7 +83,7 @@
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <span class="text-primary">
-                                                {{__('by')}} {{$post->author->name}}
+                                                {{__('frontend_localize.by')}} {{$post->author->name}}
                                             </span>
                                         </li>
                                         <li class="list-inline-item">
@@ -138,7 +138,7 @@
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item">
                                                         <span class="text-primary">
-                                                            {{__('by')}} {{$newsPost->author->name}}
+                                                            {{__('frontend_localize.by')}} {{$newsPost->author->name}}
                                                         </span>
                                                     </li>
                                                     <li class="list-inline-item">
@@ -177,7 +177,7 @@
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <span class="text-primary">
-                                                {{__('by')}} {{$newsPost->author->name}}
+                                                {{__('frontend_localize.by')}} {{$newsPost->author->name}}
                                             </span>
                                         </li>
                                         <li class="list-inline-item">
@@ -195,7 +195,7 @@
                                     <p>
                                        {!! limitText($newsPost->content , 200) !!}
                                     </p>
-                                    <a href="{{route('news-details' , $newsPost->slug)}}" class="btn btn-outline-primary mb-4 text-capitalize"> {{__('read more')}}</a>
+                                    <a href="{{route('news-details' , $newsPost->slug)}}" class="btn btn-outline-primary mb-4 text-capitalize"> {{__('frontend_localize.read more')}}</a>
                                 </div>
                             </div>
                             @endif
@@ -204,7 +204,7 @@
                     </aside>
 
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{__('tags')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.tags')}}</h4>
                         <div class="blog-tags p-0">
                             <ul class="list-inline">
                                 @foreach ($mostPopularTag as $tag)
@@ -221,17 +221,17 @@
                     </aside>
 
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{__('newsletter')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.newsletter')}}</h4>
                         <!-- Form Subscribe -->
                         <div class="widget__form-subscribe bg__card-shadow">
                             <h6>
-                                {{__('The most important world news and events of the day')}}.
+                                {{__('frontend_localize.The most important world news and events of the day')}}.
                             </h6>
-                            <p><small>{{__('Get magzrenvi daily newsletter on your inbox')}}.</small></p>
+                            <p><small>{{__('frontend_localize.Get magzrenvi daily newsletter on your inbox')}}.</small></p>
                             <div class="input-group ">
                                 <input type="text" class="form-control" placeholder="Your email address">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">{{__('sign up')}}</button>
+                                    <button class="btn btn-primary" type="button">{{__('frontend_localize.sign up')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -240,7 +240,7 @@
                     @if ($ad->sidebar_ad_status == 1)
 
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{__('Advertise')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.Advertise')}}</h4>
                         <a href="{{$ad->sidebar_ad_url}}">
                             <figure>
                                 <img src="{{asset(env('AD_IMAGE_UPLOAD_PATH').$ad->sidebar_ad)}}" alt="" class="img-fluid">

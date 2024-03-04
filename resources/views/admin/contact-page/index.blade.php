@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Contact Page'))
+@section('title', __('admin_localize.Contact Page'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Contact Page') }}</h1>
+            <h1>{{ __('admin_localize.Contact Page') }}</h1>
         </div>
 
         <div class="section-body">
@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('Update Contact Info') }}</h4>
+                            <h4>{{ __('admin_localize.Update Contact Info') }}</h4>
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="myTab2" role="tablist">
@@ -37,7 +37,7 @@
                                                 @method('PUT')
 
                                                 <div class="form-group row mb-4">
-                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Address') }}</label>
+                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Address') }}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <textarea name="address" class="form-control" cols="30" rows="10">{!! @$contact->address !!}</textarea>
                                                         <input type="hidden" name="language" value="{{$language->lang}}">
@@ -45,14 +45,14 @@
                                                 </div>
 
                                                 <div class="form-group row mb-4">
-                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Phone') }}</label>
+                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Phone') }}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <input type="text" name="phone" class="form-control" value="{{@$contact->phone}}">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row mb-4">
-                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Email') }}</label>
+                                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Email') }}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <input type="text" name="email" class="form-control"  value="{{@$contact->email}}">
                                                     </div>
@@ -61,7 +61,7 @@
                                                 <div class="form-group row mb-4">
                                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                                     <div class="col-sm-12 col-md-7">
-                                                        <button class="btn btn-primary">{{ __('Save') }}</button>
+                                                        <button class="btn btn-primary">{{ __('admin_localize.Save') }}</button>
                                                     </div>
                                                 </div>
                                             </form>

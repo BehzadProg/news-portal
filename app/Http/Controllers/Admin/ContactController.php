@@ -42,7 +42,7 @@ class ContactController extends Controller
             ]
         );
 
-        toast(__('Updated Successfully') , 'success');
+        toast(__('admin_localize.Updated Successfully') , 'success');
         return redirect()->back();
     }
 
@@ -69,7 +69,7 @@ class ContactController extends Controller
         $didReplied->replied = 1;
         $didReplied->save();
 
-        toast(__('Reply sent Successfully'), 'success');
+        toast(__('admin_localize.Reply sent Successfully'), 'success');
         return redirect()->back();
 
        }catch (\Exception $e) {
@@ -83,7 +83,7 @@ class ContactController extends Controller
 
         $receivedMessage->delete();
 
-        return response(['status' => 'success' , 'message' => __('Message Deleted Successfully')]);
+        return response(['status' => 'success' , 'message' => __('admin_localize.Message Deleted Successfully')]);
     }
 
     public function hasSeen(Request $request) {
@@ -91,10 +91,10 @@ class ContactController extends Controller
         if($seen->seen == 0){
             $seen->seen = 1;
             $seen->save();
-            return response(['status' => 'success' , 'message' => __('Seen')]);
+            return response(['status' => 'success' , 'message' => __('admin_localize.Seen')]);
         }elseif($seen->seen == 1){
 
-            return response(['status' => 'info' , 'message' => __('You have seen this mail massege before')]);
+            return response(['status' => 'info' , 'message' => __('admin_localize.You have seen this mail massege before')]);
         }
 
     }

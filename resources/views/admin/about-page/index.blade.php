@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('About Page'))
+@section('title', __('admin_localize.About Page'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('About Page') }}</h1>
+            <h1>{{ __('admin_localize.About Page') }}</h1>
         </div>
 
         <div class="section-body">
@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{ __('Update About Content') }}</h4>
+                            <h4>{{ __('admin_localize.Update About Content') }}</h4>
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="myTab2" role="tablist">
@@ -36,14 +36,14 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="form-group mb-4">
-                                                    <label>{{ __('About Content') }}</label>
+                                                    <label>{{ __('admin_localize.About Content') }}</label>
 
                                                     <textarea name="content" class="summernote-{{$language->lang}}" cols="30" rows="10">{!! @$about->content !!}</textarea>
                                                     <input type="hidden" name="language" value="{{$language->lang}}">
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <button class="btn btn-primary">{{ __('Save') }}</button>
+                                                    <button class="btn btn-primary">{{ __('admin_localize.Save') }}</button>
                                                 </div>
                                             </form>
                                         </div>

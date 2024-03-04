@@ -21,7 +21,7 @@
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <span class="text-primary">
-                                                    {{__('by')}} {{$new->author->name}}
+                                                    {{__('frontend_localize.by')}} {{$new->author->name}}
                                                 </span>
                                             </li>
                                             <li class="list-inline-item">

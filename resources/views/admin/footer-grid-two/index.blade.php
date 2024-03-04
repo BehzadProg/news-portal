@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', __('Footer Grid Two'))
+@section('title', __('admin_localize.Footer Grid Two'))
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{__('Footer Grid Two')}}</h1>
+            <h1>{{__('admin_localize.Footer Grid Two')}}</h1>
         </div>
 
         <div class="section-body">
@@ -35,7 +35,7 @@
                                                 @csrf
                                                 <div class="form-group row mb-4">
                                                     <label
-                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Footer Grid Two Title') }}</label>
+                                                        class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Footer Grid Two Title') }}</label>
                                                     <div class="col-sm-12 col-md-7">
                                                         <input name="title" type="text" value="{{@$footerTitle->value}}" class="form-control">
                                                         <input name="language" type="hidden" value="{{$language->lang}}" class="form-control">
@@ -48,7 +48,7 @@
                                                 <div class="form-group row mb-4">
                                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                                     <div class="col-sm-12 col-md-7">
-                                                        <button class="btn btn-primary">{{__('Save')}}</button>
+                                                        <button class="btn btn-primary">{{__('admin_localize.Save')}}</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -61,9 +61,9 @@
                     </div>
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>{{__('All Footer Grid Two Links')}}</h4>
+                            <h4>{{__('admin_localize.All Footer Grid Two Links')}}</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('admin.footer-grid-two.create') }}" class="btn btn-primary">{{__('Create New')}} <i
+                                <a href="{{ route('admin.footer-grid-two.create') }}" class="btn btn-primary">{{__('admin_localize.Create New')}} <i
                                         class="fas fa-plus"></i></a>
                             </div>
                         </div>
@@ -92,11 +92,11 @@
                                                     <th class="text-center">
                                                         #
                                                     </th>
-                                                    <th>{{__('Name')}}</th>
-                                                    <th>{{__('Laguage Code')}}</th>
-                                                    <th>{{__('Status')}}</th>
+                                                    <th>{{__('admin_localize.Name')}}</th>
+                                                    <th>{{__('admin_localize.Laguage Code')}}</th>
+                                                    <th>{{__('admin_localize.Status')}}</th>
 
-                                                    <th>{{__('Action')}}</th>
+                                                    <th>{{__('admin_localize.Action')}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -108,9 +108,9 @@
 
                                                     <td>
                                                         @if ($footer->status === 1)
-                                                        <span class="badge badge-success">{{__('Active')}}</span>
+                                                        <span class="badge badge-success">{{__('admin_localize.Active')}}</span>
                                                         @else
-                                                        <span class="badge badge-danger">{{__('InActive')}}</span>
+                                                        <span class="badge badge-danger">{{__('admin_localize.InActive')}}</span>
                                                         @endif
 
                                                     </td>

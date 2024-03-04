@@ -59,7 +59,7 @@ class SocialCountController extends Controller
         $socialCount->status = $request->status;
         $socialCount->save();
 
-        toast()->success(__('Created Successfully'));
+        toast()->success(__('admin_localize.Created Successfully'));
         return redirect()->route('admin.social-count.index');
     }
     /**
@@ -97,7 +97,7 @@ class SocialCountController extends Controller
         $socialCount->status = $request->status;
         $socialCount->save();
 
-        toast()->success(__('Updated Successfully'));
+        toast()->success(__('admin_localize.Updated Successfully'));
         return redirect()->route('admin.social-count.index');
     }
 
@@ -109,6 +109,6 @@ class SocialCountController extends Controller
         $socialCount = SocialCount::findOrFail($id);
         $socialCount->delete();
 
-        return response(['status' => 'success' , 'message' => __('Deleted Successfully')]);
+        return response(['status' => 'success' , 'message' => __('admin_localize.Deleted Successfully')]);
     }
 }

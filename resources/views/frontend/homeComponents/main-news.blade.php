@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-8">
                     <div class="wrapper__list__article">
-                        <h4 class="border_section">{{__('recent post')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.recent post')}}</h4>
                     </div>
                     <div class="row">
                         @foreach ($recentPosts as $post)
@@ -32,7 +32,7 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <a href="javascript:;">
-                                                        {{__('by')}} {{$post->author->name}}
+                                                        {{__('frontend_localize.by')}} {{$post->author->name}}
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
@@ -73,7 +73,7 @@
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
                                                             <span class="text-primary">
-                                                                {{__('by')}} {{$post->author->name}}
+                                                                {{__('frontend_localize.by')}} {{$post->author->name}}
                                                             </span>
                                                         </li>
                                                         <li class="list-inline-item">
@@ -120,7 +120,7 @@
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
                                                             <span class="text-primary">
-                                                                {{__('by')}} {{$post->author->name}}
+                                                                {{__('frontend_localize.by')}} {{$post->author->name}}
                                                             </span>
                                                         </li>
                                                         <li class="list-inline-item">
@@ -153,7 +153,7 @@
 
                 <div class="col-md-12 col-lg-4">
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{__('popular post')}}</h4>
+                        <h4 class="border_section">{{__('frontend_localize.popular post')}}</h4>
                         <div class="wrapper__list-number">
 
                             <!-- List Article -->
@@ -212,7 +212,7 @@
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
                                         <span class="text-primary">
-                                            {{__('by')}} {{$categoryOneNews->author->name}}
+                                            {{__('frontend_localize.by')}} {{$categoryOneNews->author->name}}
                                         </span>
                                     </li>
                                     <li class="list-inline-item">
@@ -262,7 +262,7 @@
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
                                         <span class="text-primary">
-                                            {{__('by')}} {{$categoryTwoNews->author->name}}
+                                            {{__('frontend_localize.by')}} {{$categoryTwoNews->author->name}}
                                         </span>
                                     </li>
                                     <li class="list-inline-item">
@@ -313,7 +313,7 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <span class="text-primary">
-                                                        {{__('by')}} {{$categoryThreeNews->author->name}}
+                                                        {{__('frontend_localize.by')}} {{$categoryThreeNews->author->name}}
                                                     </span>
                                                 </li>
                                                 <li class="list-inline-item">
@@ -352,7 +352,7 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <span class="text-primary">
-                                                        {{__('by')}} {{$categoryThreeNews->author->name}}
+                                                        {{__('frontend_localize.by')}} {{$categoryThreeNews->author->name}}
                                                     </span>
                                                 </li>
                                                 <li class="list-inline-item">
@@ -413,7 +413,7 @@
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
                                                             <span class="text-primary">
-                                                                {{__('by')}} {{$categoryFourNews->author->name}}
+                                                                {{__('frontend_localize.by')}} {{$categoryFourNews->author->name}}
                                                             </span>
                                                         </li>
                                                         <li class="list-inline-item">
@@ -449,7 +449,7 @@
                     <div class="sticky-top">
                         <aside class="wrapper__list__article">
                             <h4 class="border_section">
-                                {{__('Most Viewed')}}</h4>
+                                {{__('frontend_localize.Most Viewed')}}</h4>
                             <div class="wrapper__list__article-small">
 
                                 <!-- Post Article -->
@@ -469,7 +469,7 @@
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <span class="text-primary">
-                                                    {{__('by')}} {{$mostViewed->author->name}}
+                                                    {{__('frontend_localize.by')}} {{$mostViewed->author->name}}
                                                 </span>
                                             </li>
                                             <li class="list-inline-item">
@@ -487,7 +487,7 @@
                                         <p>
                                             {!! limitText($mostViewed->content , 120) !!}
                                         </p>
-                                        <a href="{{route('news-details' , $mostViewed->slug)}}" class="btn btn-outline-primary mb-4 text-capitalize"> {{__('read more')}}</a>
+                                        <a href="{{route('news-details' , $mostViewed->slug)}}" class="btn btn-outline-primary mb-4 text-capitalize"> {{__('frontend_localize.read more')}}</a>
                                     </div>
                                 </div>
                                 @endif
@@ -509,7 +509,7 @@
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
                                                             <span class="text-primary">
-                                                                {{__('by')}} {{$mostViewed->author->name}}
+                                                                {{__('frontend_localize.by')}} {{$mostViewed->author->name}}
                                                             </span>
                                                         </li>
                                                         <li class="list-inline-item">
@@ -537,7 +537,7 @@
                         </aside>
 
                         <aside class="wrapper__list__article">
-                            <h4 class="border_section">{{__('stay conected')}}</h4>
+                            <h4 class="border_section">{{__('frontend_localize.stay conected')}}</h4>
                             <!-- widget Social media -->
                             <div class="wrap__social__media">
                                 @foreach ($socialCounts as $socialCount)
@@ -561,7 +561,7 @@
                         </aside>
 
                         <aside class="wrapper__list__article">
-                            <h4 class="border_section">{{__('tags')}}</h4>
+                            <h4 class="border_section">{{__('frontend_localize.tags')}}</h4>
                             <div class="blog-tags p-0">
                                 <ul class="list-inline">
                                     @foreach ($mostPopularTag as $tag)
@@ -580,7 +580,7 @@
                         @if ($ad->sidebar_ad_status == 1)
 
                         <aside class="wrapper__list__article">
-                            <h4 class="border_section">{{__('Advertise')}}</h4>
+                            <h4 class="border_section">{{__('frontend_localize.Advertise')}}</h4>
                             <a href="{{$ad->sidebar_ad_url}}">
                                 <figure>
                                     <img src="{{asset(env('AD_IMAGE_UPLOAD_PATH').$ad->sidebar_ad)}}" alt="" class="img-fluid">
@@ -590,17 +590,17 @@
                         @endif
 
                         <aside class="wrapper__list__article">
-                            <h4 class="border_section">{{__('newsletter')}}</h4>
+                            <h4 class="border_section">{{__('frontend_localize.newsletter')}}</h4>
                             <!-- Form Subscribe -->
                             <div class="widget__form-subscribe bg__card-shadow">
                                 <h6>
-                                    {{__('The most important world news and events of the day')}}.
+                                    {{__('frontend_localize.The most important world news and events of the day')}}.
                                 </h6>
-                                <p><small>{{__('Get magzrenvi daily newsletter on your inbox')}}.</small></p>
+                                <p><small>{{__('frontend_localize.Get magzrenvi daily newsletter on your inbox')}}.</small></p>
                                 <div class="input-group ">
                                     <input type="text" class="form-control" placeholder="Your email address">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">{{__('sign up')}}</button>
+                                        <button class="btn btn-primary" type="button">{{__('frontend_localize.sign up')}}</button>
                                     </div>
                                 </div>
                             </div>

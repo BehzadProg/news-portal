@@ -1,12 +1,12 @@
 @extends('admin.layouts.master')
-@section('title', __('Edit Role User'))
+@section('title', __('admin_localize.Edit Role User'))
 @section('content')
     <section class="section">
         <div class="section-header">
             <div class="section-header-back">
                 <a href="{{route('admin.role-users.index')}}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>{{__('Role Users')}}</h1>
+            <h1>{{__('admin_localize.Role Users')}}</h1>
         </div>
 
         <div class="section-body">
@@ -14,14 +14,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>{{__('Update User With Role')}}</h4>
+                            <h4>{{__('admin_localize.Update User With Role')}}</h4>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('admin.role-users.update' , $admin->id) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('User Name')}}</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('admin_localize.User Name')}}</label>
                                     <div class="col-sm-12 col-md-7">
                                         <input name="name" type="text" value="{{$admin->name}}" class="form-control">
                                         @error('name')
@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('User Email')}}</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('admin_localize.User Email')}}</label>
                                     <div class="col-sm-12 col-md-7">
                                         <input name="email" type="text" value="{{$admin->email}}" class="form-control">
                                         @error('email')
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Password')}}</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('admin_localize.Password')}}</label>
                                     <div class="col-sm-12 col-md-7">
                                         <input name="password" type="password" class="form-control">
                                         @error('password')
@@ -48,16 +48,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Confirm Password')}}</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('admin_localize.Confirm Password')}}</label>
                                     <div class="col-sm-12 col-md-7">
                                         <input name="password_confirmation" type="password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('Role')}}</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{__('admin_localize.Role')}}</label>
                                     <div class="col-sm-12 col-md-7">
                                         <select name="role" id="select-language" class="form-control select2">
-                                            <option value="">--{{__('Select')}}--</option>
+                                            <option value="">--{{__('admin_localize.Select')}}--</option>
                                             @foreach ($roles as $role)
 
                                             <option {{$admin->getRoleNames()->first() == $role->name ? 'selected' : ''}} value="{{$role->name}}">{{$role->name}}</option>
@@ -73,7 +73,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                     <div class="col-sm-12 col-md-7">
-                                        <button class="btn btn-primary">{{__('Update')}}</button>
+                                        <button class="btn btn-primary">{{__('admin_localize.Update')}}</button>
                                     </div>
                                 </div>
                             </form>
