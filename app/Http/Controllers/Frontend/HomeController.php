@@ -16,6 +16,7 @@ use App\Models\Advertisement;
 use App\Models\HomeSectionSetting;
 use App\Http\Controllers\Controller;
 use App\Models\ReceivedMail;
+use App\Models\Subscriber;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -268,5 +269,21 @@ class HomeController extends Controller
             toast(__($e->getMessage()), 'error');
             return redirect()->back();
         }
+    }
+
+    public function subNewsletter(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|max:100|unique:subscribers,email',
+        ],
+        [
+            'email.unique' => __('frontend_localize.Email is already subscribed')
+        ]);
+
+        $subscriber = new Subscriber();
+        $subscriber->email = $request->email;
+        $subscriber->save();
+
+        return response(['status' => 'success' , 'message' => __('frontend_localize.Subscribed Successfully')]);
     }
 }
