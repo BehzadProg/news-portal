@@ -227,13 +227,16 @@
                             <h6>
                                 {{__('frontend_localize.The most important world news and events of the day')}}.
                             </h6>
-                            <p><small>{{__('frontend_localize.Get magzrenvi daily newsletter on your inbox')}}.</small></p>
-                            <div class="input-group ">
-                                <input type="text" class="form-control" placeholder="Your email address">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">{{__('frontend_localize.sign up')}}</button>
+                            <p><small>{{__('frontend_localize.Get magazine daily newsletter on your inbox')}}.</small></p>
+                            <form class="newsletter-form">
+
+                                <div class="input-group ">
+                                    <input type="text" class="form-control" name="email" placeholder="{{__('frontend_localize.Your email address')}}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary newsletter-btn" type="submit">{{__('frontend_localize.sign up')}}</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </aside>
 

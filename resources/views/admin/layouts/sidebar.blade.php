@@ -83,6 +83,12 @@
                         href="{{ route('admin.language.index') }}"><i class="fa fa-globe"></i>
                         <span>{{ __('admin_localize.Language') }}</span></a></li>
             @endif
+            @if (canAccess(['subscriber index']))
+            <li class="{{ setSidebarActive(['admin.newsletter-subscriber.index']) }}"><a class="nav-link"
+                href="{{ route('admin.newsletter-subscriber.index') }}"><i class="fa fa-users"></i>
+                <span>{{ __('admin_localize.Subscriber') }}</span></a></li>
+            @endif
+
             @if (canAccess(['footer index']))
                 <li
                     class="dropdown {{ setSidebarActive(['admin.social-link.*', 'admin.footer-info.index', 'admin.footer-grid-one.*', 'admin.footer-grid-two.*', 'admin.footer-grid-three.*']) }}">

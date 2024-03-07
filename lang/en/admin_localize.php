@@ -122,6 +122,7 @@ return array (
   'Pages' => 'Pages',
   'Social Count' => 'Social Count',
   'Home Section Setting' => 'Home Section Setting',
+  'Subscriber' => 'Subscriber',
   'Setting' => 'Setting',
   'Social Links' => 'Social Links',
   'Access Managment' => 'Access Managment',
@@ -204,6 +205,8 @@ return array (
   'Update Social Link' => 'Update Social Link',
   'Social-links' => 'Social-links',
   'All Social Links' => 'All Social Links',
+  'Send Mail to Subscribers' => 'Send Mail to Subscribers',
+  'All Subscribers' => 'All Subscribers',
   'Updated Successfully' => 'Updated Successfully',
   'A Mail has been sent to your email address please check' => 'A Mail has been sent to your email address please check',
   'token is invalid' => 'token is invalid',
@@ -227,4 +230,5 @@ return array (
   'Can\\\'t Delete Super Admin Role' => 'Can\\\'t Delete Super Admin Role',
   'Role deleted successfully' => 'Role deleted successfully',
   'User with role created successfully' => 'User with role created successfully',
+  'Mail Sent Successfully' => 'Mail Sent Successfully',
 );

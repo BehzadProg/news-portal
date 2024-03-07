@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\FooterGridThreeController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
+use App\Http\Controllers\Admin\SubscriberController;
 
 Route::get('login' , [AdminAuthenticationController::class , 'login'])->name('login');
 Route::post('login' , [AdminAuthenticationController::class , 'handleLogin'])->name('handle.login');
@@ -70,6 +71,11 @@ Route::group(['middleware' => ['admin']],function () {
     /** Advertisement route */
     Route::get('advertisement' , [AdvertisementController::class ,'index'])->name('advertisement.index');
     Route::put('advertisement/update' , [AdvertisementController::class ,'update'])->name('advertisement.update');
+
+    /** Newsletter Subscriber */
+    Route::get('newsletter-subscriber' , [SubscriberController::class , 'index'])->name('newsletter-subscriber.index');
+    Route::post('newsletter-send-mail' , [SubscriberController::class , 'sendMail'])->name('newsletter-send-mail');
+    Route::delete('subscriber/{id}/destroy' , [SubscriberController::class , 'destroy'])->name('subscriber.destroy');
 
     /** Footer Info route */
     Route::resource('footer-info' , FooterInfoController::class)->only('index' , 'store');
