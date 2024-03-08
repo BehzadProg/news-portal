@@ -1,5 +1,11 @@
 @php
     $languages = \App\Models\Language::where('status', 1)->get();
+    $featuredCategories = \App\Models\Category::where([
+        'status' => 1,
+        'show_at_nav' => 1,
+        'language' => getLanguage(),
+    ])->get();
+    $categories = \App\Models\Category::where(['status' => 1, 'show_at_nav' => 0, 'language' => getLanguage()])->get();
 @endphp
 
 <header class="bg-light">
@@ -37,7 +43,8 @@
                             @auth
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <a href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();">
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();this.closest('form').submit();">
                                         {{ __('frontend_localize.Logout') }}
                                     </a>
                                 </form>
@@ -73,6 +80,29 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
+                        @foreach ($featuredCategories as $category)
+                            @if ($loop->index <= 3)
+                                <li class="nav-item dropdown has-megamenu">
+                                    <a class="nav-link"
+                                        href="{{ route('news', ['category' => $category->slug]) }}">{{ $category->name }}
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+                        @if (count($categories) > 0)
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                    {{ __('frontend_localize.More') }} </a>
+                                <ul class="dropdown-menu animate fade-up">
+                                    @foreach ($categories as $cat)
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('news', ['category' => $cat->slug]) }}">
+                                                {{ $cat->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link active"
                                 href="{{ url('/') }}">{{ __('frontend_localize.home') }}</a>
@@ -80,17 +110,6 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('about.index') }}"> {{ __('frontend_localize.about') }}
                             </a>
-                        </li>
-                        <li class="nav-item dropdown has-megamenu">
-                            <a class="nav-link" href="blog.html">blog </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Pages </a>
-                            <ul class="dropdown-menu animate fade-up">
-                                <li><a class="dropdown-item icon-arrow" href="blog_details.html"> Blog single detail
-                                    </a></li>
-                                <li><a class="dropdown-item" href="404.html"> 404 Error </a>
-                            </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('contact.index') }}">
                                 {{ __('frontend_localize.Contact') }} </a></li>
@@ -173,30 +192,38 @@
                                 <a class="nav-link text-dark" href="{{ route('about.index') }}">
                                     {{ __('frontend_localize.About') }} </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="blog.html">Blog </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active dropdown-toggle  text-dark" href="#"
-                                    data-toggle="dropdown">Pages </a>
-                                <ul class="dropdown-menu dropdown-menu-left">
-                                    <li><a class="dropdown-item" href="blog_details.html">Blog details</a></li>
-                                    <li><a class="dropdown-item" href="404.html"> 404 Error</a></li>
-
-                                </ul>
-                            </li>
                             <li class="nav-item"><a class="nav-link  text-dark" href="{{ route('contact.index') }}">
                                     {{ __('frontend_localize.Contact') }} </a>
                             </li>
+                            @foreach ($featuredCategories as $category)
+                            @if ($loop->index <= 5)
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark"
+                                        href="{{ route('news', ['category' => $category->slug]) }}">{{ $category->name }}
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+
+
+                            @if (count($categories) > 0)
+                                <li class="nav-item">
+                                    <a class="nav-link active dropdown-toggle  text-dark" href="#"
+                                        data-toggle="dropdown">{{ __('frontend_localize.More') }} </a>
+                                    <ul class="dropdown-menu dropdown-menu-left">
+                                        @foreach ($categories as $cat)
+                                            <li><a class="dropdown-item"
+                                                    href="{{ route('news', ['category' => $cat->slug]) }}">
+                                                    {{ $cat->name }}</a></li>
+                                        @endforeach
+
+                                    </ul>
+                                </li>
+                            @endif
+
                         </ul>
 
                     </nav>
-                </div>
-                <div class="modal-footer">
-                    <p>© 2020 <a href="https://websolutionus.com/.com">WebSolutionUS</a>
-                        -
-                        Premium template news, blog & magazine &amp;
-                        magazine theme by <a href="https://websolutionus.com/.com">websolutionus.com</a></p>
                 </div>
             </div>
         </div>
