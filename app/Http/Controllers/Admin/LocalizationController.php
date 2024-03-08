@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Http;
 
 class LocalizationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:language index,admin'])->only(['adminIndex' , 'frontendIndex']);
+    }
+
     public function adminIndex(): View
     {
         $languages = Language::where('status', 1)->get();

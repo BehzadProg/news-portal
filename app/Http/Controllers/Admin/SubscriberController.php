@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Mail;
 
 class SubscriberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:subscriber index,admin'])->only('index');
+        $this->middleware(['permission:subscriber delete,admin'])->only('destroy');
+    }
+
     public function index()
     {
         $subs = Subscriber::orderByDesc('id')->get();

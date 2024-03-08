@@ -78,11 +78,6 @@
                         href="{{ route('admin.advertisement.index') }}"><i class="fas fa-ad"></i>
                         <span>{{ __('admin_localize.Advertisement') }}</span></a></li>
             @endif
-            @if (canAccess(['language index']))
-                <li class="{{ setSidebarActive(['admin.language.*']) }}"><a class="nav-link"
-                        href="{{ route('admin.language.index') }}"><i class="fa fa-globe"></i>
-                        <span>{{ __('admin_localize.Language') }}</span></a></li>
-            @endif
             @if (canAccess(['subscriber index']))
             <li class="{{ setSidebarActive(['admin.newsletter-subscriber.index']) }}"><a class="nav-link"
                 href="{{ route('admin.newsletter-subscriber.index') }}"><i class="fa fa-users"></i>
@@ -132,11 +127,13 @@
             @endif
 
 
-
-                <li class="dropdown {{ setSidebarActive(['admin.admin-localization.index', 'admin.frontend-localization.index']) }}">
+            @if (canAccess(['language index']))
+                <li class="dropdown {{ setSidebarActive(['admin.admin-localization.index', 'admin.frontend-localization.index' , 'admin.language.index']) }}">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-language"></i>
                         <span>{{ __('admin_localize.Localization') }}</span></a>
                     <ul class="dropdown-menu">
+                         <li class="{{ setSidebarActive(['admin.language.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.language.index') }}"><span>{{ __('admin_localize.Language') }}</span></a></li>
                         <li class="{{ setSidebarActive(['admin.admin-localization.index']) }}"><a class="nav-link"
                             href="{{ route('admin.admin-localization.index') }}">
                             <span>{{ __('admin_localize.Admin') }}</span></a></li>
@@ -146,6 +143,7 @@
                             <span>{{ __('admin_localize.Frontend') }}</span></a></li>
                     </ul>
                 </li>
+                @endif
         </ul>
 
     </aside>
