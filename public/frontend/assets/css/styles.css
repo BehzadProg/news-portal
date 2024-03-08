@@ -18003,7 +18003,14 @@ background-color: #fff !important;
 color: var(--colorPrimary) !important;
 }
 
+.wrap__profile-author {
+    width: 100% !important;
+}
 
+.social__media__widget-icon {
+    padding-top: 5px;
+    padding-left: 5px;
+}
 
 
 /*  */

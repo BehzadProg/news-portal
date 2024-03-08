@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title' , '- '. $newsDetail->title)
+@section('title' , $newsDetail->title)
 @section('meta_description' , $newsDetail->content)
 @section('meta_og_title' , $newsDetail->meta_title)
 @section('meta_og_description' , $newsDetail->meta_description)
@@ -147,41 +147,11 @@
                 <div class="wrap__profile">
                     <div class="wrap__profile-author">
                         <figure>
-                            <img style="width: 200px;height: 200px;object-fit: cover;" src="{{asset(env('ADMIN_PROFILE_IMAGE_UPLOAD_PATH').$newsDetail->author->image)}}" alt="" class="img-fluid rounded-circle">
+                            <img style="width: 80px;height: 80px;object-fit: cover;" src="{{ $newsDetail->author->image ? asset(env('ADMIN_PROFILE_IMAGE_UPLOAD_PATH').$newsDetail->author->image) : asset('frontend/assets/images/avatar-1.png')}}" alt="" class="img-fluid rounded-circle">
                         </figure>
                         <div class="wrap__profile-author-detail">
-                            <div class="wrap__profile-author-detail-name">{{__('frontend_localize.author')}}</div>
+                            <div class="wrap__profile-author-detail-name">{{$newsDetail->author->getRoleNames()->first()}}</div>
                             <h4>{{$newsDetail->author->name}}</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis laboriosam ad
-                                beatae itaque ea non
-                                placeat officia ipsum praesentium! Ullam?</p>
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-social btn-social-o facebook ">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-social btn-social-o twitter ">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-social btn-social-o instagram ">
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-social btn-social-o telegram ">
-                                        <i class="fa fa-telegram"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-social btn-social-o linkedin ">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

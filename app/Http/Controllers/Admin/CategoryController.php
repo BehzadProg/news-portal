@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Language;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -97,6 +98,10 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         $category = Category::findOrFail($id);
+        $news = News::where('category_id' , $category->id)->get();
+        foreach ($news as $item) {
+            $item->tags()->delete();
+        }
         $category->delete();
         return response(['status' => 'success' , 'message' => __('admin_localize.Deleted Successfully')]);
     }

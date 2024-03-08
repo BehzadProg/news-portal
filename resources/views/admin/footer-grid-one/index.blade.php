@@ -37,7 +37,7 @@
                                                     <label
                                                         class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('admin_localize.Footer Grid One Title') }}</label>
                                                     <div class="col-sm-12 col-md-7">
-                                                        <input name="title" type="text" value="{{$footerTitle->value}}" class="form-control">
+                                                        <input name="title" type="text" value="{{@$footerTitle->value}}" class="form-control">
                                                         <input name="language" type="hidden" value="{{$language->lang}}" class="form-control">
                                                         @error('title')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -73,7 +73,7 @@
                                 @foreach ($languages as $language)
                                     <li class="nav-item">
                                         <a class="nav-link {{ $loop->index === 0 ? 'active' : '' }}" id="home-tab2"
-                                            data-toggle="tab" href="#home-{{ $language->lang }}" role="tab"
+                                            data-toggle="tab" href="#dtable-{{ $language->lang }}" role="tab"
                                             aria-controls="home" aria-selected="true">{{ $language->name }}</a>
                                     </li>
                                 @endforeach
@@ -87,7 +87,7 @@
                                     @endphp
 
                                     <div class="tab-pane fade {{ $loop->index === 0 ? 'show active' : '' }} "
-                                        id="home-{{ $language->lang }}" role="tabpanel" aria-labelledby="home-tab2">
+                                        id="dtable-{{ $language->lang }}" role="tabpanel" aria-labelledby="home-tab2">
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table table-striped" id="table-{{ $language->lang }}">

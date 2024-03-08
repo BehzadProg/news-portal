@@ -73,7 +73,7 @@
                                     @foreach ($languages as $language)
 
                                     <li class="nav-item">
-                                        <a class="nav-link {{$loop->index === 0 ? 'active' : ''}}" id="home-tab2" data-toggle="tab" href="#home-{{$language->lang}}" role="tab" aria-controls="home" aria-selected="true">{{$language->name}}</a>
+                                        <a class="nav-link {{$loop->index === 0 ? 'active' : ''}}" id="home-tab2" data-toggle="tab" href="#dtable-{{$language->lang}}" role="tab" aria-controls="home" aria-selected="true">{{$language->name}}</a>
                                       </li>
                                     @endforeach
                                 </ul>
@@ -83,7 +83,7 @@
                                         $footers = \App\Models\FooterGridThree::where('language' , $language->lang)->orderByDesc('id')->get()
                                     @endphp
 
-                                  <div class="tab-pane fade {{$loop->index === 0 ? 'show active' : ''}} " id="home-{{$language->lang}}" role="tabpanel" aria-labelledby="home-tab2">
+                                  <div class="tab-pane fade {{$loop->index === 0 ? 'show active' : ''}} " id="dtable-{{$language->lang}}" role="tabpanel" aria-labelledby="home-tab2">
                                    <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-striped" id="table-{{$language->lang}}">
